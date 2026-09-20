@@ -163,7 +163,7 @@ function SparkassenLoginPage() {
                   </label>
                   <div className="group relative z-10">
                     <Info className="h-5 w-5 shrink-0 cursor-help text-[#6b6b6b]" strokeWidth={2} />
-                    <div className="pointer-events-none absolute right-full top-1/2 mr-2 w-80 -translate-y-1/2 rounded-lg bg-black px-4 py-3 text-[14px] leading-snug text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
+                    <div className="pointer-events-none absolute right-full top-1/2 mr-2 w-52 -translate-y-1/2 rounded-lg bg-black px-4 py-4 text-[16px] leading-relaxed text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                       Online-Banking PIN, nicht die 4-stellige PIN Ihrer EC-/Maestro-Karte
                     </div>
                   </div>
