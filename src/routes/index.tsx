@@ -55,8 +55,8 @@ function Index() {
             <div className="flex items-center gap-3">
               <Smartphone className="h-5 w-5 text-[#0b051d]" strokeWidth={1.75} />
               <div className="flex flex-col">
-                <span className="text-xs text-[#4b3bdf]">Handynummer</span>
-                <span className="text-[15px] font-semibold text-[#0b051d]">0176 16146986</span>
+              <span className="text-xs text-[#6b6b6b]">Handynummer</span>
+              <span className="text-[15px] font-semibold text-[#373544]">0176 16146986</span>
               </div>
             </div>
           </div>
