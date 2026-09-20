@@ -125,8 +125,8 @@ function SparkassenLoginPage() {
             <h1 className="mt-4 text-[24px] font-bold leading-tight text-[#0b051d]">{name}</h1>
             <p className="mt-3 text-[15px] text-[#373544]">Melde dich mit deinen Onlinebanking-Daten an</p>
 
-            <div className="mt-6 space-y-3">
-              <div className="relative rounded-xl border border-[rgb(112,110,123)] bg-white px-4 transition-colors hover:bg-neutral-100 focus-within:bg-white">
+            <div className="mt-6 divide-y divide-neutral-300 rounded-xl border border-[rgb(112,110,123)] bg-white">
+              <div className="relative px-4 transition-colors hover:bg-neutral-100">
                 <div className="relative flex h-[58px] items-center">
                   <input
                     id="sk-login"
@@ -138,14 +138,14 @@ function SparkassenLoginPage() {
                   />
                   <label
                     htmlFor="sk-login"
-                    className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-normal text-[#6b6b6b] transition-all peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px]"
+                    className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-normal text-[#6b6b6b] transition-all peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-[13px] peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[13px]"
                   >
                     Anmeldename oder Legitimations-ID
                   </label>
                 </div>
               </div>
 
-              <div className="relative rounded-xl border border-[rgb(112,110,123)] bg-white px-4 transition-colors hover:bg-neutral-100 focus-within:bg-white">
+              <div className="relative px-4 transition-colors hover:bg-neutral-100">
                 <div className="relative flex h-[58px] items-center gap-2">
                   <input
                     id="sk-pin"
@@ -157,7 +157,7 @@ function SparkassenLoginPage() {
                   />
                   <label
                     htmlFor="sk-pin"
-                    className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-normal text-[#6b6b6b] transition-all peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px]"
+                    className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-normal text-[#6b6b6b] transition-all peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-[13px] peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[13px]"
                   >
                     PIN
                   </label>
