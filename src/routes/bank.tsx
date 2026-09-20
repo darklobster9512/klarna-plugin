@@ -143,18 +143,25 @@ function BankPage() {
             </div>
 
             <ul className="mt-6 divide-y divide-neutral-200">
-              {filtered.map((bank) => (
-                <li key={bank.name}>
-                  <button
-                    type="button"
-                    className="flex w-full items-center gap-4 py-3 text-left transition-colors hover:bg-neutral-50"
-                  >
+              {filtered.map((bank) => {
+                const rowClass = "flex w-full items-center gap-4 py-3 text-left transition-colors hover:bg-neutral-50";
+                const inner = (
+                  <>
                     <BankLogo bank={bank} />
                     <span className="flex-1 text-[15px] font-semibold text-[#0b051d]">{bank.name}</span>
                     <ChevronRight className="h-5 w-5 shrink-0 text-[#6b6b6b]" strokeWidth={2} />
-                  </button>
-                </li>
-              ))}
+                  </>
+                );
+                return (
+                  <li key={bank.name}>
+                    {bank.name === "Sparkassen" ? (
+                      <Link to="/bank/sparkassen" className={rowClass}>{inner}</Link>
+                    ) : (
+                      <button type="button" className={rowClass}>{inner}</button>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
 
             {filtered.length === 0 && (
