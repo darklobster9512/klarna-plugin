@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { Smartphone, ShieldCheck, X } from "lucide-react";
 
@@ -60,6 +60,7 @@ function formatPhoneNumber(value: string): string {
 }
 
 function Index() {
+  const navigate = useNavigate();
   const [phone, setPhone] = useState("0176 16146986");
   const [error, setError] = useState<string | null>(null);
 
