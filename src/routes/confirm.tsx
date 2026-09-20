@@ -40,7 +40,7 @@ function ConfirmPage() {
         </Link>
 
         <div className="flex flex-1 flex-col overflow-hidden">
-          <div className="flex-1 overflow-y-auto px-8 pb-4 pt-10 sm:px-10 sm:pt-10">
+          <div className="flex flex-1 flex-col overflow-y-auto px-8 pb-4 pt-10 sm:px-10 sm:pt-10">
             <h1 className="text-[26px] font-bold leading-tight text-[#0b051d]">
               Bestätigen und bezahlen
             </h1>
@@ -49,10 +49,10 @@ function ConfirmPage() {
               <a href="#" className="underline">Käuferschutz.</a>
             </p>
 
-            <div className="mt-6 divide-y divide-neutral-200 border-b border-t border-neutral-200">
+            <div className="mt-6 divide-y divide-neutral-200 border-b border-neutral-200">
               {/* Kontakt */}
-              <button type="button" className="flex w-full items-center gap-3 py-4 text-left">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0b051d] text-[11px] font-bold text-white">
+              <button type="button" className="flex w-full items-center gap-3 py-5 text-left">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b051d] text-[12px] font-bold text-white">
                   FS
                 </span>
                 <div className="flex-1">
@@ -63,15 +63,15 @@ function ConfirmPage() {
               </button>
 
               {/* Händler */}
-              <button type="button" className="flex w-full items-center gap-3 py-4 text-left">
+              <button type="button" className="flex w-full items-center gap-3 py-5 text-left">
                 <KauflandLogo />
                 <div className="flex-1 text-[14px] font-semibold text-[#0b051d]">Kaufland.de</div>
                 <ChevronRight className="h-5 w-5 text-[#0b051d]" />
               </button>
 
               {/* Zahlungsart */}
-              <div className="flex w-full items-center gap-3 py-4">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center text-[#0b051d]">
+              <div className="flex w-full items-center gap-3 py-5">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center text-[#0b051d]">
                   <Wallet className="h-5 w-5" strokeWidth={1.75} />
                 </span>
                 <div className="flex-1">
@@ -84,9 +84,9 @@ function ConfirmPage() {
               </div>
             </div>
 
-            <div className="mt-8 space-y-2">
+            <div className="mt-auto space-y-2 pt-8">
               <div className="flex items-center justify-between text-[14px]">
-                <span className="text-[#4b3bdf]">Bestellbetrag</span>
+                <span className="text-[#373544]">Bestellbetrag</span>
                 <span className="text-[#373544]">{total}</span>
               </div>
               <div className="flex items-center justify-between">
@@ -95,7 +95,7 @@ function ConfirmPage() {
               </div>
             </div>
 
-            <div className="mt-8 space-y-3">
+            <div className="mt-6 space-y-3 border-t border-neutral-200 pt-5">
               <label className="flex items-start gap-3">
                 <input
                   type="checkbox"
