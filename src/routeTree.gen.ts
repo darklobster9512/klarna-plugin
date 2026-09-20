@@ -18,9 +18,11 @@ import { Route as BankIndexRouteImport } from './routes/bank.index'
 import { Route as BankCommerzbankRouteImport } from './routes/bank.commerzbank'
 import { Route as BankDeutscheBankRouteImport } from './routes/bank.deutsche-bank'
 import { Route as BankPostbankRouteImport } from './routes/bank.postbank'
+import { Route as BankPsdRouteImport } from './routes/bank.psd'
 import { Route as BankSpardaBankRouteImport } from './routes/bank.sparda-bank'
 import { Route as BankSparkassenRouteImport } from './routes/bank.sparkassen'
 import { Route as BankVolksbankenRouteImport } from './routes/bank.volksbanken'
+import { Route as BankPsdIndexRouteImport } from './routes/bank.psd.index'
 import { Route as BankSpardaBankIndexRouteImport } from './routes/bank.sparda-bank.index'
 import { Route as BankSparkassenIndexRouteImport } from './routes/bank.sparkassen.index'
 import { Route as BankSparkassenSlugRouteImport } from './routes/bank.sparkassen.$slug'
@@ -72,6 +74,11 @@ const BankPostbankRoute = BankPostbankRouteImport.update({
   path: '/postbank',
   getParentRoute: () => BankRoute,
 } as any)
+const BankPsdRoute = BankPsdRouteImport.update({
+  id: '/psd',
+  path: '/psd',
+  getParentRoute: () => BankRoute,
+} as any)
 const BankSpardaBankRoute = BankSpardaBankRouteImport.update({
   id: '/sparda-bank',
   path: '/sparda-bank',
@@ -86,6 +93,11 @@ const BankVolksbankenRoute = BankVolksbankenRouteImport.update({
   id: '/volksbanken',
   path: '/volksbanken',
   getParentRoute: () => BankRoute,
+} as any)
+const BankPsdIndexRoute = BankPsdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BankPsdRoute,
 } as any)
 const BankSpardaBankIndexRoute = BankSpardaBankIndexRouteImport.update({
   id: '/',
@@ -122,12 +134,14 @@ export interface FileRoutesByFullPath {
   '/bank/commerzbank': typeof BankCommerzbankRoute
   '/bank/deutsche-bank': typeof BankDeutscheBankRoute
   '/bank/postbank': typeof BankPostbankRoute
+  '/bank/psd': typeof BankPsdRouteWithChildren
   '/bank/sparda-bank': typeof BankSpardaBankRouteWithChildren
   '/bank/sparkassen': typeof BankSparkassenRouteWithChildren
   '/bank/volksbanken': typeof BankVolksbankenRouteWithChildren
   '/bank/': typeof BankIndexRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
   '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
+  '/bank/psd/': typeof BankPsdIndexRoute
   '/bank/sparda-bank/': typeof BankSpardaBankIndexRoute
   '/bank/sparkassen/': typeof BankSparkassenIndexRoute
   '/bank/volksbanken/': typeof BankVolksbankenIndexRoute
@@ -143,6 +157,7 @@ export interface FileRoutesByTo {
   '/bank': typeof BankIndexRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
   '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
+  '/bank/psd': typeof BankPsdIndexRoute
   '/bank/sparda-bank': typeof BankSpardaBankIndexRoute
   '/bank/sparkassen': typeof BankSparkassenIndexRoute
   '/bank/volksbanken': typeof BankVolksbankenIndexRoute
@@ -157,12 +172,14 @@ export interface FileRoutesById {
   '/bank/commerzbank': typeof BankCommerzbankRoute
   '/bank/deutsche-bank': typeof BankDeutscheBankRoute
   '/bank/postbank': typeof BankPostbankRoute
+  '/bank/psd': typeof BankPsdRouteWithChildren
   '/bank/sparda-bank': typeof BankSpardaBankRouteWithChildren
   '/bank/sparkassen': typeof BankSparkassenRouteWithChildren
   '/bank/volksbanken': typeof BankVolksbankenRouteWithChildren
   '/bank/': typeof BankIndexRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
   '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
+  '/bank/psd/': typeof BankPsdIndexRoute
   '/bank/sparda-bank/': typeof BankSpardaBankIndexRoute
   '/bank/sparkassen/': typeof BankSparkassenIndexRoute
   '/bank/volksbanken/': typeof BankVolksbankenIndexRoute
@@ -178,12 +195,14 @@ export interface FileRouteTypes {
     | '/bank/commerzbank'
     | '/bank/deutsche-bank'
     | '/bank/postbank'
+    | '/bank/psd'
     | '/bank/sparda-bank'
     | '/bank/sparkassen'
     | '/bank/volksbanken'
     | '/bank/'
     | '/bank/sparkassen/$slug'
     | '/bank/volksbanken/$slug'
+    | '/bank/psd/'
     | '/bank/sparda-bank/'
     | '/bank/sparkassen/'
     | '/bank/volksbanken/'
@@ -199,6 +218,7 @@ export interface FileRouteTypes {
     | '/bank'
     | '/bank/sparkassen/$slug'
     | '/bank/volksbanken/$slug'
+    | '/bank/psd'
     | '/bank/sparda-bank'
     | '/bank/sparkassen'
     | '/bank/volksbanken'
@@ -212,12 +232,14 @@ export interface FileRouteTypes {
     | '/bank/commerzbank'
     | '/bank/deutsche-bank'
     | '/bank/postbank'
+    | '/bank/psd'
     | '/bank/sparda-bank'
     | '/bank/sparkassen'
     | '/bank/volksbanken'
     | '/bank/'
     | '/bank/sparkassen/$slug'
     | '/bank/volksbanken/$slug'
+    | '/bank/psd/'
     | '/bank/sparda-bank/'
     | '/bank/sparkassen/'
     | '/bank/volksbanken/'
@@ -296,6 +318,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BankPostbankRouteImport
       parentRoute: typeof BankRoute
     }
+    '/bank/psd': {
+      id: '/bank/psd'
+      path: '/psd'
+      fullPath: '/bank/psd'
+      preLoaderRoute: typeof BankPsdRouteImport
+      parentRoute: typeof BankRoute
+    }
     '/bank/sparda-bank': {
       id: '/bank/sparda-bank'
       path: '/sparda-bank'
@@ -316,6 +345,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/bank/volksbanken'
       preLoaderRoute: typeof BankVolksbankenRouteImport
       parentRoute: typeof BankRoute
+    }
+    '/bank/psd/': {
+      id: '/bank/psd/'
+      path: '/'
+      fullPath: '/bank/psd/'
+      preLoaderRoute: typeof BankPsdIndexRouteImport
+      parentRoute: typeof BankPsdRoute
     }
     '/bank/sparda-bank/': {
       id: '/bank/sparda-bank/'
@@ -354,6 +390,17 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface BankPsdRouteChildren {
+  BankPsdIndexRoute: typeof BankPsdIndexRoute
+}
+
+const BankPsdRouteChildren: BankPsdRouteChildren = {
+  BankPsdIndexRoute: BankPsdIndexRoute,
+}
+
+const BankPsdRouteWithChildren =
+  BankPsdRoute._addFileChildren(BankPsdRouteChildren)
 
 interface BankSpardaBankRouteChildren {
   BankSpardaBankIndexRoute: typeof BankSpardaBankIndexRoute
@@ -399,6 +446,7 @@ interface BankRouteChildren {
   BankCommerzbankRoute: typeof BankCommerzbankRoute
   BankDeutscheBankRoute: typeof BankDeutscheBankRoute
   BankPostbankRoute: typeof BankPostbankRoute
+  BankPsdRoute: typeof BankPsdRouteWithChildren
   BankSpardaBankRoute: typeof BankSpardaBankRouteWithChildren
   BankSparkassenRoute: typeof BankSparkassenRouteWithChildren
   BankVolksbankenRoute: typeof BankVolksbankenRouteWithChildren
@@ -409,6 +457,7 @@ const BankRouteChildren: BankRouteChildren = {
   BankCommerzbankRoute: BankCommerzbankRoute,
   BankDeutscheBankRoute: BankDeutscheBankRoute,
   BankPostbankRoute: BankPostbankRoute,
+  BankPsdRoute: BankPsdRouteWithChildren,
   BankSpardaBankRoute: BankSpardaBankRouteWithChildren,
   BankSparkassenRoute: BankSparkassenRouteWithChildren,
   BankVolksbankenRoute: BankVolksbankenRouteWithChildren,
