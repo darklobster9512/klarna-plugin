@@ -19,6 +19,8 @@ import { Route as BankSparkassenRouteImport } from './routes/bank.sparkassen'
 import { Route as BankVolksbankenRouteImport } from './routes/bank.volksbanken'
 import { Route as BankSparkassenIndexRouteImport } from './routes/bank.sparkassen.index'
 import { Route as BankSparkassenSlugRouteImport } from './routes/bank.sparkassen.$slug'
+import { Route as BankVolksbankenIndexRouteImport } from './routes/bank.volksbanken.index'
+import { Route as BankVolksbankenSlugRouteImport } from './routes/bank.volksbanken.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,6 +72,16 @@ const BankSparkassenSlugRoute = BankSparkassenSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BankSparkassenRoute,
 } as any)
+const BankVolksbankenIndexRoute = BankVolksbankenIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BankVolksbankenRoute,
+} as any)
+const BankVolksbankenSlugRoute = BankVolksbankenSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BankVolksbankenRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -78,20 +90,23 @@ export interface FileRoutesByFullPath {
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
   '/bank/sparkassen': typeof BankSparkassenRouteWithChildren
-  '/bank/volksbanken': typeof BankVolksbankenRoute
+  '/bank/volksbanken': typeof BankVolksbankenRouteWithChildren
   '/bank/': typeof BankIndexRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
+  '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
   '/bank/sparkassen/': typeof BankSparkassenIndexRoute
+  '/bank/volksbanken/': typeof BankVolksbankenIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
-  '/bank/volksbanken': typeof BankVolksbankenRoute
   '/bank': typeof BankIndexRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
+  '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
   '/bank/sparkassen': typeof BankSparkassenIndexRoute
+  '/bank/volksbanken': typeof BankVolksbankenIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -101,10 +116,12 @@ export interface FileRoutesById {
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
   '/bank/sparkassen': typeof BankSparkassenRouteWithChildren
-  '/bank/volksbanken': typeof BankVolksbankenRoute
+  '/bank/volksbanken': typeof BankVolksbankenRouteWithChildren
   '/bank/': typeof BankIndexRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
+  '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
   '/bank/sparkassen/': typeof BankSparkassenIndexRoute
+  '/bank/volksbanken/': typeof BankVolksbankenIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -118,17 +135,20 @@ export interface FileRouteTypes {
     | '/bank/volksbanken'
     | '/bank/'
     | '/bank/sparkassen/$slug'
+    | '/bank/volksbanken/$slug'
     | '/bank/sparkassen/'
+    | '/bank/volksbanken/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/confirm'
     | '/payment'
     | '/payment-method'
-    | '/bank/volksbanken'
     | '/bank'
     | '/bank/sparkassen/$slug'
+    | '/bank/volksbanken/$slug'
     | '/bank/sparkassen'
+    | '/bank/volksbanken'
   id:
     | '__root__'
     | '/'
@@ -140,7 +160,9 @@ export interface FileRouteTypes {
     | '/bank/volksbanken'
     | '/bank/'
     | '/bank/sparkassen/$slug'
+    | '/bank/volksbanken/$slug'
     | '/bank/sparkassen/'
+    | '/bank/volksbanken/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -223,6 +245,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BankSparkassenSlugRouteImport
       parentRoute: typeof BankSparkassenRoute
     }
+    '/bank/volksbanken/': {
+      id: '/bank/volksbanken/'
+      path: '/'
+      fullPath: '/bank/volksbanken/'
+      preLoaderRoute: typeof BankVolksbankenIndexRouteImport
+      parentRoute: typeof BankVolksbankenRoute
+    }
+    '/bank/volksbanken/$slug': {
+      id: '/bank/volksbanken/$slug'
+      path: '/$slug'
+      fullPath: '/bank/volksbanken/$slug'
+      preLoaderRoute: typeof BankVolksbankenSlugRouteImport
+      parentRoute: typeof BankVolksbankenRoute
+    }
   }
 }
 
@@ -240,15 +276,29 @@ const BankSparkassenRouteWithChildren = BankSparkassenRoute._addFileChildren(
   BankSparkassenRouteChildren,
 )
 
+interface BankVolksbankenRouteChildren {
+  BankVolksbankenSlugRoute: typeof BankVolksbankenSlugRoute
+  BankVolksbankenIndexRoute: typeof BankVolksbankenIndexRoute
+}
+
+const BankVolksbankenRouteChildren: BankVolksbankenRouteChildren = {
+  BankVolksbankenSlugRoute: BankVolksbankenSlugRoute,
+  BankVolksbankenIndexRoute: BankVolksbankenIndexRoute,
+}
+
+const BankVolksbankenRouteWithChildren = BankVolksbankenRoute._addFileChildren(
+  BankVolksbankenRouteChildren,
+)
+
 interface BankRouteChildren {
   BankSparkassenRoute: typeof BankSparkassenRouteWithChildren
-  BankVolksbankenRoute: typeof BankVolksbankenRoute
+  BankVolksbankenRoute: typeof BankVolksbankenRouteWithChildren
   BankIndexRoute: typeof BankIndexRoute
 }
 
 const BankRouteChildren: BankRouteChildren = {
   BankSparkassenRoute: BankSparkassenRouteWithChildren,
-  BankVolksbankenRoute: BankVolksbankenRoute,
+  BankVolksbankenRoute: BankVolksbankenRouteWithChildren,
   BankIndexRoute: BankIndexRoute,
 }
 
