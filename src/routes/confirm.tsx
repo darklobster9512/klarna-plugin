@@ -101,22 +101,24 @@ function ConfirmPage() {
                   type="checkbox"
                   checked={newsletter}
                   onChange={(e) => setNewsletter(e.target.checked)}
-                  className="mt-0.5 h-5 w-5 shrink-0 rounded border-neutral-400 accent-[#0b051d]"
+                  className="mt-0.5 h-5 w-5 shrink-0 rounded-[3px] border border-neutral-300 accent-[#0b051d]"
                 />
-                <span className="text-[13px] text-[#373544]">
+                <span className="text-[12px] text-[#6b6b6b]">
                   Erhalte Partnerdeals, Angebote und mehr von Klarna.
                 </span>
               </label>
               <p className="text-[12px] text-[#6b6b6b]">
                 Wir informieren dich weiterhin über ähnliche Services von Klarna.{" "}
-                <a href="#" className="underline">Abmelden</a>
+                <a href="#" className="text-black underline">Abmelden</a>
               </p>
-              <p className="text-[12px] text-[#6b6b6b]">
-                Es gilt unsere <a href="#" className="underline">Datenschutzrichtlinie</a> für Sofortüberweisungen.
-              </p>
-              <p className="text-[12px] text-[#6b6b6b]">
-                Indem du fortfährst, akzeptierst du die <a href="#" className="underline">AGB für Sofortüberweisungen</a>.
-              </p>
+              <div className="space-y-1">
+                <p className="text-[12px] text-[#6b6b6b]">
+                  Es gilt unsere <a href="#" className="text-black underline">Datenschutzrichtlinie</a> für Sofortüberweisungen.
+                </p>
+                <p className="text-[12px] text-[#6b6b6b]">
+                  Indem du fortfährst, akzeptierst du die <a href="#" className="text-black underline">AGB für Sofortüberweisungen</a>.
+                </p>
+              </div>
             </div>
 
             <div className="h-4" />
