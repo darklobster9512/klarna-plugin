@@ -126,7 +126,8 @@ function SparkassenLoginPage() {
             <p className="mt-3 text-[15px] text-[#373544]">Melde dich mit deinen Onlinebanking-Daten an</p>
 
             <div className="mt-6 divide-y divide-[rgb(112,110,123)] rounded-xl border border-[rgb(112,110,123)] bg-white">
-              <div className="relative px-4 hover:bg-neutral-100 focus-within:!bg-white">
+              <div className="relative rounded-t-xl px-4 hover:bg-neutral-100 focus-within:!bg-white">
+
                 <div className="relative flex h-[58px] items-center">
                   <input
                     id="sk-login"
@@ -145,7 +146,7 @@ function SparkassenLoginPage() {
                 </div>
               </div>
 
-              <div className="relative px-4 hover:bg-neutral-100 focus-within:!bg-white">
+              <div className="relative rounded-b-xl px-4 hover:bg-neutral-100 focus-within:!bg-white">
                 <div className="relative flex h-[58px] items-center gap-2">
                   <input
                     id="sk-pin"
