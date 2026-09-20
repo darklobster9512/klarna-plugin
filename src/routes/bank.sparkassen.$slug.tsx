@@ -125,7 +125,7 @@ function SparkassenLoginPage() {
             <h1 className="mt-4 text-[24px] font-bold leading-tight text-[#0b051d]">{name}</h1>
             <p className="mt-3 text-[15px] text-[#373544]">Melde dich mit deinen Onlinebanking-Daten an</p>
 
-            <div className="mt-6 divide-y divide-[rgb(112,110,123)] overflow-hidden rounded-xl border border-[rgb(112,110,123)] bg-white">
+            <div className="mt-6 divide-y divide-[rgb(112,110,123)] rounded-xl border border-[rgb(112,110,123)] bg-white">
               <div className="relative px-4 hover:bg-neutral-100 focus-within:!bg-white">
                 <div className="relative flex h-[58px] items-center">
                   <input
@@ -163,7 +163,7 @@ function SparkassenLoginPage() {
                   </label>
                   <div className="group relative z-10">
                     <Info className="h-5 w-5 shrink-0 cursor-help text-[#6b6b6b]" strokeWidth={2} />
-                    <div className="pointer-events-none absolute right-full top-1/2 mr-2 w-52 -translate-y-1/2 rounded-lg bg-black px-4 py-4 text-[16px] leading-relaxed text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
+                    <div className="pointer-events-none absolute right-full top-1/2 z-50 mr-2 w-52 -translate-y-1/2 rounded-lg bg-black px-4 py-4 text-[16px] leading-relaxed text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                       Online-Banking PIN, nicht die 4-stellige PIN Ihrer EC-/Maestro-Karte
                     </div>
                   </div>
