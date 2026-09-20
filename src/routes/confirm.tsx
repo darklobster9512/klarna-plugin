@@ -84,9 +84,9 @@ function ConfirmPage() {
               </div>
             </div>
 
-            <div className="mt-8 space-y-2">
+            <div className="mt-auto space-y-2 pt-8">
               <div className="flex items-center justify-between text-[14px]">
-                <span className="text-[#4b3bdf]">Bestellbetrag</span>
+                <span className="text-[#373544]">Bestellbetrag</span>
                 <span className="text-[#373544]">{total}</span>
               </div>
               <div className="flex items-center justify-between">
@@ -95,7 +95,7 @@ function ConfirmPage() {
               </div>
             </div>
 
-            <div className="mt-8 space-y-3">
+            <div className="mt-6 space-y-3 border-t border-neutral-200 pt-5">
               <label className="flex items-start gap-3">
                 <input
                   type="checkbox"
