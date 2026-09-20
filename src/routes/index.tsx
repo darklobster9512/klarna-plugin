@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { Smartphone, ShieldCheck, X } from "lucide-react";
 
@@ -60,6 +60,7 @@ function formatPhoneNumber(value: string): string {
 }
 
 function Index() {
+  const navigate = useNavigate();
   const [phone, setPhone] = useState("0176 16146986");
   const [error, setError] = useState<string | null>(null);
 
@@ -146,6 +147,7 @@ function Index() {
           <button
             type="button"
             disabled={!isValid}
+            onClick={() => navigate({ to: "/step2" })}
             className="mt-auto w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Weiter
