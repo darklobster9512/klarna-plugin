@@ -3,7 +3,7 @@ import { createFileRoute, Link, useParams } from "@tanstack/react-router";
 import { ArrowLeft, Info, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
 
-const sparkassen: string[] = [
+export const sparkassen: string[] = [
   "Berliner Sparkasse - Landesbank Berlin",
   "Hamburger Sparkasse",
   "Sparkasse KölnBonn",
