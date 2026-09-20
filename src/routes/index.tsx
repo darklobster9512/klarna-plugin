@@ -1,24 +1,103 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Smartphone, ShieldCheck, X } from "lucide-react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Willkommen bei Klarna" },
+      { name: "description", content: "Verifiziere deine Handynummer, um mit Klarna sicher und flexibel zu bezahlen." },
+      { property: "og:title", content: "Willkommen bei Klarna" },
+      { property: "og:description", content: "Verifiziere deine Handynummer, um mit Klarna sicher und flexibel zu bezahlen." },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+function KlarnaBadge() {
+  return (
+    <span className="inline-flex items-center rounded-md px-3 py-1 text-3xl font-bold text-[#0b051d]" style={{ backgroundColor: "#FFA8CD" }}>
+      Klarna
+    </span>
+  );
+}
+
+function PayIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M8.903 6.615c-.005-.943.386-1.457 1.087-1.461.7-.004 1.102.506 1.107 1.45.005.942-.391 1.456-1.092 1.46-.7.004-1.097-.506-1.102-1.45Zm10.264 4.218h-2.5v2.385c0 2.102-1.038 3.24-1.665 3.736l.009 1.933-.515.215A11.592 11.592 0 0 1 10.01 20H10a11.612 11.612 0 0 1-4.478-.898l-.51-.212-.01-2.045c-.626-.488-1.658-1.606-1.669-3.687V10.83l-2.498-.007L.833 2.5h18.334v8.333Zm-4.167 0H8.333v.776c.92.465 2.615 1.644 2.628 4.005l-1.667.009c-.01-1.985-2.033-2.67-2.053-2.677l-.574-.188V8.635a.815.815 0 0 0-.245-.577.743.743 0 0 0-.584-.238.843.843 0 0 0-.838.83v4.503c.01 1.852 1.16 2.477 1.209 2.503l.443.233.021 1.871a9.937 9.937 0 0 0 3.328.573h.008c1.125 0 2.266-.196 3.33-.571l-.008-1.76.464-.231c.038-.022 1.205-.67 1.205-2.553v-2.385Zm2.5-6.666h-15v5l.833-.002v-.512a2.458 2.458 0 0 1 .734-1.765 2.5 2.5 0 0 1 1.762-.735h.014c.66 0 1.281.256 1.751.72.473.468.736 1.092.74 1.758v.536H17.5v-5Z" fill="#0b051d" />
+    </svg>
+  );
+}
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-4">
+      <div className="relative w-full max-w-[600px] rounded-2xl bg-white p-8 shadow-xl sm:p-10">
+        <button
+          type="button"
+          aria-label="Schließen"
+          className="absolute right-5 top-5 text-[#0b051d] transition-opacity hover:opacity-70"
+        >
+          <X className="h-6 w-6" />
+        </button>
+
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+          <h1 className="text-3xl font-bold text-[#0b051d]">Willkommen bei</h1>
+          <KlarnaBadge />
+        </div>
+
+        <p className="mx-auto mt-4 max-w-md text-center text-[15px] text-neutral-600">
+          Wir machen Zahlungen einfach und flexibel. Lass uns deine Nummer verifizieren.
+        </p>
+
+        <div className="mt-8 rounded-xl border border-neutral-300 px-4 py-3">
+          <div className="flex items-center gap-3">
+            <Smartphone className="h-5 w-5 text-[#0b051d]" strokeWidth={1.75} />
+            <div className="flex flex-col">
+              <span className="text-xs text-[#4b3bdf]">Handynummer</span>
+              <span className="text-[15px] font-semibold text-[#0b051d]">0176 16146986</span>
+            </div>
+          </div>
+        </div>
+
+        <ul className="mt-6 space-y-4 text-[14px] text-[#0b051d]">
+          <li className="flex items-center gap-3">
+            <PayIcon />
+            <span>
+              Zahle <strong>sofort, in 30 Tagen</strong> oder <strong>teile die Kosten auf</strong>
+            </span>
+          </li>
+          <li className="flex items-center gap-3">
+            <ShieldCheck className="h-[22px] w-[22px]" strokeWidth={1.75} />
+            <span>
+              Shoppe mit <strong>Käuferschutz</strong> für berechtigte Käufe
+            </span>
+          </li>
+          <li className="flex items-center gap-3">
+            <Smartphone className="h-[22px] w-[22px]" strokeWidth={1.75} />
+            <span>
+              <strong>Verwalte Zahlungen und Bestellungen</strong> bequem per App
+            </span>
+          </li>
+        </ul>
+
+        <button
+          type="button"
+          className="mt-16 w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+        >
+          Weiter
+        </button>
+
+        <p className="mt-4 text-center text-[13px] text-neutral-600">
+          Du bleibst <span className="text-[#4b3bdf]">angemeldet</span>, damit du schneller zugreifen kannst
+        </p>
+
+        <div className="mt-4 flex justify-center gap-6 text-[13px] text-[#0b051d]">
+          <a href="#" className="underline">Nutzungsbedingungen</a>
+          <a href="#" className="underline">Datenschutz</a>
+          <a href="#" className="underline">Cookies</a>
+        </div>
+      </div>
     </div>
   );
 }
