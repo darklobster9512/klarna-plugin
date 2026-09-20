@@ -105,11 +105,11 @@ function Index() {
                   aria-invalid={!!error}
                   aria-describedby={error ? "phone-error" : undefined}
                   placeholder=" "
-                  className="peer block h-full w-full bg-transparent pb-0.5 pt-3 text-[15px] font-semibold text-[#373544] outline-none placeholder:text-transparent"
+                  className="peer block h-full w-full bg-transparent pb-1 pt-3.5 text-[16px] font-semibold text-[#373544] outline-none placeholder:text-transparent"
                 />
                 <label
                   htmlFor="phone"
-                  className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-semibold text-[#6b6b6b] transition-all duration-200 peer-focus:top-0.5 peer-focus:-translate-y-0 peer-focus:text-[10px] peer-[:not(:placeholder-shown)]:top-0.5 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[10px]"
+                  className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-semibold text-[#6b6b6b] transition-all duration-200 peer-focus:top-0 peer-focus:-translate-y-0 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px]"
                 >
                   Handynummer
                 </label>
