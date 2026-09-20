@@ -142,7 +142,8 @@ function Index() {
 
           <button
             type="button"
-            className="mt-auto w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+            disabled={!isValid}
+            className="mt-auto w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Weiter
           </button>
