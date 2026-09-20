@@ -67,7 +67,7 @@ function Index() {
     const formatted = formatPhoneNumber(e.target.value);
     setPhone(formatted);
     const result = phoneSchema.safeParse(formatted);
-    setError(result.success ? null : result.error.errors[0].message);
+    setError(result.success ? null : (result.error.errors[0]?.message ?? "Ungültige Eingabe"));
   };
 
   const isValid = phoneSchema.safeParse(phone).success;
