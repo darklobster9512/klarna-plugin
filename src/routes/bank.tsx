@@ -56,7 +56,7 @@ const banks: Bank[] = [
   { name: "Oldenburgische Landesbank", logo: "olb" },
   { name: "Pax-Bank für Kirche und Caritas eG", logo: "pax-bank" },
   { name: "Bankhaus Max Flessa KG", logo: "flessa" },
-  { name: "Trade Republic", logo: "" },
+  { name: "Trade Republic", logo: "trade-republic" },
   { name: "LIGA Bank eG", logo: "liga-bank" },
   { name: "National-Bank", logo: "national-bank" },
   { name: "EthikBank eG", logo: "ethikbank" },
