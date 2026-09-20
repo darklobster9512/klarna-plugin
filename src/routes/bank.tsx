@@ -18,47 +18,72 @@ export const Route = createFileRoute("/bank")({
 
 type Bank = {
   name: string;
-  bg: string;
-  fg: string;
-  label: string;
-  ring?: boolean;
+  logo: string;
 };
 
 const banks: Bank[] = [
-  { name: "Sparkassen", bg: "#E3000F", fg: "#ffffff", label: "S" },
-  { name: "Volksbanken", bg: "#0066B3", fg: "#ffffff", label: "V" },
-  { name: "Commerzbank", bg: "#ffffff", fg: "#FFCC00", label: "C", ring: true },
-  { name: "Postbank", bg: "#FFCC00", fg: "#003087", label: "P" },
-  { name: "TARGOBANK", bg: "#ffffff", fg: "#0b2a4a", label: "T", ring: true },
-  { name: "Deutsche Bank", bg: "#12234B", fg: "#ffffff", label: "D" },
-  { name: "ING", bg: "#FF6200", fg: "#ffffff", label: "I" },
-  { name: "Sparda-Bank", bg: "#00699E", fg: "#ffffff", label: "SB" },
-  { name: "Revolut", bg: "#ffffff", fg: "#0b051d", label: "R", ring: true },
-  { name: "Klarna Bank AB", bg: "#FFB3C7", fg: "#0b051d", label: "K" },
-  { name: "DKB", bg: "#ffffff", fg: "#1D8AC4", label: "DKB", ring: true },
-  { name: "N26", bg: "#1A1A1A", fg: "#ffffff", label: "N" },
-  { name: "comdirect", bg: "#FFF200", fg: "#0b051d", label: "cd" },
-  { name: "HypoVereinsbank", bg: "#E2001A", fg: "#ffffff", label: "H" },
-  { name: "Consorsbank", bg: "#005E85", fg: "#ffffff", label: "C" },
-  { name: "norisbank", bg: "#E2001A", fg: "#ffffff", label: "n" },
-  { name: "Santander", bg: "#EC0000", fg: "#ffffff", label: "S" },
-  { name: "Deutsche Apotheker- und Ärztebank", bg: "#0067B1", fg: "#ffffff", label: "apo" },
-  { name: "Openbank", bg: "#EC0000", fg: "#ffffff", label: "O" },
-  { name: "Triodos Bank", bg: "#00856F", fg: "#ffffff", label: "T" },
-  { name: "GLS Bank", bg: "#F39200", fg: "#ffffff", label: "GLS" },
-  { name: "Oldenburgische Landesbank", bg: "#00447C", fg: "#ffffff", label: "OLB" },
-  { name: "Bank11", bg: "#003D7C", fg: "#ffffff", label: "11" },
-  { name: "Wüstenrot Bank", bg: "#E30613", fg: "#ffffff", label: "W" },
+  { name: "Sparkassen", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank-group_4de6442b-716f-49af-9cf3-36ffefea238e.png" },
+  { name: "Volksbanken", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank-group_0d62807c-5180-47bc-9046-3ebe510e09b5.png" },
+  { name: "Commerzbank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_b9819df4-3a8a-43d6-8af8-81036af0087e.png" },
+  { name: "Postbank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_ecc0f744-5287-4183-ab16-7b4ca46acd98.png" },
+  { name: "TARGOBANK", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_77595a31-6a1b-40ec-a7c8-357e6974a478.png" },
+  { name: "Deutsche Bank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_3274ad48-b05e-4381-94e8-b9050e8e293c.png" },
+  { name: "ING", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_a51ec5f3-096d-4499-beb7-b18247047d80.png" },
+  { name: "Sparda-Bank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank-group_86045a48-45b8-4902-9438-a63c6eecaba3.png" },
+  { name: "Revolut", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_01a5f44c-5449-4347-8882-c1a76a512ea5.png" },
+  { name: "Klarna Bank AB", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_c7422e06-c081-416e-bf61-455478f1dd20.png" },
+  { name: "DKB", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_56e743f9-b773-4be4-b93a-bb2c5feefaa1.png" },
+  { name: "N26", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_9e6610d2-3ad8-4ade-8b69-bc8b94bf6c8c.png" },
+  { name: "C24 BANK GMBH", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_93887921-39da-4939-8487-51436e9698f6.png" },
+  { name: "Comdirect Bank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_c2555127-ce1a-4eb8-a2be-caa63a381205.png" },
+  { name: "1822Direkt", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_ee3e770e-8439-474e-98bd-55eadf2af2e2.png" },
+  { name: "GLS Bank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_15992d7b-b0ae-4ad3-824d-c3a031922d2d.png" },
+  { name: "BBBank eG", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_06ff55ea-cbcf-4341-919a-3298182c564f.png" },
+  { name: "HypoVereinsbank (UniCredit)", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_469855a4-b8d9-479b-93fb-681ac658329d.png" },
+  { name: "Norisbank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_5a79587c-0139-40b3-b662-9f800cacbc43.png" },
+  { name: "BW-Bank / LBBW", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_c47335d2-4fdc-42cc-b6c1-9566356a881b.png" },
+  { name: "PSD Banken", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank-group_6665e9de-65e0-470d-b6f0-b2e25f5e4c29.png" },
+  { name: "Bank 1 Saar eG", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_bbab3afc-902a-4c17-af14-354d4fca5e4c.png" },
+  { name: "bunq", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_3f2df307-b950-42c1-ae02-eec38a71cb33.png" },
+  { name: "Wise", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_c96391a5-1876-4ee0-a694-5a7c2999f96a.png" },
+  { name: "Santander", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_d561c3cd-f84a-4496-8f5b-92066c564748.png" },
+  { name: "MLP Financepilot Banking - MLP Banking AG", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_43b6efcd-77a8-4501-a898-505bb0c72049.png" },
+  { name: "Consorsbank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_d66b12c6-6183-475f-9988-8230a2f34d10.png" },
+  { name: "Deutsche Apotheker- und Ärztebank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_fb2fed45-9427-4d9c-8b5b-ba1124f37aef.png" },
+  { name: "Qonto", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_3aab3b2a-42ba-43da-bba8-3a59520b2d4f.png" },
+  { name: "Volkswagen Bank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_6e0e7f95-1b3e-45ba-b0e6-aea412b5c2bb.png" },
+  { name: "Oldenburgische Landesbank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_188cafb1-b542-4321-b848-5678cfe30399.png" },
+  { name: "Pax-Bank für Kirche und Caritas eG", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_fa223620-7de7-4463-9f03-9d3ef334ed3a.png" },
+  { name: "Bankhaus Max Flessa KG", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_63f761ea-ded3-4ac6-9263-a9f7eb140ef0.png" },
+  { name: "Trade Republic", logo: "" },
+  { name: "LIGA Bank eG", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_d525079d-ef48-45cb-88bb-c7a9c3181fe0.png" },
+  { name: "National-Bank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_85eb1875-6f74-4a29-ae81-1b5d293e8c21.png" },
+  { name: "EthikBank eG", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_22fafb55-6b6f-44dc-a373-59dd3e4bfd19.png" },
+  { name: "Bensberger Bank eG", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_fefd22d1-c9fb-4e21-b85e-ba36d5ae5a20.png" },
+  { name: "Evangelische Bank eG", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_b8f4aaea-82ee-4ad6-a53f-e92d5ff5fa3e.png" },
+  { name: "Tomorrow", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_d1f4170a-b2be-4838-808a-50e1b44f5e74.png" },
+  { name: "Triodos Bank Deutschland", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_0ccd91f9-73c4-419d-93da-929e2870571a.png" },
+  { name: "DKM Partner für Kirche + Caritas", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_3528a69c-7f62-49d8-8b7c-7e12660491e2.png" },
+  { name: "Bank für Kirche und Diakonie - KD-Bank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_669f080f-639b-4a5e-ad6d-f6fbe7aea903.png" },
+  { name: "VietinBank eG", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_7dec1656-d009-403a-9ec4-00a37ef5c562.png" },
+  { name: "Edekabank", logo: "https://x.klarnacdn.net/xs2a/assets/bank-logos-krn/de/png/50_50/krn_openbanking_global_bank_602f7cfe-c657-4bd4-af1b-da86813ea47d.png" },
 ];
 
 function BankLogo({ bank }: { bank: Bank }) {
+  if (!bank.logo) {
+    return (
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-neutral-200 bg-neutral-100 text-[11px] font-bold text-[#0b051d]">
+        {bank.name.slice(0, 2).toUpperCase()}
+      </div>
+    );
+  }
   return (
-    <div
-      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${bank.ring ? "border border-neutral-200" : ""}`}
-      style={{ backgroundColor: bank.bg, color: bank.fg }}
-    >
-      {bank.label}
-    </div>
+    <img
+      src={bank.logo}
+      alt=""
+      loading="lazy"
+      className="h-10 w-10 shrink-0 rounded-full object-contain"
+    />
   );
 }
 
