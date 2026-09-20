@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ChevronRight, Search, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
+import { slugifySparkasse } from "./bank.sparkassen.$slug";
 
 export const Route = createFileRoute("/bank/sparkassen")({
   head: () => ({
@@ -117,8 +118,9 @@ function SparkassenPage() {
             <ul className="mt-6 divide-y divide-neutral-200">
               {filtered.map((name) => (
                 <li key={name}>
-                  <button
-                    type="button"
+                  <Link
+                    to="/bank/sparkassen/$slug"
+                    params={{ slug: slugifySparkasse(name) }}
                     className="flex w-full items-center gap-4 py-3 text-left transition-colors hover:bg-neutral-50"
                   >
                     <img
@@ -129,7 +131,7 @@ function SparkassenPage() {
                     />
                     <span className="flex-1 text-[15px] font-semibold text-[#0b051d]">{name}</span>
                     <ChevronRight className="h-5 w-5 shrink-0 text-[#6b6b6b]" strokeWidth={2} />
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
