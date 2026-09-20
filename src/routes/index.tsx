@@ -90,7 +90,7 @@ function Index() {
             <KlarnaBadge />
           </div>
 
-          <p className="mx-auto mt-4 max-w-md text-center text-[15px] text-[#373544]">
+          <p className="mx-auto mt-4 max-w-lg text-center text-[15px] text-[#373544]">
             Wir machen Zahlungen einfach und flexibel. Lass uns deine Nummer verifizieren.
           </p>
 
@@ -155,13 +155,13 @@ function Index() {
         </div>
 
         <p className="mt-4 text-center text-[13px] text-[#373544]">
-          Du bleibst <span className="text-[#4b3bdf]">angemeldet</span>, damit du schneller zugreifen kannst
+          Du bleibst <span className="text-[rgb(92,50,184)]">angemeldet</span>, damit du schneller zugreifen kannst
         </p>
 
-        <div className="mt-4 flex justify-center gap-6 text-[13px] text-[#373544]">
-          <a href="#" className="underline">Nutzungsbedingungen</a>
-          <a href="#" className="underline">Datenschutz</a>
-          <a href="#" className="underline">Cookies</a>
+        <div className="mt-4 flex justify-center gap-6 text-[13px]">
+          <a href="#" className="text-[rgb(55,53,68)] underline">Nutzungsbedingungen</a>
+          <a href="#" className="text-[rgb(55,53,68)] underline">Datenschutz</a>
+          <a href="#" className="text-[rgb(55,53,68)] underline">Cookies</a>
         </div>
       </div>
     </div>
