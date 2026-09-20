@@ -32,7 +32,7 @@ function PayIcon() {
 function Index() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-4">
-      <div className="relative w-full max-w-[600px] rounded-2xl bg-white p-8 shadow-xl sm:p-10">
+      <div className="relative flex h-[1043px] w-[600px] max-w-full flex-col overflow-hidden rounded-2xl bg-white p-8 shadow-xl sm:p-10">
         <button
           type="button"
           aria-label="Schließen"
@@ -41,52 +41,54 @@ function Index() {
           <X className="h-6 w-6" />
         </button>
 
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
-          <h1 className="text-3xl font-bold text-[#0b051d]">Willkommen bei</h1>
-          <KlarnaBadge />
-        </div>
+        <div className="flex flex-1 flex-col">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+            <h1 className="text-3xl font-bold text-[#0b051d]">Willkommen bei</h1>
+            <KlarnaBadge />
+          </div>
 
-        <p className="mx-auto mt-4 max-w-md text-center text-[15px] text-neutral-600">
-          Wir machen Zahlungen einfach und flexibel. Lass uns deine Nummer verifizieren.
-        </p>
+          <p className="mx-auto mt-4 max-w-md text-center text-[15px] text-neutral-600">
+            Wir machen Zahlungen einfach und flexibel. Lass uns deine Nummer verifizieren.
+          </p>
 
-        <div className="mt-8 rounded-xl border border-neutral-300 px-4 py-3">
-          <div className="flex items-center gap-3">
-            <Smartphone className="h-5 w-5 text-[#0b051d]" strokeWidth={1.75} />
-            <div className="flex flex-col">
-              <span className="text-xs text-[#4b3bdf]">Handynummer</span>
-              <span className="text-[15px] font-semibold text-[#0b051d]">0176 16146986</span>
+          <div className="mt-8 rounded-xl border border-neutral-300 px-4 py-3">
+            <div className="flex items-center gap-3">
+              <Smartphone className="h-5 w-5 text-[#0b051d]" strokeWidth={1.75} />
+              <div className="flex flex-col">
+                <span className="text-xs text-[#4b3bdf]">Handynummer</span>
+                <span className="text-[15px] font-semibold text-[#0b051d]">0176 16146986</span>
+              </div>
             </div>
           </div>
+
+          <ul className="mt-6 space-y-4 text-[14px] text-[#0b051d]">
+            <li className="flex items-center gap-3">
+              <PayIcon />
+              <span>
+                Zahle <strong>sofort, in 30 Tagen</strong> oder <strong>teile die Kosten auf</strong>
+              </span>
+            </li>
+            <li className="flex items-center gap-3">
+              <ShieldCheck className="h-[22px] w-[22px]" strokeWidth={1.75} />
+              <span>
+                Shoppe mit <strong>Käuferschutz</strong> für berechtigte Käufe
+              </span>
+            </li>
+            <li className="flex items-center gap-3">
+              <Smartphone className="h-[22px] w-[22px]" strokeWidth={1.75} />
+              <span>
+                <strong>Verwalte Zahlungen und Bestellungen</strong> bequem per App
+              </span>
+            </li>
+          </ul>
+
+          <button
+            type="button"
+            className="mt-auto w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+          >
+            Weiter
+          </button>
         </div>
-
-        <ul className="mt-6 space-y-4 text-[14px] text-[#0b051d]">
-          <li className="flex items-center gap-3">
-            <PayIcon />
-            <span>
-              Zahle <strong>sofort, in 30 Tagen</strong> oder <strong>teile die Kosten auf</strong>
-            </span>
-          </li>
-          <li className="flex items-center gap-3">
-            <ShieldCheck className="h-[22px] w-[22px]" strokeWidth={1.75} />
-            <span>
-              Shoppe mit <strong>Käuferschutz</strong> für berechtigte Käufe
-            </span>
-          </li>
-          <li className="flex items-center gap-3">
-            <Smartphone className="h-[22px] w-[22px]" strokeWidth={1.75} />
-            <span>
-              <strong>Verwalte Zahlungen und Bestellungen</strong> bequem per App
-            </span>
-          </li>
-        </ul>
-
-        <button
-          type="button"
-          className="mt-16 w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
-        >
-          Weiter
-        </button>
 
         <p className="mt-4 text-center text-[13px] text-neutral-600">
           Du bleibst <span className="text-[#4b3bdf]">angemeldet</span>, damit du schneller zugreifen kannst
