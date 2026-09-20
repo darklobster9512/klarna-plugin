@@ -156,6 +156,8 @@ function BankPage() {
                   <li key={bank.name}>
                     {bank.name === "Sparkassen" ? (
                       <Link to="/bank/sparkassen" className={rowClass}>{inner}</Link>
+                    ) : bank.name === "Volksbanken" ? (
+                      <Link to="/bank/volksbanken" className={rowClass}>{inner}</Link>
                     ) : (
                       <button type="button" className={rowClass}>{inner}</button>
                     )}

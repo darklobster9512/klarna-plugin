@@ -1,0 +1,145 @@
+import { useMemo, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft, ChevronRight, Search, X } from "lucide-react";
+import { bankLogoUrls } from "@/assets/bank-logos";
+
+export const Route = createFileRoute("/bank/volksbanken")({
+  head: () => ({
+    meta: [
+      { title: "Wähle deine Volksbank aus — Klarna" },
+      { name: "description", content: "Suche deine Volksbanken-Filiale und melde dich für die Sofortüberweisung an." },
+      { property: "og:title", content: "Wähle deine Volksbank aus — Klarna" },
+      { property: "og:description", content: "Suche deine Volksbanken-Filiale und melde dich für die Sofortüberweisung an." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
+  component: VolksbankenPage,
+});
+
+const volksbanken: string[] = [
+  "Berliner Volksbank eG",
+  "Volksbank Mittelhessen eG",
+  "Volksbank Darmstadt Mainz eG",
+  "Volksbank im Münsterland eG",
+  "Frankfurter Volksbank Rhein-Main eG",
+  "Dortmunder Volksbank eG",
+  "VerbundVolksbank OWL",
+  "Volksbank pur eG",
+  "Volksbank Kraichgau eG",
+  "Hannoversche Volksbank eG",
+  "Volksbank Stuttgart eG",
+  "Volksbank in Ostwestfalen eG",
+  "meine Volksbank Raiffeisenbank eG",
+  "VR Bank Rhein-Neckar eG",
+  "VR Bank Bonn Rhein-Sieg",
+  "Volksbank BRAWO eG",
+  "Vereinigte Volksbanken eG",
+  "Volksbank Mittlerer Neckar eG",
+  "Volksbank im Rheinland eG",
+  "VR-Bank Ludwigsburg eG",
+  "VR Bank Heilbronn Schwäbisch Hall eG",
+  "VR Bank RheinAhrEifel eG",
+  "Volksbank eG - Die Gestalterbank",
+  "Volksbank Ruhr Mitte eG",
+  "Vereinigte VR Bank Kur- und Rheinpfalz eG",
+  "VR Bank Mecklenburg eG",
+  "VR Bank zwischen den Meeren eG",
+  "Wiesbadener Volksbank eG",
+  "Volksbank Lüneburger Heide eG",
+  "Vereinigte Volksbank eG Saarlouis - Losheim am See - Sulzbach/Saar",
+  "VR Bank Schleswig-Holstein Mitte",
+  "Volksbank Alzey-Worms eG",
+  "Volksbank Ulm-Biberach eG",
+  "Volksbank an der Niers eG",
+  "Volksbank Trier Eifel eG",
+  "Volksbank in Südwestfalen eG",
+  "Volksbank Köln Bonn eG",
+  "Volksbank Kassel Göttingen eG",
+  "Westerwald Bank eG",
+  "VR Bank Bamberg-Forchheim eG",
+  "VR Bank Augsburg-Ostallgäu eG",
+  "Volksbank Vorpommern eG",
+  "VR Bank Metropolregion Nürnberg eG",
+  "Volksbank in der Region eG",
+  "Volksbank Oberberg eG",
+];
+
+function VolksbankenPage() {
+  const [query, setQuery] = useState("");
+  const logo = bankLogoUrls["volksbanken"];
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return volksbanken;
+    return volksbanken.filter((n) => n.toLowerCase().includes(q));
+  }, [query]);
+
+  return (
+    <div className="min-h-screen bg-neutral-100 p-4">
+      <div className="mx-auto flex w-[600px] max-w-full items-start justify-center">
+        <div className="flex h-[calc(100vh-2rem)] max-h-[1043px] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-xl">
+          <div className="flex flex-1 flex-col overflow-y-auto px-8 pb-6 pt-8 sm:px-10">
+            <div className="flex items-start justify-end">
+              <Link
+                to="/confirm"
+                aria-label="Schließen"
+                className="rounded-full p-1 text-[#0b051d] transition-colors hover:bg-neutral-100"
+              >
+                <X className="h-6 w-6" strokeWidth={2} />
+              </Link>
+            </div>
+
+            <h1 className="mt-2 text-[26px] font-bold leading-tight text-[#0b051d]">Wähle deine Bank aus</h1>
+
+            <div className="mt-6 flex items-center gap-3">
+              <Link
+                to="/bank"
+                aria-label="Zurück"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-neutral-300 text-[#0b051d] transition-colors hover:bg-neutral-50"
+              >
+                <ArrowLeft className="h-5 w-5" strokeWidth={2} />
+              </Link>
+
+              <div className="relative flex-1">
+                <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6b6b6b]" />
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Suche nach deiner Bankfiliale"
+                  aria-label="Volksbank suchen"
+                  className="h-12 w-full rounded-full bg-neutral-100 pl-10 pr-4 text-[15px] text-[#373544] outline-none placeholder:text-[#6b6b6b] focus:ring-1 focus:ring-[#0b051d]"
+                />
+              </div>
+            </div>
+
+            <ul className="mt-6 divide-y divide-neutral-200">
+              {filtered.map((name) => (
+                <li key={name}>
+                  <button
+                    type="button"
+                    className="flex w-full items-center gap-4 py-3 text-left transition-colors hover:bg-neutral-50"
+                  >
+                    <img
+                      src={logo}
+                      alt=""
+                      loading="lazy"
+                      className="h-10 w-10 shrink-0 rounded-full object-contain"
+                    />
+                    <span className="flex-1 text-[15px] font-semibold text-[#0b051d]">{name}</span>
+                    <ChevronRight className="h-5 w-5 shrink-0 text-[#6b6b6b]" strokeWidth={2} />
+                  </button>
+                </li>
+              ))}
+            </ul>
+
+            {filtered.length === 0 && (
+              <p className="mt-6 text-[14px] text-[#373544]">Keine Volksbank gefunden.</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
