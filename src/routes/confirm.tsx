@@ -123,12 +123,12 @@ function ConfirmPage() {
           </div>
 
           <div className="relative bg-white px-8 pb-6 pt-3 shadow-[0_-8px_24px_-8px_rgba(0,0,0,0.08)] sm:px-10">
-            <button
-              type="button"
-              className="w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+            <Link
+              to="/bank"
+              className="block w-full rounded-full bg-[#0b051d] py-4 text-center text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
             >
               Weiter zur Sofortüberweisung
-            </button>
+            </Link>
           </div>
         </div>
       </div>
