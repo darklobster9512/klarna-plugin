@@ -2,6 +2,10 @@ import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronDown, ChevronRight, Search, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
+import { sparkassen, slugifySparkasse } from "./bank.sparkassen.$slug";
+import { volksbanken, slugifyVolksbank } from "./bank.volksbanken.$slug";
+import { branches as spardaBranches, slugifySparda } from "./bank.sparda-bank.$slug";
+import { branches as psdBranches, slugifyPsd } from "./bank.psd.$slug";
 
 export const Route = createFileRoute("/bank/")({
   head: () => ({
