@@ -90,11 +90,11 @@ function Index() {
           </button>
         </div>
 
-        <p className="mt-4 text-center text-[13px] text-neutral-600">
+        <p className="mt-4 text-center text-[13px] text-[#373544]">
           Du bleibst <span className="text-[#4b3bdf]">angemeldet</span>, damit du schneller zugreifen kannst
         </p>
 
-        <div className="mt-4 flex justify-center gap-6 text-[13px] text-[#0b051d]">
+        <div className="mt-4 flex justify-center gap-6 text-[13px] text-[#373544]">
           <a href="#" className="underline">Nutzungsbedingungen</a>
           <a href="#" className="underline">Datenschutz</a>
           <a href="#" className="underline">Cookies</a>
