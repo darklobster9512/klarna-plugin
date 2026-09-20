@@ -96,12 +96,28 @@ function Index() {
           <div className="mt-8 rounded-xl border border-neutral-300 px-4 py-3">
             <div className="flex items-center gap-3">
               <Smartphone className="h-5 w-5 text-[#0b051d]" strokeWidth={1.75} />
-              <div className="flex flex-col">
-              <span className="text-xs text-[#6b6b6b]">Handynummer</span>
-              <span className="text-[15px] font-semibold text-[#373544]">0176 16146986</span>
+              <div className="flex flex-1 flex-col">
+                <label htmlFor="phone" className="text-xs text-[#6b6b6b]">
+                  Handynummer
+                </label>
+                <input
+                  id="phone"
+                  type="tel"
+                  value={phone}
+                  onChange={handleChange}
+                  aria-invalid={!!error}
+                  aria-describedby={error ? "phone-error" : undefined}
+                  className="w-full bg-transparent p-0 text-[15px] font-semibold text-[#373544] outline-none placeholder:text-[#6b6b6b]"
+                  placeholder="0176 16146986"
+                />
               </div>
             </div>
           </div>
+          {error && (
+            <p id="phone-error" className="mt-2 text-xs text-red-600">
+              {error}
+            </p>
+          )}
 
           <ul className="mt-6 space-y-4 text-[14px] text-[#373544]">
             <li className="flex items-center gap-3">
