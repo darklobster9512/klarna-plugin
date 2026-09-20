@@ -18,7 +18,7 @@ export const Route = createFileRoute("/confirm")({
 
 function KauflandLogo() {
   return (
-    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded bg-[#E10915] text-[15px] font-black text-white">
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded bg-[#E10915] text-[16px] font-black text-white">
       K
     </span>
   );
@@ -41,10 +41,10 @@ function ConfirmPage() {
 
         <div className="flex flex-1 flex-col overflow-hidden">
           <div className="flex flex-1 flex-col overflow-y-auto px-8 pb-4 pt-10 sm:px-10 sm:pt-10">
-            <h1 className="text-[26px] font-bold leading-tight text-[#0b051d]">
+            <h1 className="text-[30px] font-extrabold leading-tight text-[#0b051d]">
               Bestätigen und bezahlen
             </h1>
-            <p className="mt-2 text-[14px] text-[#373544]">
+            <p className="mt-2 text-[14px] leading-snug text-[#373544]">
               Überprüfe vor der Zahlung noch einmal alle Angaben. Du profitierst außerdem vom Klarna{" "}
               <a href="#" className="underline">Käuferschutz.</a>
             </p>
@@ -90,12 +90,12 @@ function ConfirmPage() {
                 <span className="text-[#373544]">{total}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[15px] font-semibold text-[#0b051d]">Gesamtbetrag</span>
+                <span className="text-[16px] font-semibold text-[#0b051d]">Gesamtbetrag</span>
                 <span className="text-[22px] font-bold text-[#0b051d]">{total}</span>
               </div>
             </div>
 
-            <div className="mt-6 space-y-3 border-t border-neutral-200 pt-5">
+            <div className="mt-6 space-y-3 pt-6">
               <label className="flex items-start gap-3">
                 <input
                   type="checkbox"
@@ -107,14 +107,14 @@ function ConfirmPage() {
                   Erhalte Partnerdeals, Angebote und mehr von Klarna.
                 </span>
               </label>
-              <p className="text-[12px] text-[#6b6b6b]">
+              <p className="text-[12px] text-[#373544]">
                 Wir informieren dich weiterhin über ähnliche Services von Klarna.{" "}
                 <a href="#" className="underline">Abmelden</a>
               </p>
-              <p className="text-[12px] text-[#6b6b6b]">
+              <p className="text-[12px] text-[#373544]">
                 Es gilt unsere <a href="#" className="underline">Datenschutzrichtlinie</a> für Sofortüberweisungen.
               </p>
-              <p className="text-[12px] text-[#6b6b6b]">
+              <p className="text-[12px] text-[#373544]">
                 Indem du fortfährst, akzeptierst du die <a href="#" className="underline">AGB für Sofortüberweisungen</a>.
               </p>
             </div>
@@ -122,10 +122,10 @@ function ConfirmPage() {
             <div className="h-4" />
           </div>
 
-          <div className="relative bg-white px-8 pb-6 pt-3 shadow-[0_-8px_24px_-8px_rgba(0,0,0,0.08)] sm:px-10">
+          <div className="relative bg-white px-8 pb-6 pt-3 sm:px-10">
             <Link
               to="/bank"
-              className="block w-full rounded-full bg-[#0b051d] py-4 text-center text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+              className="block w-full rounded-full bg-[#0b051d] py-4 text-center text-[16px] font-semibold text-white transition-opacity hover:opacity-90"
             >
               Weiter zur Sofortüberweisung
             </Link>
