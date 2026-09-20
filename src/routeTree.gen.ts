@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConfirmRouteImport } from './routes/confirm'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as PaymentMethodRouteImport } from './routes/payment-method'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfirmRoute = ConfirmRouteImport.update({
+  id: '/confirm',
+  path: '/confirm',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PaymentRoute = PaymentRouteImport.update({
@@ -31,30 +37,34 @@ const PaymentMethodRoute = PaymentMethodRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/payment' | '/payment-method'
+  fullPaths: '/' | '/confirm' | '/payment' | '/payment-method'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/payment' | '/payment-method'
-  id: '__root__' | '/' | '/payment' | '/payment-method'
+  to: '/' | '/confirm' | '/payment' | '/payment-method'
+  id: '__root__' | '/' | '/confirm' | '/payment' | '/payment-method'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ConfirmRoute: typeof ConfirmRoute
   PaymentRoute: typeof PaymentRoute
   PaymentMethodRoute: typeof PaymentMethodRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confirm': {
+      id: '/confirm'
+      path: '/confirm'
+      fullPath: '/confirm'
+      preLoaderRoute: typeof ConfirmRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/payment': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ConfirmRoute: ConfirmRoute,
   PaymentRoute: PaymentRoute,
   PaymentMethodRoute: PaymentMethodRoute,
 }
