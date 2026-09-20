@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { z } from "zod";
 import { Smartphone, ShieldCheck, X } from "lucide-react";
 
 export const Route = createFileRoute("/")({
