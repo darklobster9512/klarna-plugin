@@ -61,7 +61,9 @@ import { Route as BankVolksbankenRouteImport } from './routes/bank.volksbanken'
 import { Route as BankVwBankRouteImport } from './routes/bank.vw-bank'
 import { Route as BankWiseRouteImport } from './routes/bank.wise'
 import { Route as BankPsdIndexRouteImport } from './routes/bank.psd.index'
+import { Route as BankPsdSlugRouteImport } from './routes/bank.psd.$slug'
 import { Route as BankSpardaBankIndexRouteImport } from './routes/bank.sparda-bank.index'
+import { Route as BankSpardaBankSlugRouteImport } from './routes/bank.sparda-bank.$slug'
 import { Route as BankSparkassenIndexRouteImport } from './routes/bank.sparkassen.index'
 import { Route as BankSparkassenSlugRouteImport } from './routes/bank.sparkassen.$slug'
 import { Route as BankVolksbankenIndexRouteImport } from './routes/bank.volksbanken.index'
@@ -327,9 +329,19 @@ const BankPsdIndexRoute = BankPsdIndexRouteImport.update({
   path: '/',
   getParentRoute: () => BankPsdRoute,
 } as any)
+const BankPsdSlugRoute = BankPsdSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BankPsdRoute,
+} as any)
 const BankSpardaBankIndexRoute = BankSpardaBankIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => BankSpardaBankRoute,
+} as any)
+const BankSpardaBankSlugRoute = BankSpardaBankSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
   getParentRoute: () => BankSpardaBankRoute,
 } as any)
 const BankSparkassenIndexRoute = BankSparkassenIndexRouteImport.update({
@@ -405,6 +417,8 @@ export interface FileRoutesByFullPath {
   '/bank/vw-bank': typeof BankVwBankRoute
   '/bank/wise': typeof BankWiseRoute
   '/bank/': typeof BankIndexRoute
+  '/bank/psd/$slug': typeof BankPsdSlugRoute
+  '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
   '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
   '/bank/psd/': typeof BankPsdIndexRoute
@@ -459,6 +473,8 @@ export interface FileRoutesByTo {
   '/bank/vw-bank': typeof BankVwBankRoute
   '/bank/wise': typeof BankWiseRoute
   '/bank': typeof BankIndexRoute
+  '/bank/psd/$slug': typeof BankPsdSlugRoute
+  '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
   '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
   '/bank/psd': typeof BankPsdIndexRoute
@@ -519,6 +535,8 @@ export interface FileRoutesById {
   '/bank/vw-bank': typeof BankVwBankRoute
   '/bank/wise': typeof BankWiseRoute
   '/bank/': typeof BankIndexRoute
+  '/bank/psd/$slug': typeof BankPsdSlugRoute
+  '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
   '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
   '/bank/psd/': typeof BankPsdIndexRoute
@@ -580,6 +598,8 @@ export interface FileRouteTypes {
     | '/bank/vw-bank'
     | '/bank/wise'
     | '/bank/'
+    | '/bank/psd/$slug'
+    | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
     | '/bank/volksbanken/$slug'
     | '/bank/psd/'
@@ -634,6 +654,8 @@ export interface FileRouteTypes {
     | '/bank/vw-bank'
     | '/bank/wise'
     | '/bank'
+    | '/bank/psd/$slug'
+    | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
     | '/bank/volksbanken/$slug'
     | '/bank/psd'
@@ -693,6 +715,8 @@ export interface FileRouteTypes {
     | '/bank/vw-bank'
     | '/bank/wise'
     | '/bank/'
+    | '/bank/psd/$slug'
+    | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
     | '/bank/volksbanken/$slug'
     | '/bank/psd/'
@@ -1075,11 +1099,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BankPsdIndexRouteImport
       parentRoute: typeof BankPsdRoute
     }
+    '/bank/psd/$slug': {
+      id: '/bank/psd/$slug'
+      path: '/$slug'
+      fullPath: '/bank/psd/$slug'
+      preLoaderRoute: typeof BankPsdSlugRouteImport
+      parentRoute: typeof BankPsdRoute
+    }
     '/bank/sparda-bank/': {
       id: '/bank/sparda-bank/'
       path: '/'
       fullPath: '/bank/sparda-bank/'
       preLoaderRoute: typeof BankSpardaBankIndexRouteImport
+      parentRoute: typeof BankSpardaBankRoute
+    }
+    '/bank/sparda-bank/$slug': {
+      id: '/bank/sparda-bank/$slug'
+      path: '/$slug'
+      fullPath: '/bank/sparda-bank/$slug'
+      preLoaderRoute: typeof BankSpardaBankSlugRouteImport
       parentRoute: typeof BankSpardaBankRoute
     }
     '/bank/sparkassen/': {
@@ -1114,10 +1152,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface BankPsdRouteChildren {
+  BankPsdSlugRoute: typeof BankPsdSlugRoute
   BankPsdIndexRoute: typeof BankPsdIndexRoute
 }
 
 const BankPsdRouteChildren: BankPsdRouteChildren = {
+  BankPsdSlugRoute: BankPsdSlugRoute,
   BankPsdIndexRoute: BankPsdIndexRoute,
 }
 
@@ -1125,10 +1165,12 @@ const BankPsdRouteWithChildren =
   BankPsdRoute._addFileChildren(BankPsdRouteChildren)
 
 interface BankSpardaBankRouteChildren {
+  BankSpardaBankSlugRoute: typeof BankSpardaBankSlugRoute
   BankSpardaBankIndexRoute: typeof BankSpardaBankIndexRoute
 }
 
 const BankSpardaBankRouteChildren: BankSpardaBankRouteChildren = {
+  BankSpardaBankSlugRoute: BankSpardaBankSlugRoute,
   BankSpardaBankIndexRoute: BankSpardaBankIndexRoute,
 }
 
