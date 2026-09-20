@@ -96,7 +96,7 @@ function Index() {
           <div className="relative mt-8 rounded-xl border border-neutral-300 px-4 py-3 transition-all focus-within:border-[#0b051d] focus-within:ring-1 focus-within:ring-[#0b051d]">
             <div className="flex h-[52px] items-center gap-3">
               <Smartphone className="h-5 w-5 text-[#0b051d]" strokeWidth={1.75} />
-              <div className="relative flex flex-1 flex-col">
+              <div className="relative flex h-full flex-1 flex-col justify-center">
                 <input
                   id="phone"
                   type="tel"
@@ -109,7 +109,7 @@ function Index() {
                 />
                 <label
                   htmlFor="phone"
-                  className="pointer-events-none absolute left-0 top-4 text-[15px] font-semibold text-[#6b6b6b] transition-all duration-200 peer-focus:top-1 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-[11px]"
+                  className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-semibold text-[#6b6b6b] transition-all duration-200 peer-focus:top-1 peer-focus:-translate-y-0 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px]"
                 >
                   Handynummer
                 </label>
