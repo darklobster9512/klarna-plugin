@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PaymentRouteImport } from './routes/payment'
+import { Route as PaymentMethodRouteImport } from './routes/payment-method'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const PaymentRoute = PaymentRouteImport.update({
   path: '/payment',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PaymentMethodRoute = PaymentMethodRouteImport.update({
+  id: '/payment-method',
+  path: '/payment-method',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/payment': typeof PaymentRoute
+  '/payment-method': typeof PaymentMethodRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/payment': typeof PaymentRoute
+  '/payment-method': typeof PaymentMethodRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/payment': typeof PaymentRoute
+  '/payment-method': typeof PaymentMethodRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/payment'
+  fullPaths: '/' | '/payment' | '/payment-method'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/payment'
-  id: '__root__' | '/' | '/payment'
+  to: '/' | '/payment' | '/payment-method'
+  id: '__root__' | '/' | '/payment' | '/payment-method'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PaymentRoute: typeof PaymentRoute
+  PaymentMethodRoute: typeof PaymentMethodRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PaymentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/payment-method': {
+      id: '/payment-method'
+      path: '/payment-method'
+      fullPath: '/payment-method'
+      preLoaderRoute: typeof PaymentMethodRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PaymentRoute: PaymentRoute,
+  PaymentMethodRoute: PaymentMethodRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
