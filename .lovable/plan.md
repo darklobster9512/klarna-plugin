@@ -1,34 +1,21 @@
-# `/confirm` pixelgenau an die Referenz angleichen
+# Feinschliff `/confirm` zur Referenz
 
-## Ziel
-Die Bestätigungsseite wird in Proportionen, Typografie und Abständen exakt an `popup5-3.png` angenähert, ohne Ablauf oder Inhalte zu verändern.
+Gezielte Anpassungen in `src/routes/confirm.tsx`, damit die Seite 1:1 der Referenz `popup5-4.png` entspricht. Bankauswahl-Weiterleitung und Layout-Grundgerüst bleiben unverändert.
 
-## Anpassungen
-1. **Grundfläche und Innenabstände**
-   - Die Standardansicht auf die Referenzbreite von rund 600 px abstimmen.
-   - Den seitlichen Abstand des Inhalts reduzieren und den Titel weiter nach unten setzen.
-   - Die responsive Höhe und das Scrollen auf kleinen Bildschirmen beibehalten.
+## Änderungen
 
-2. **Typografie und Zeilenumbrüche**
-   - Titel, Beschreibung, Listeneinträge und Betragszeilen auf die sichtbar größeren Referenzgrößen bringen.
-   - Textbreiten und Zeilenhöhen so abstimmen, dass die Beschreibung wie in der Vorlage nach „profitierst“ umbricht.
-   - Rechtstexte und Links in Größe, Farbe und Abstand an die Vorlage angleichen.
+1. **Titel größer und kräftiger.** „Bestätigen und bezahlen" von `text-[26px]` auf `text-[30px]` mit `font-extrabold`.
+2. **Untertitel-Farbe angleichen.** Untertitel bleibt `text-[14px]`, Farbe auf `text-[#0b051d]/80` bzw. gleiches Grau wie Referenz (`#373544` behalten, aber Zeilenhöhe leicht erhöhen mit `leading-snug`).
+3. **Trennlinie über der Checkbox entfernen.** Die Referenz zeigt keinen sichtbaren Strich zwischen Beträgen und Newsletter-Checkbox — `border-t border-neutral-200 pt-5` wird zu reinem `pt-6` ohne Rahmen.
+4. **Hinweistexte dunkler.** „Wir informieren…", „Es gilt unsere…", „Indem du fortfährst…" von `text-[#6b6b6b]` auf `text-[#373544]` (wie in der Referenz sichtbar).
+5. **Bottom-Bar-Schatten entfernen.** Referenz zeigt keinen sichtbaren Schatten über dem Button — `shadow-[0_-8px_24px_-8px_rgba(0,0,0,0.08)]` entfernen, damit die Button-Zone flach anschließt.
+6. **Button leicht runder und größer.** `py-4` bleibt, aber Font auf `text-[16px]` für bessere Übereinstimmung.
+7. **Kaufland-Logo-Größe.** Von `h-9 w-9` auf `h-10 w-10` angleichen, damit es mit Avatar-/Wallet-Höhe konsistent ist.
+8. **Gesamtbetrag-Label leicht dunkler/größer.** „Gesamtbetrag" auf `text-[16px] font-semibold`.
 
-3. **Kontakt-, Händler- und Zahlungszeilen**
-   - Zeilenhöhe, Symbolgröße, Textabstand und Trennlinien exakt nachziehen.
-   - Das derzeitige rote „K“-Feld durch die kompaktere Kaufland-Darstellung der Referenz ersetzen.
-   - Pfeile, Wallet-Symbol und „Ändern“ in Größe und Position korrigieren.
-
-4. **Betrag und Zustimmung**
-   - Den großen Leerraum bis zum Betragsblock sowie dessen vertikale Abstände anpassen.
-   - Gesamtbetrag stärker hervorheben und die Trennlinie direkt darunter positionieren.
-   - Checkbox und Hinweistexte enger wie in der Vorlage gruppieren.
-
-5. **Unterer Button**
-   - Die zusätzliche schwebende Leistenwirkung reduzieren, damit der Button wie in der Referenz direkt im weißen Seitenbereich sitzt.
-   - Breite, Höhe, Rundung und Abstand zum unteren Rand exakt angleichen.
+Alle anderen Elemente (Reihenfolge, Icons, Links, Käuferschutz-Unterstreichung, Bank-Weiterleitung) bleiben identisch.
 
 ## Verifikation
-- Vergleichsscreenshots von `/confirm` bei Referenzgröße sowie auf einem kleinen Mobilbildschirm erstellen.
-- Sichtbare Abweichungen bei Kanten, Textumbrüchen, Zeilenpositionen und Buttonlage nachmessen.
-- Abschließend den Vorschau-Status auf Fehler prüfen.
+
+- Build-Log prüfen (`/tmp/observability/build-errors.log`).
+- Playwright-Screenshot von `/confirm` auf Desktop (1280×1800) mit `popup5-4.png` vergleichen.
