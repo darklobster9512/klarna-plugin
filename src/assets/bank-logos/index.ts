@@ -37,6 +37,7 @@ import sparda_bank from "./sparda-bank.png.asset.json";
 import sparkassen from "./sparkassen.png.asset.json";
 import targobank from "./targobank.png.asset.json";
 import tomorrow from "./tomorrow.png.asset.json";
+import trade_republic from "./trade-republic.png.asset.json";
 import triodos from "./triodos.png.asset.json";
 import vietinbank from "./vietinbank.png.asset.json";
 import volksbanken from "./volksbanken.png.asset.json";
@@ -83,6 +84,7 @@ export const bankLogoUrls: Record<string, string> = {
   "sparkassen": sparkassen.url,
   "targobank": targobank.url,
   "tomorrow": tomorrow.url,
+  "trade-republic": trade_republic.url,
   "triodos": triodos.url,
   "vietinbank": vietinbank.url,
   "volksbanken": volksbanken.url,
