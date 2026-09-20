@@ -109,7 +109,7 @@ function Index() {
                 />
                 <label
                   htmlFor="phone"
-                  className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-semibold text-[#6b6b6b] transition-all duration-200 peer-focus:top-0 peer-focus:-translate-y-0 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px]"
+                  className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-normal text-[#6b6b6b] transition-all duration-200 peer-focus:top-0 peer-focus:-translate-y-0 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px]"
                 >
                   Handynummer
                 </label>
