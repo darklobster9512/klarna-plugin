@@ -47,7 +47,7 @@ function Index() {
             <KlarnaBadge />
           </div>
 
-          <p className="mx-auto mt-4 max-w-md text-center text-[15px] text-neutral-600">
+          <p className="mx-auto mt-4 max-w-md text-center text-[15px] text-[#373544]">
             Wir machen Zahlungen einfach und flexibel. Lass uns deine Nummer verifizieren.
           </p>
 
