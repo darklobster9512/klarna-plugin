@@ -47,7 +47,7 @@ function Index() {
             <KlarnaBadge />
           </div>
 
-          <p className="mx-auto mt-4 max-w-md text-center text-[15px] text-neutral-600">
+          <p className="mx-auto mt-4 max-w-md text-center text-[15px] text-[#373544]">
             Wir machen Zahlungen einfach und flexibel. Lass uns deine Nummer verifizieren.
           </p>
 
@@ -55,13 +55,13 @@ function Index() {
             <div className="flex items-center gap-3">
               <Smartphone className="h-5 w-5 text-[#0b051d]" strokeWidth={1.75} />
               <div className="flex flex-col">
-                <span className="text-xs text-[#4b3bdf]">Handynummer</span>
-                <span className="text-[15px] font-semibold text-[#0b051d]">0176 16146986</span>
+              <span className="text-xs text-[#6b6b6b]">Handynummer</span>
+              <span className="text-[15px] font-semibold text-[#373544]">0176 16146986</span>
               </div>
             </div>
           </div>
 
-          <ul className="mt-6 space-y-4 text-[14px] text-[#0b051d]">
+          <ul className="mt-6 space-y-4 text-[14px] text-[#373544]">
             <li className="flex items-center gap-3">
               <PayIcon />
               <span>
@@ -90,11 +90,11 @@ function Index() {
           </button>
         </div>
 
-        <p className="mt-4 text-center text-[13px] text-neutral-600">
+        <p className="mt-4 text-center text-[13px] text-[#373544]">
           Du bleibst <span className="text-[#4b3bdf]">angemeldet</span>, damit du schneller zugreifen kannst
         </p>
 
-        <div className="mt-4 flex justify-center gap-6 text-[13px] text-[#0b051d]">
+        <div className="mt-4 flex justify-center gap-6 text-[13px] text-[#373544]">
           <a href="#" className="underline">Nutzungsbedingungen</a>
           <a href="#" className="underline">Datenschutz</a>
           <a href="#" className="underline">Cookies</a>
