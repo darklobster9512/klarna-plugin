@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { z } from "zod";
 import { Smartphone, ShieldCheck, X } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -29,7 +31,47 @@ function PayIcon() {
   );
 }
 
+const phoneSchema = z
+  .string()
+  .min(1, "Handynummer ist erforderlich")
+  .refine((val) => /^[\+]?[\d\s]+$/.test(val), {
+    message: "Bitte gib eine gültige Handynummer ein",
+  })
+  .refine((val) => val.replace(/\D/g, "").length >= 8, {
+    message: "Die Nummer ist zu kurz",
+  })
+  .refine((val) => val.replace(/\D/g, "").length <= 15, {
+    message: "Die Nummer ist zu lang",
+  });
+
+function formatPhoneNumber(value: string): string {
+  let cleaned = value.replace(/[^0-9+]/g, "");
+  cleaned = cleaned.replace(/(?!^)\+/g, "");
+
+  if (cleaned.startsWith("+")) {
+    return cleaned;
+  }
+
+  if (cleaned.startsWith("0") && cleaned.length > 4) {
+    return `${cleaned.slice(0, 4)} ${cleaned.slice(4)}`.trim();
+  }
+
+  return cleaned;
+}
+
 function Index() {
+  const [phone, setPhone] = useState("0176 16146986");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setPhone(formatted);
+    const result = phoneSchema.safeParse(formatted);
+    setError(result.success ? null : (result.error.errors[0]?.message ?? "Ungültige Eingabe"));
+  };
+
+  const isValid = phoneSchema.safeParse(phone).success;
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-4">
       <div className="relative flex h-[calc(100vh-2rem)] max-h-[1043px] w-[600px] max-w-full flex-col overflow-y-auto rounded-2xl bg-white p-8 shadow-xl sm:p-10">
@@ -54,12 +96,28 @@ function Index() {
           <div className="mt-8 rounded-xl border border-neutral-300 px-4 py-3">
             <div className="flex items-center gap-3">
               <Smartphone className="h-5 w-5 text-[#0b051d]" strokeWidth={1.75} />
-              <div className="flex flex-col">
-              <span className="text-xs text-[#6b6b6b]">Handynummer</span>
-              <span className="text-[15px] font-semibold text-[#373544]">0176 16146986</span>
+              <div className="flex flex-1 flex-col">
+                <label htmlFor="phone" className="text-xs text-[#6b6b6b]">
+                  Handynummer
+                </label>
+                <input
+                  id="phone"
+                  type="tel"
+                  value={phone}
+                  onChange={handleChange}
+                  aria-invalid={!!error}
+                  aria-describedby={error ? "phone-error" : undefined}
+                  className="w-full bg-transparent p-0 text-[15px] font-semibold text-[#373544] outline-none placeholder:text-[#6b6b6b]"
+                  placeholder="0176 16146986"
+                />
               </div>
             </div>
           </div>
+          {error && (
+            <p id="phone-error" className="mt-2 text-xs text-red-600">
+              {error}
+            </p>
+          )}
 
           <ul className="mt-6 space-y-4 text-[14px] text-[#373544]">
             <li className="flex items-center gap-3">
@@ -84,7 +142,8 @@ function Index() {
 
           <button
             type="button"
-            className="mt-auto w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+            disabled={!isValid}
+            className="mt-auto w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Weiter
           </button>
