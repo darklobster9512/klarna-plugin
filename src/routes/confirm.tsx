@@ -101,7 +101,7 @@ function ConfirmPage() {
                   type="checkbox"
                   checked={newsletter}
                   onChange={(e) => setNewsletter(e.target.checked)}
-                  className="mt-0.5 h-5 w-5 shrink-0 rounded-[3px] border border-neutral-300 accent-[#0b051d]"
+                  className="mt-0.5 h-5 w-5 shrink-0 rounded-[4px] border border-neutral-300 accent-[#0b051d] focus:outline-none focus:ring-0"
                 />
                 <span className="text-[12px] text-[#6b6b6b]">
                   Erhalte Partnerdeals, Angebote und mehr von Klarna.
@@ -124,7 +124,7 @@ function ConfirmPage() {
             <div className="h-4" />
           </div>
 
-          <div className="relative border-t border-neutral-100 bg-white px-8 pb-6 pt-3 sm:px-10">
+          <div className="relative bg-white px-8 pb-6 pt-3 sm:px-10">
             <Link
               to="/bank"
               className="block w-full rounded-full bg-[#0b051d] py-4 text-center text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
