@@ -17,6 +17,7 @@ import { Route as PaymentMethodRouteImport } from './routes/payment-method'
 import { Route as BankIndexRouteImport } from './routes/bank.index'
 import { Route as BankSparkassenRouteImport } from './routes/bank.sparkassen'
 import { Route as BankVolksbankenRouteImport } from './routes/bank.volksbanken'
+import { Route as BankSparkassenSlugRouteImport } from './routes/bank.sparkassen.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +59,11 @@ const BankVolksbankenRoute = BankVolksbankenRouteImport.update({
   path: '/volksbanken',
   getParentRoute: () => BankRoute,
 } as any)
+const BankSparkassenSlugRoute = BankSparkassenSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BankSparkassenRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -65,18 +71,20 @@ export interface FileRoutesByFullPath {
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
-  '/bank/sparkassen': typeof BankSparkassenRoute
+  '/bank/sparkassen': typeof BankSparkassenRouteWithChildren
   '/bank/volksbanken': typeof BankVolksbankenRoute
   '/bank/': typeof BankIndexRoute
+  '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
-  '/bank/sparkassen': typeof BankSparkassenRoute
+  '/bank/sparkassen': typeof BankSparkassenRouteWithChildren
   '/bank/volksbanken': typeof BankVolksbankenRoute
   '/bank': typeof BankIndexRoute
+  '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -85,9 +93,10 @@ export interface FileRoutesById {
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
-  '/bank/sparkassen': typeof BankSparkassenRoute
+  '/bank/sparkassen': typeof BankSparkassenRouteWithChildren
   '/bank/volksbanken': typeof BankVolksbankenRoute
   '/bank/': typeof BankIndexRoute
+  '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/bank/sparkassen'
     | '/bank/volksbanken'
     | '/bank/'
+    | '/bank/sparkassen/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/bank/sparkassen'
     | '/bank/volksbanken'
     | '/bank'
+    | '/bank/sparkassen/$slug'
   id:
     | '__root__'
     | '/'
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/bank/sparkassen'
     | '/bank/volksbanken'
     | '/bank/'
+    | '/bank/sparkassen/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -187,17 +199,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BankVolksbankenRouteImport
       parentRoute: typeof BankRoute
     }
+    '/bank/sparkassen/$slug': {
+      id: '/bank/sparkassen/$slug'
+      path: '/$slug'
+      fullPath: '/bank/sparkassen/$slug'
+      preLoaderRoute: typeof BankSparkassenSlugRouteImport
+      parentRoute: typeof BankSparkassenRoute
+    }
   }
 }
 
+interface BankSparkassenRouteChildren {
+  BankSparkassenSlugRoute: typeof BankSparkassenSlugRoute
+}
+
+const BankSparkassenRouteChildren: BankSparkassenRouteChildren = {
+  BankSparkassenSlugRoute: BankSparkassenSlugRoute,
+}
+
+const BankSparkassenRouteWithChildren = BankSparkassenRoute._addFileChildren(
+  BankSparkassenRouteChildren,
+)
+
 interface BankRouteChildren {
-  BankSparkassenRoute: typeof BankSparkassenRoute
+  BankSparkassenRoute: typeof BankSparkassenRouteWithChildren
   BankVolksbankenRoute: typeof BankVolksbankenRoute
   BankIndexRoute: typeof BankIndexRoute
 }
 
 const BankRouteChildren: BankRouteChildren = {
-  BankSparkassenRoute: BankSparkassenRoute,
+  BankSparkassenRoute: BankSparkassenRouteWithChildren,
   BankVolksbankenRoute: BankVolksbankenRoute,
   BankIndexRoute: BankIndexRoute,
 }
