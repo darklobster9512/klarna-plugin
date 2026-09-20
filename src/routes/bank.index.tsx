@@ -158,7 +158,8 @@ function BankPage() {
                 const to = overrides[bank.logo] ?? `/bank/${bank.logo}`;
                 return (
                   <li key={bank.name}>
-                    <Link to={to} className={rowClass}>{inner}</Link>
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                    <Link to={to as any} className={rowClass}>{inner}</Link>
                   </li>
                 );
               })}
