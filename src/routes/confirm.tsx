@@ -40,11 +40,11 @@ function ConfirmPage() {
         </Link>
 
         <div className="flex flex-1 flex-col overflow-hidden">
-          <div className="flex flex-1 flex-col overflow-y-auto px-8 pb-4 pt-10 sm:px-10 sm:pt-10">
+          <div className="flex flex-1 flex-col overflow-y-auto px-8 pb-4 pt-14 sm:px-10 sm:pt-16">
             <h1 className="text-[26px] font-bold leading-tight text-[#0b051d]">
               Bestätigen und bezahlen
             </h1>
-            <p className="mt-2 text-[14px] text-[#373544]">
+            <p className="mt-2 text-[15px] text-[#373544]">
               Überprüfe vor der Zahlung noch einmal alle Angaben. Du profitierst außerdem vom Klarna{" "}
               <a href="#" className="underline">Käuferschutz.</a>
             </p>
@@ -56,8 +56,8 @@ function ConfirmPage() {
                   FS
                 </span>
                 <div className="flex-1">
-                  <div className="text-[14px] font-semibold text-[#0b051d]">fabianschmidt253@yopmail.com</div>
-                  <div className="text-[13px] text-[#373544]">0176 16146986</div>
+                  <div className="text-[15px] font-semibold text-[#0b051d]">fabianschmidt253@yopmail.com</div>
+                  <div className="text-[14px] text-[#373544]">0176 16146986</div>
                 </div>
                 <ChevronRight className="h-5 w-5 text-[#0b051d]" />
               </button>
@@ -65,7 +65,7 @@ function ConfirmPage() {
               {/* Händler */}
               <button type="button" className="flex w-full items-center gap-3 py-5 text-left">
                 <KauflandLogo />
-                <div className="flex-1 text-[14px] font-semibold text-[#0b051d]">Kaufland.de</div>
+                <div className="flex-1 text-[15px] font-semibold text-[#0b051d]">Kaufland.de</div>
                 <ChevronRight className="h-5 w-5 text-[#0b051d]" />
               </button>
 
@@ -75,8 +75,8 @@ function ConfirmPage() {
                   <Wallet className="h-5 w-5" strokeWidth={1.75} />
                 </span>
                 <div className="flex-1">
-                  <div className="text-[14px] font-semibold text-[#0b051d]">Sofortüberweisung</div>
-                  <div className="text-[13px] text-[#373544]">Schnell und sicher per Onlinebanking</div>
+                  <div className="text-[15px] font-semibold text-[#0b051d]">Sofortüberweisung</div>
+                  <div className="text-[14px] text-[#373544]">Schnell und sicher per Onlinebanking</div>
                 </div>
                 <Link to="/payment-method" className="text-[14px] font-semibold text-[#4b3bdf] hover:underline">
                   Ändern
@@ -90,7 +90,7 @@ function ConfirmPage() {
                 <span className="text-[#373544]">{total}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[15px] font-semibold text-[#0b051d]">Gesamtbetrag</span>
+                <span className="text-[15px] font-normal text-[#0b051d]">Gesamtbetrag</span>
                 <span className="text-[22px] font-bold text-[#0b051d]">{total}</span>
               </div>
             </div>
@@ -101,28 +101,30 @@ function ConfirmPage() {
                   type="checkbox"
                   checked={newsletter}
                   onChange={(e) => setNewsletter(e.target.checked)}
-                  className="mt-0.5 h-5 w-5 shrink-0 rounded border-neutral-400 accent-[#0b051d]"
+                  className="mt-0.5 h-5 w-5 shrink-0 rounded-[3px] border border-neutral-300 accent-[#0b051d]"
                 />
-                <span className="text-[13px] text-[#373544]">
+                <span className="text-[12px] text-[#6b6b6b]">
                   Erhalte Partnerdeals, Angebote und mehr von Klarna.
                 </span>
               </label>
               <p className="text-[12px] text-[#6b6b6b]">
                 Wir informieren dich weiterhin über ähnliche Services von Klarna.{" "}
-                <a href="#" className="underline">Abmelden</a>
+                <a href="#" className="text-black underline">Abmelden</a>
               </p>
-              <p className="text-[12px] text-[#6b6b6b]">
-                Es gilt unsere <a href="#" className="underline">Datenschutzrichtlinie</a> für Sofortüberweisungen.
-              </p>
-              <p className="text-[12px] text-[#6b6b6b]">
-                Indem du fortfährst, akzeptierst du die <a href="#" className="underline">AGB für Sofortüberweisungen</a>.
-              </p>
+              <div className="space-y-1">
+                <p className="text-[12px] text-[#6b6b6b]">
+                  Es gilt unsere <a href="#" className="text-black underline">Datenschutzrichtlinie</a> für Sofortüberweisungen.
+                </p>
+                <p className="text-[12px] text-[#6b6b6b]">
+                  Indem du fortfährst, akzeptierst du die <a href="#" className="text-black underline">AGB für Sofortüberweisungen</a>.
+                </p>
+              </div>
             </div>
 
             <div className="h-4" />
           </div>
 
-          <div className="relative bg-white px-8 pb-6 pt-3 shadow-[0_-8px_24px_-8px_rgba(0,0,0,0.08)] sm:px-10">
+          <div className="relative border-t border-neutral-100 bg-white px-8 pb-6 pt-3 sm:px-10">
             <Link
               to="/bank"
               className="block w-full rounded-full bg-[#0b051d] py-4 text-center text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
