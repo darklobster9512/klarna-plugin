@@ -32,7 +32,7 @@ function PayIcon() {
 function Index() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-4">
-      <div className="relative flex h-[1043px] w-[600px] max-w-full flex-col overflow-hidden rounded-2xl bg-white p-8 shadow-xl sm:p-10">
+      <div className="relative flex h-[calc(100vh-2rem)] max-h-[1043px] w-[600px] max-w-full flex-col overflow-y-auto rounded-2xl bg-white p-8 shadow-xl sm:p-10">
         <button
           type="button"
           aria-label="Schließen"
