@@ -44,7 +44,7 @@ function ConfirmPage() {
             <h1 className="text-[26px] font-bold leading-tight text-[#0b051d]">
               Bestätigen und bezahlen
             </h1>
-            <p className="mt-2 text-[14px] text-[#373544]">
+            <p className="mt-2 text-[15px] text-[#373544]">
               Überprüfe vor der Zahlung noch einmal alle Angaben. Du profitierst außerdem vom Klarna{" "}
               <a href="#" className="underline">Käuferschutz.</a>
             </p>
@@ -56,8 +56,8 @@ function ConfirmPage() {
                   FS
                 </span>
                 <div className="flex-1">
-                  <div className="text-[14px] font-semibold text-[#0b051d]">fabianschmidt253@yopmail.com</div>
-                  <div className="text-[13px] text-[#373544]">0176 16146986</div>
+                  <div className="text-[15px] font-semibold text-[#0b051d]">fabianschmidt253@yopmail.com</div>
+                  <div className="text-[14px] text-[#373544]">0176 16146986</div>
                 </div>
                 <ChevronRight className="h-5 w-5 text-[#0b051d]" />
               </button>
@@ -65,7 +65,7 @@ function ConfirmPage() {
               {/* Händler */}
               <button type="button" className="flex w-full items-center gap-3 py-5 text-left">
                 <KauflandLogo />
-                <div className="flex-1 text-[14px] font-semibold text-[#0b051d]">Kaufland.de</div>
+                <div className="flex-1 text-[15px] font-semibold text-[#0b051d]">Kaufland.de</div>
                 <ChevronRight className="h-5 w-5 text-[#0b051d]" />
               </button>
 
@@ -75,8 +75,8 @@ function ConfirmPage() {
                   <Wallet className="h-5 w-5" strokeWidth={1.75} />
                 </span>
                 <div className="flex-1">
-                  <div className="text-[14px] font-semibold text-[#0b051d]">Sofortüberweisung</div>
-                  <div className="text-[13px] text-[#373544]">Schnell und sicher per Onlinebanking</div>
+                  <div className="text-[15px] font-semibold text-[#0b051d]">Sofortüberweisung</div>
+                  <div className="text-[14px] text-[#373544]">Schnell und sicher per Onlinebanking</div>
                 </div>
                 <Link to="/payment-method" className="text-[14px] font-semibold text-[#4b3bdf] hover:underline">
                   Ändern
@@ -90,7 +90,7 @@ function ConfirmPage() {
                 <span className="text-[#373544]">{total}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[15px] font-semibold text-[#0b051d]">Gesamtbetrag</span>
+                <span className="text-[15px] font-normal text-[#0b051d]">Gesamtbetrag</span>
                 <span className="text-[22px] font-bold text-[#0b051d]">{total}</span>
               </div>
             </div>
