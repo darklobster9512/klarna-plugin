@@ -96,11 +96,31 @@ function BankLogo({ bank }: { bank: Bank }) {
 function BankPage() {
   const [query, setQuery] = useState("");
 
+  type Row = { key: string; name: string; logo: string; to: string };
+
+  const overrides: Record<string, string> = { "psd-banken": "/bank/psd" };
+  const baseRows: Row[] = banks.map((b) => ({
+    key: `bank:${b.logo}`,
+    name: b.name,
+    logo: b.logo,
+    to: overrides[b.logo] ?? `/bank/${b.logo}`,
+  }));
+
+  const branchRows: Row[] = useMemo(() => {
+    const rows: Row[] = [];
+    for (const n of sparkassen) rows.push({ key: `sk:${n}`, name: n, logo: "sparkassen", to: `/bank/sparkassen/${slugifySparkasse(n)}` });
+    for (const n of volksbanken) rows.push({ key: `vb:${n}`, name: n, logo: "volksbanken", to: `/bank/volksbanken/${slugifyVolksbank(n)}` });
+    for (const n of spardaBranches) rows.push({ key: `sp:${n}`, name: n, logo: "sparda-bank", to: `/bank/sparda-bank/${slugifySparda(n)}` });
+    for (const n of psdBranches) rows.push({ key: `psd:${n}`, name: n, logo: "psd-banken", to: `/bank/psd/${slugifyPsd(n)}` });
+    return rows;
+  }, []);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return banks;
-    return banks.filter((b) => b.name.toLowerCase().includes(q));
-  }, [query]);
+    if (!q) return baseRows;
+    const all = [...baseRows, ...branchRows];
+    return all.filter((r) => r.name.toLowerCase().includes(q));
+  }, [query, baseRows, branchRows]);
 
   return (
     <div className="min-h-screen bg-neutral-100 p-4">
@@ -147,26 +167,16 @@ function BankPage() {
             </div>
 
             <ul className="mt-6 divide-y divide-neutral-200">
-              {filtered.map((bank) => {
-                const rowClass = "flex w-full items-center gap-4 py-3 text-left transition-colors hover:bg-neutral-50";
-                const inner = (
-                  <>
-                    <BankLogo bank={bank} />
-                    <span className="flex-1 text-[15px] font-semibold text-[#0b051d]">{bank.name}</span>
+              {filtered.map((row) => (
+                <li key={row.key}>
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                  <Link to={row.to as any} className="flex w-full items-center gap-4 py-3 text-left transition-colors hover:bg-neutral-50">
+                    <BankLogo bank={{ name: row.name, logo: row.logo }} />
+                    <span className="flex-1 text-[15px] font-semibold text-[#0b051d]">{row.name}</span>
                     <ChevronRight className="h-5 w-5 shrink-0 text-[#6b6b6b]" strokeWidth={2} />
-                  </>
-                );
-                const overrides: Record<string, string> = {
-                  "psd-banken": "/bank/psd",
-                };
-                const to = overrides[bank.logo] ?? `/bank/${bank.logo}`;
-                return (
-                  <li key={bank.name}>
-                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                    <Link to={to as any} className={rowClass}>{inner}</Link>
-                  </li>
-                );
-              })}
+                  </Link>
+                </li>
+              ))}
             </ul>
 
             {filtered.length === 0 && (
