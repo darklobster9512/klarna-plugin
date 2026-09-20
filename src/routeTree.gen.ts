@@ -14,6 +14,7 @@ import { Route as BankRouteImport } from './routes/bank'
 import { Route as ConfirmRouteImport } from './routes/confirm'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as PaymentMethodRouteImport } from './routes/payment-method'
+import { Route as BankIndexRouteImport } from './routes/bank.index'
 import { Route as BankSparkassenRouteImport } from './routes/bank.sparkassen'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +42,11 @@ const PaymentMethodRoute = PaymentMethodRouteImport.update({
   path: '/payment-method',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BankIndexRoute = BankIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BankRoute,
+} as any)
 const BankSparkassenRoute = BankSparkassenRouteImport.update({
   id: '/sparkassen',
   path: '/sparkassen',
@@ -54,14 +60,15 @@ export interface FileRoutesByFullPath {
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
   '/bank/sparkassen': typeof BankSparkassenRoute
+  '/bank/': typeof BankIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/bank': typeof BankRouteWithChildren
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
   '/bank/sparkassen': typeof BankSparkassenRoute
+  '/bank': typeof BankIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +78,7 @@ export interface FileRoutesById {
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
   '/bank/sparkassen': typeof BankSparkassenRoute
+  '/bank/': typeof BankIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,14 +89,15 @@ export interface FileRouteTypes {
     | '/payment'
     | '/payment-method'
     | '/bank/sparkassen'
+    | '/bank/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/bank'
     | '/confirm'
     | '/payment'
     | '/payment-method'
     | '/bank/sparkassen'
+    | '/bank'
   id:
     | '__root__'
     | '/'
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/payment'
     | '/payment-method'
     | '/bank/sparkassen'
+    | '/bank/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -144,6 +154,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PaymentMethodRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bank/': {
+      id: '/bank/'
+      path: '/'
+      fullPath: '/bank/'
+      preLoaderRoute: typeof BankIndexRouteImport
+      parentRoute: typeof BankRoute
+    }
     '/bank/sparkassen': {
       id: '/bank/sparkassen'
       path: '/sparkassen'
@@ -156,10 +173,12 @@ declare module '@tanstack/react-router' {
 
 interface BankRouteChildren {
   BankSparkassenRoute: typeof BankSparkassenRoute
+  BankIndexRoute: typeof BankIndexRoute
 }
 
 const BankRouteChildren: BankRouteChildren = {
   BankSparkassenRoute: BankSparkassenRoute,
+  BankIndexRoute: BankIndexRoute,
 }
 
 const BankRouteWithChildren = BankRoute._addFileChildren(BankRouteChildren)
