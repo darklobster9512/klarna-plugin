@@ -15,15 +15,55 @@ import { Route as ConfirmRouteImport } from './routes/confirm'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as PaymentMethodRouteImport } from './routes/payment-method'
 import { Route as BankIndexRouteImport } from './routes/bank.index'
+import { Route as BankApobankRouteImport } from './routes/bank.apobank'
+import { Route as BankBank1saarRouteImport } from './routes/bank.bank1saar'
+import { Route as BankBbbankRouteImport } from './routes/bank.bbbank'
+import { Route as BankBensbergerRouteImport } from './routes/bank.bensberger'
+import { Route as BankBunqRouteImport } from './routes/bank.bunq'
+import { Route as BankBwBankRouteImport } from './routes/bank.bw-bank'
+import { Route as BankC24BankRouteImport } from './routes/bank.c24-bank'
+import { Route as BankComdirectRouteImport } from './routes/bank.comdirect'
 import { Route as BankCommerzbankRouteImport } from './routes/bank.commerzbank'
+import { Route as BankConsorsbankRouteImport } from './routes/bank.consorsbank'
 import { Route as BankDeutscheBankRouteImport } from './routes/bank.deutsche-bank'
+import { Route as BankDirekt1822RouteImport } from './routes/bank.direkt1822'
+import { Route as BankDkbRouteImport } from './routes/bank.dkb'
+import { Route as BankDkmRouteImport } from './routes/bank.dkm'
+import { Route as BankEdekabankRouteImport } from './routes/bank.edekabank'
+import { Route as BankEthikbankRouteImport } from './routes/bank.ethikbank'
+import { Route as BankEvangelischeRouteImport } from './routes/bank.evangelische'
+import { Route as BankFlessaRouteImport } from './routes/bank.flessa'
+import { Route as BankGlsBankRouteImport } from './routes/bank.gls-bank'
+import { Route as BankHypovereinsbankRouteImport } from './routes/bank.hypovereinsbank'
+import { Route as BankIngRouteImport } from './routes/bank.ing'
+import { Route as BankKdBankRouteImport } from './routes/bank.kd-bank'
+import { Route as BankKlarnaBankRouteImport } from './routes/bank.klarna-bank'
+import { Route as BankLigaBankRouteImport } from './routes/bank.liga-bank'
+import { Route as BankMlpRouteImport } from './routes/bank.mlp'
+import { Route as BankN26RouteImport } from './routes/bank.n26'
+import { Route as BankNationalBankRouteImport } from './routes/bank.national-bank'
+import { Route as BankNorisbankRouteImport } from './routes/bank.norisbank'
+import { Route as BankOlbRouteImport } from './routes/bank.olb'
+import { Route as BankPaxBankRouteImport } from './routes/bank.pax-bank'
 import { Route as BankPostbankRouteImport } from './routes/bank.postbank'
 import { Route as BankPsdRouteImport } from './routes/bank.psd'
+import { Route as BankQontoRouteImport } from './routes/bank.qonto'
+import { Route as BankRevolutRouteImport } from './routes/bank.revolut'
+import { Route as BankSantanderRouteImport } from './routes/bank.santander'
 import { Route as BankSpardaBankRouteImport } from './routes/bank.sparda-bank'
 import { Route as BankSparkassenRouteImport } from './routes/bank.sparkassen'
+import { Route as BankTargobankRouteImport } from './routes/bank.targobank'
+import { Route as BankTomorrowRouteImport } from './routes/bank.tomorrow'
+import { Route as BankTradeRepublicRouteImport } from './routes/bank.trade-republic'
+import { Route as BankTriodosRouteImport } from './routes/bank.triodos'
+import { Route as BankVietinbankRouteImport } from './routes/bank.vietinbank'
 import { Route as BankVolksbankenRouteImport } from './routes/bank.volksbanken'
+import { Route as BankVwBankRouteImport } from './routes/bank.vw-bank'
+import { Route as BankWiseRouteImport } from './routes/bank.wise'
 import { Route as BankPsdIndexRouteImport } from './routes/bank.psd.index'
+import { Route as BankPsdSlugRouteImport } from './routes/bank.psd.$slug'
 import { Route as BankSpardaBankIndexRouteImport } from './routes/bank.sparda-bank.index'
+import { Route as BankSpardaBankSlugRouteImport } from './routes/bank.sparda-bank.$slug'
 import { Route as BankSparkassenIndexRouteImport } from './routes/bank.sparkassen.index'
 import { Route as BankSparkassenSlugRouteImport } from './routes/bank.sparkassen.$slug'
 import { Route as BankVolksbankenIndexRouteImport } from './routes/bank.volksbanken.index'
@@ -59,14 +99,154 @@ const BankIndexRoute = BankIndexRouteImport.update({
   path: '/',
   getParentRoute: () => BankRoute,
 } as any)
+const BankApobankRoute = BankApobankRouteImport.update({
+  id: '/apobank',
+  path: '/apobank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankBank1saarRoute = BankBank1saarRouteImport.update({
+  id: '/bank1saar',
+  path: '/bank1saar',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankBbbankRoute = BankBbbankRouteImport.update({
+  id: '/bbbank',
+  path: '/bbbank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankBensbergerRoute = BankBensbergerRouteImport.update({
+  id: '/bensberger',
+  path: '/bensberger',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankBunqRoute = BankBunqRouteImport.update({
+  id: '/bunq',
+  path: '/bunq',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankBwBankRoute = BankBwBankRouteImport.update({
+  id: '/bw-bank',
+  path: '/bw-bank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankC24BankRoute = BankC24BankRouteImport.update({
+  id: '/c24-bank',
+  path: '/c24-bank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankComdirectRoute = BankComdirectRouteImport.update({
+  id: '/comdirect',
+  path: '/comdirect',
+  getParentRoute: () => BankRoute,
+} as any)
 const BankCommerzbankRoute = BankCommerzbankRouteImport.update({
   id: '/commerzbank',
   path: '/commerzbank',
   getParentRoute: () => BankRoute,
 } as any)
+const BankConsorsbankRoute = BankConsorsbankRouteImport.update({
+  id: '/consorsbank',
+  path: '/consorsbank',
+  getParentRoute: () => BankRoute,
+} as any)
 const BankDeutscheBankRoute = BankDeutscheBankRouteImport.update({
   id: '/deutsche-bank',
   path: '/deutsche-bank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankDirekt1822Route = BankDirekt1822RouteImport.update({
+  id: '/direkt1822',
+  path: '/direkt1822',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankDkbRoute = BankDkbRouteImport.update({
+  id: '/dkb',
+  path: '/dkb',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankDkmRoute = BankDkmRouteImport.update({
+  id: '/dkm',
+  path: '/dkm',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankEdekabankRoute = BankEdekabankRouteImport.update({
+  id: '/edekabank',
+  path: '/edekabank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankEthikbankRoute = BankEthikbankRouteImport.update({
+  id: '/ethikbank',
+  path: '/ethikbank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankEvangelischeRoute = BankEvangelischeRouteImport.update({
+  id: '/evangelische',
+  path: '/evangelische',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankFlessaRoute = BankFlessaRouteImport.update({
+  id: '/flessa',
+  path: '/flessa',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankGlsBankRoute = BankGlsBankRouteImport.update({
+  id: '/gls-bank',
+  path: '/gls-bank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankHypovereinsbankRoute = BankHypovereinsbankRouteImport.update({
+  id: '/hypovereinsbank',
+  path: '/hypovereinsbank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankIngRoute = BankIngRouteImport.update({
+  id: '/ing',
+  path: '/ing',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankKdBankRoute = BankKdBankRouteImport.update({
+  id: '/kd-bank',
+  path: '/kd-bank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankKlarnaBankRoute = BankKlarnaBankRouteImport.update({
+  id: '/klarna-bank',
+  path: '/klarna-bank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankLigaBankRoute = BankLigaBankRouteImport.update({
+  id: '/liga-bank',
+  path: '/liga-bank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankMlpRoute = BankMlpRouteImport.update({
+  id: '/mlp',
+  path: '/mlp',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankN26Route = BankN26RouteImport.update({
+  id: '/n26',
+  path: '/n26',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankNationalBankRoute = BankNationalBankRouteImport.update({
+  id: '/national-bank',
+  path: '/national-bank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankNorisbankRoute = BankNorisbankRouteImport.update({
+  id: '/norisbank',
+  path: '/norisbank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankOlbRoute = BankOlbRouteImport.update({
+  id: '/olb',
+  path: '/olb',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankPaxBankRoute = BankPaxBankRouteImport.update({
+  id: '/pax-bank',
+  path: '/pax-bank',
   getParentRoute: () => BankRoute,
 } as any)
 const BankPostbankRoute = BankPostbankRouteImport.update({
@@ -79,6 +259,21 @@ const BankPsdRoute = BankPsdRouteImport.update({
   path: '/psd',
   getParentRoute: () => BankRoute,
 } as any)
+const BankQontoRoute = BankQontoRouteImport.update({
+  id: '/qonto',
+  path: '/qonto',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankRevolutRoute = BankRevolutRouteImport.update({
+  id: '/revolut',
+  path: '/revolut',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankSantanderRoute = BankSantanderRouteImport.update({
+  id: '/santander',
+  path: '/santander',
+  getParentRoute: () => BankRoute,
+} as any)
 const BankSpardaBankRoute = BankSpardaBankRouteImport.update({
   id: '/sparda-bank',
   path: '/sparda-bank',
@@ -89,9 +284,44 @@ const BankSparkassenRoute = BankSparkassenRouteImport.update({
   path: '/sparkassen',
   getParentRoute: () => BankRoute,
 } as any)
+const BankTargobankRoute = BankTargobankRouteImport.update({
+  id: '/targobank',
+  path: '/targobank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankTomorrowRoute = BankTomorrowRouteImport.update({
+  id: '/tomorrow',
+  path: '/tomorrow',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankTradeRepublicRoute = BankTradeRepublicRouteImport.update({
+  id: '/trade-republic',
+  path: '/trade-republic',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankTriodosRoute = BankTriodosRouteImport.update({
+  id: '/triodos',
+  path: '/triodos',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankVietinbankRoute = BankVietinbankRouteImport.update({
+  id: '/vietinbank',
+  path: '/vietinbank',
+  getParentRoute: () => BankRoute,
+} as any)
 const BankVolksbankenRoute = BankVolksbankenRouteImport.update({
   id: '/volksbanken',
   path: '/volksbanken',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankVwBankRoute = BankVwBankRouteImport.update({
+  id: '/vw-bank',
+  path: '/vw-bank',
+  getParentRoute: () => BankRoute,
+} as any)
+const BankWiseRoute = BankWiseRouteImport.update({
+  id: '/wise',
+  path: '/wise',
   getParentRoute: () => BankRoute,
 } as any)
 const BankPsdIndexRoute = BankPsdIndexRouteImport.update({
@@ -99,9 +329,19 @@ const BankPsdIndexRoute = BankPsdIndexRouteImport.update({
   path: '/',
   getParentRoute: () => BankPsdRoute,
 } as any)
+const BankPsdSlugRoute = BankPsdSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BankPsdRoute,
+} as any)
 const BankSpardaBankIndexRoute = BankSpardaBankIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => BankSpardaBankRoute,
+} as any)
+const BankSpardaBankSlugRoute = BankSpardaBankSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
   getParentRoute: () => BankSpardaBankRoute,
 } as any)
 const BankSparkassenIndexRoute = BankSparkassenIndexRouteImport.update({
@@ -131,14 +371,54 @@ export interface FileRoutesByFullPath {
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
+  '/bank/apobank': typeof BankApobankRoute
+  '/bank/bank1saar': typeof BankBank1saarRoute
+  '/bank/bbbank': typeof BankBbbankRoute
+  '/bank/bensberger': typeof BankBensbergerRoute
+  '/bank/bunq': typeof BankBunqRoute
+  '/bank/bw-bank': typeof BankBwBankRoute
+  '/bank/c24-bank': typeof BankC24BankRoute
+  '/bank/comdirect': typeof BankComdirectRoute
   '/bank/commerzbank': typeof BankCommerzbankRoute
+  '/bank/consorsbank': typeof BankConsorsbankRoute
   '/bank/deutsche-bank': typeof BankDeutscheBankRoute
+  '/bank/direkt1822': typeof BankDirekt1822Route
+  '/bank/dkb': typeof BankDkbRoute
+  '/bank/dkm': typeof BankDkmRoute
+  '/bank/edekabank': typeof BankEdekabankRoute
+  '/bank/ethikbank': typeof BankEthikbankRoute
+  '/bank/evangelische': typeof BankEvangelischeRoute
+  '/bank/flessa': typeof BankFlessaRoute
+  '/bank/gls-bank': typeof BankGlsBankRoute
+  '/bank/hypovereinsbank': typeof BankHypovereinsbankRoute
+  '/bank/ing': typeof BankIngRoute
+  '/bank/kd-bank': typeof BankKdBankRoute
+  '/bank/klarna-bank': typeof BankKlarnaBankRoute
+  '/bank/liga-bank': typeof BankLigaBankRoute
+  '/bank/mlp': typeof BankMlpRoute
+  '/bank/n26': typeof BankN26Route
+  '/bank/national-bank': typeof BankNationalBankRoute
+  '/bank/norisbank': typeof BankNorisbankRoute
+  '/bank/olb': typeof BankOlbRoute
+  '/bank/pax-bank': typeof BankPaxBankRoute
   '/bank/postbank': typeof BankPostbankRoute
   '/bank/psd': typeof BankPsdRouteWithChildren
+  '/bank/qonto': typeof BankQontoRoute
+  '/bank/revolut': typeof BankRevolutRoute
+  '/bank/santander': typeof BankSantanderRoute
   '/bank/sparda-bank': typeof BankSpardaBankRouteWithChildren
   '/bank/sparkassen': typeof BankSparkassenRouteWithChildren
+  '/bank/targobank': typeof BankTargobankRoute
+  '/bank/tomorrow': typeof BankTomorrowRoute
+  '/bank/trade-republic': typeof BankTradeRepublicRoute
+  '/bank/triodos': typeof BankTriodosRoute
+  '/bank/vietinbank': typeof BankVietinbankRoute
   '/bank/volksbanken': typeof BankVolksbankenRouteWithChildren
+  '/bank/vw-bank': typeof BankVwBankRoute
+  '/bank/wise': typeof BankWiseRoute
   '/bank/': typeof BankIndexRoute
+  '/bank/psd/$slug': typeof BankPsdSlugRoute
+  '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
   '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
   '/bank/psd/': typeof BankPsdIndexRoute
@@ -151,10 +431,50 @@ export interface FileRoutesByTo {
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
+  '/bank/apobank': typeof BankApobankRoute
+  '/bank/bank1saar': typeof BankBank1saarRoute
+  '/bank/bbbank': typeof BankBbbankRoute
+  '/bank/bensberger': typeof BankBensbergerRoute
+  '/bank/bunq': typeof BankBunqRoute
+  '/bank/bw-bank': typeof BankBwBankRoute
+  '/bank/c24-bank': typeof BankC24BankRoute
+  '/bank/comdirect': typeof BankComdirectRoute
   '/bank/commerzbank': typeof BankCommerzbankRoute
+  '/bank/consorsbank': typeof BankConsorsbankRoute
   '/bank/deutsche-bank': typeof BankDeutscheBankRoute
+  '/bank/direkt1822': typeof BankDirekt1822Route
+  '/bank/dkb': typeof BankDkbRoute
+  '/bank/dkm': typeof BankDkmRoute
+  '/bank/edekabank': typeof BankEdekabankRoute
+  '/bank/ethikbank': typeof BankEthikbankRoute
+  '/bank/evangelische': typeof BankEvangelischeRoute
+  '/bank/flessa': typeof BankFlessaRoute
+  '/bank/gls-bank': typeof BankGlsBankRoute
+  '/bank/hypovereinsbank': typeof BankHypovereinsbankRoute
+  '/bank/ing': typeof BankIngRoute
+  '/bank/kd-bank': typeof BankKdBankRoute
+  '/bank/klarna-bank': typeof BankKlarnaBankRoute
+  '/bank/liga-bank': typeof BankLigaBankRoute
+  '/bank/mlp': typeof BankMlpRoute
+  '/bank/n26': typeof BankN26Route
+  '/bank/national-bank': typeof BankNationalBankRoute
+  '/bank/norisbank': typeof BankNorisbankRoute
+  '/bank/olb': typeof BankOlbRoute
+  '/bank/pax-bank': typeof BankPaxBankRoute
   '/bank/postbank': typeof BankPostbankRoute
+  '/bank/qonto': typeof BankQontoRoute
+  '/bank/revolut': typeof BankRevolutRoute
+  '/bank/santander': typeof BankSantanderRoute
+  '/bank/targobank': typeof BankTargobankRoute
+  '/bank/tomorrow': typeof BankTomorrowRoute
+  '/bank/trade-republic': typeof BankTradeRepublicRoute
+  '/bank/triodos': typeof BankTriodosRoute
+  '/bank/vietinbank': typeof BankVietinbankRoute
+  '/bank/vw-bank': typeof BankVwBankRoute
+  '/bank/wise': typeof BankWiseRoute
   '/bank': typeof BankIndexRoute
+  '/bank/psd/$slug': typeof BankPsdSlugRoute
+  '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
   '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
   '/bank/psd': typeof BankPsdIndexRoute
@@ -169,14 +489,54 @@ export interface FileRoutesById {
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
+  '/bank/apobank': typeof BankApobankRoute
+  '/bank/bank1saar': typeof BankBank1saarRoute
+  '/bank/bbbank': typeof BankBbbankRoute
+  '/bank/bensberger': typeof BankBensbergerRoute
+  '/bank/bunq': typeof BankBunqRoute
+  '/bank/bw-bank': typeof BankBwBankRoute
+  '/bank/c24-bank': typeof BankC24BankRoute
+  '/bank/comdirect': typeof BankComdirectRoute
   '/bank/commerzbank': typeof BankCommerzbankRoute
+  '/bank/consorsbank': typeof BankConsorsbankRoute
   '/bank/deutsche-bank': typeof BankDeutscheBankRoute
+  '/bank/direkt1822': typeof BankDirekt1822Route
+  '/bank/dkb': typeof BankDkbRoute
+  '/bank/dkm': typeof BankDkmRoute
+  '/bank/edekabank': typeof BankEdekabankRoute
+  '/bank/ethikbank': typeof BankEthikbankRoute
+  '/bank/evangelische': typeof BankEvangelischeRoute
+  '/bank/flessa': typeof BankFlessaRoute
+  '/bank/gls-bank': typeof BankGlsBankRoute
+  '/bank/hypovereinsbank': typeof BankHypovereinsbankRoute
+  '/bank/ing': typeof BankIngRoute
+  '/bank/kd-bank': typeof BankKdBankRoute
+  '/bank/klarna-bank': typeof BankKlarnaBankRoute
+  '/bank/liga-bank': typeof BankLigaBankRoute
+  '/bank/mlp': typeof BankMlpRoute
+  '/bank/n26': typeof BankN26Route
+  '/bank/national-bank': typeof BankNationalBankRoute
+  '/bank/norisbank': typeof BankNorisbankRoute
+  '/bank/olb': typeof BankOlbRoute
+  '/bank/pax-bank': typeof BankPaxBankRoute
   '/bank/postbank': typeof BankPostbankRoute
   '/bank/psd': typeof BankPsdRouteWithChildren
+  '/bank/qonto': typeof BankQontoRoute
+  '/bank/revolut': typeof BankRevolutRoute
+  '/bank/santander': typeof BankSantanderRoute
   '/bank/sparda-bank': typeof BankSpardaBankRouteWithChildren
   '/bank/sparkassen': typeof BankSparkassenRouteWithChildren
+  '/bank/targobank': typeof BankTargobankRoute
+  '/bank/tomorrow': typeof BankTomorrowRoute
+  '/bank/trade-republic': typeof BankTradeRepublicRoute
+  '/bank/triodos': typeof BankTriodosRoute
+  '/bank/vietinbank': typeof BankVietinbankRoute
   '/bank/volksbanken': typeof BankVolksbankenRouteWithChildren
+  '/bank/vw-bank': typeof BankVwBankRoute
+  '/bank/wise': typeof BankWiseRoute
   '/bank/': typeof BankIndexRoute
+  '/bank/psd/$slug': typeof BankPsdSlugRoute
+  '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
   '/bank/volksbanken/$slug': typeof BankVolksbankenSlugRoute
   '/bank/psd/': typeof BankPsdIndexRoute
@@ -192,14 +552,54 @@ export interface FileRouteTypes {
     | '/confirm'
     | '/payment'
     | '/payment-method'
+    | '/bank/apobank'
+    | '/bank/bank1saar'
+    | '/bank/bbbank'
+    | '/bank/bensberger'
+    | '/bank/bunq'
+    | '/bank/bw-bank'
+    | '/bank/c24-bank'
+    | '/bank/comdirect'
     | '/bank/commerzbank'
+    | '/bank/consorsbank'
     | '/bank/deutsche-bank'
+    | '/bank/direkt1822'
+    | '/bank/dkb'
+    | '/bank/dkm'
+    | '/bank/edekabank'
+    | '/bank/ethikbank'
+    | '/bank/evangelische'
+    | '/bank/flessa'
+    | '/bank/gls-bank'
+    | '/bank/hypovereinsbank'
+    | '/bank/ing'
+    | '/bank/kd-bank'
+    | '/bank/klarna-bank'
+    | '/bank/liga-bank'
+    | '/bank/mlp'
+    | '/bank/n26'
+    | '/bank/national-bank'
+    | '/bank/norisbank'
+    | '/bank/olb'
+    | '/bank/pax-bank'
     | '/bank/postbank'
     | '/bank/psd'
+    | '/bank/qonto'
+    | '/bank/revolut'
+    | '/bank/santander'
     | '/bank/sparda-bank'
     | '/bank/sparkassen'
+    | '/bank/targobank'
+    | '/bank/tomorrow'
+    | '/bank/trade-republic'
+    | '/bank/triodos'
+    | '/bank/vietinbank'
     | '/bank/volksbanken'
+    | '/bank/vw-bank'
+    | '/bank/wise'
     | '/bank/'
+    | '/bank/psd/$slug'
+    | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
     | '/bank/volksbanken/$slug'
     | '/bank/psd/'
@@ -212,10 +612,50 @@ export interface FileRouteTypes {
     | '/confirm'
     | '/payment'
     | '/payment-method'
+    | '/bank/apobank'
+    | '/bank/bank1saar'
+    | '/bank/bbbank'
+    | '/bank/bensberger'
+    | '/bank/bunq'
+    | '/bank/bw-bank'
+    | '/bank/c24-bank'
+    | '/bank/comdirect'
     | '/bank/commerzbank'
+    | '/bank/consorsbank'
     | '/bank/deutsche-bank'
+    | '/bank/direkt1822'
+    | '/bank/dkb'
+    | '/bank/dkm'
+    | '/bank/edekabank'
+    | '/bank/ethikbank'
+    | '/bank/evangelische'
+    | '/bank/flessa'
+    | '/bank/gls-bank'
+    | '/bank/hypovereinsbank'
+    | '/bank/ing'
+    | '/bank/kd-bank'
+    | '/bank/klarna-bank'
+    | '/bank/liga-bank'
+    | '/bank/mlp'
+    | '/bank/n26'
+    | '/bank/national-bank'
+    | '/bank/norisbank'
+    | '/bank/olb'
+    | '/bank/pax-bank'
     | '/bank/postbank'
+    | '/bank/qonto'
+    | '/bank/revolut'
+    | '/bank/santander'
+    | '/bank/targobank'
+    | '/bank/tomorrow'
+    | '/bank/trade-republic'
+    | '/bank/triodos'
+    | '/bank/vietinbank'
+    | '/bank/vw-bank'
+    | '/bank/wise'
     | '/bank'
+    | '/bank/psd/$slug'
+    | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
     | '/bank/volksbanken/$slug'
     | '/bank/psd'
@@ -229,14 +669,54 @@ export interface FileRouteTypes {
     | '/confirm'
     | '/payment'
     | '/payment-method'
+    | '/bank/apobank'
+    | '/bank/bank1saar'
+    | '/bank/bbbank'
+    | '/bank/bensberger'
+    | '/bank/bunq'
+    | '/bank/bw-bank'
+    | '/bank/c24-bank'
+    | '/bank/comdirect'
     | '/bank/commerzbank'
+    | '/bank/consorsbank'
     | '/bank/deutsche-bank'
+    | '/bank/direkt1822'
+    | '/bank/dkb'
+    | '/bank/dkm'
+    | '/bank/edekabank'
+    | '/bank/ethikbank'
+    | '/bank/evangelische'
+    | '/bank/flessa'
+    | '/bank/gls-bank'
+    | '/bank/hypovereinsbank'
+    | '/bank/ing'
+    | '/bank/kd-bank'
+    | '/bank/klarna-bank'
+    | '/bank/liga-bank'
+    | '/bank/mlp'
+    | '/bank/n26'
+    | '/bank/national-bank'
+    | '/bank/norisbank'
+    | '/bank/olb'
+    | '/bank/pax-bank'
     | '/bank/postbank'
     | '/bank/psd'
+    | '/bank/qonto'
+    | '/bank/revolut'
+    | '/bank/santander'
     | '/bank/sparda-bank'
     | '/bank/sparkassen'
+    | '/bank/targobank'
+    | '/bank/tomorrow'
+    | '/bank/trade-republic'
+    | '/bank/triodos'
+    | '/bank/vietinbank'
     | '/bank/volksbanken'
+    | '/bank/vw-bank'
+    | '/bank/wise'
     | '/bank/'
+    | '/bank/psd/$slug'
+    | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
     | '/bank/volksbanken/$slug'
     | '/bank/psd/'
@@ -297,6 +777,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BankIndexRouteImport
       parentRoute: typeof BankRoute
     }
+    '/bank/apobank': {
+      id: '/bank/apobank'
+      path: '/apobank'
+      fullPath: '/bank/apobank'
+      preLoaderRoute: typeof BankApobankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/bank1saar': {
+      id: '/bank/bank1saar'
+      path: '/bank1saar'
+      fullPath: '/bank/bank1saar'
+      preLoaderRoute: typeof BankBank1saarRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/bbbank': {
+      id: '/bank/bbbank'
+      path: '/bbbank'
+      fullPath: '/bank/bbbank'
+      preLoaderRoute: typeof BankBbbankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/bensberger': {
+      id: '/bank/bensberger'
+      path: '/bensberger'
+      fullPath: '/bank/bensberger'
+      preLoaderRoute: typeof BankBensbergerRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/bunq': {
+      id: '/bank/bunq'
+      path: '/bunq'
+      fullPath: '/bank/bunq'
+      preLoaderRoute: typeof BankBunqRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/bw-bank': {
+      id: '/bank/bw-bank'
+      path: '/bw-bank'
+      fullPath: '/bank/bw-bank'
+      preLoaderRoute: typeof BankBwBankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/c24-bank': {
+      id: '/bank/c24-bank'
+      path: '/c24-bank'
+      fullPath: '/bank/c24-bank'
+      preLoaderRoute: typeof BankC24BankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/comdirect': {
+      id: '/bank/comdirect'
+      path: '/comdirect'
+      fullPath: '/bank/comdirect'
+      preLoaderRoute: typeof BankComdirectRouteImport
+      parentRoute: typeof BankRoute
+    }
     '/bank/commerzbank': {
       id: '/bank/commerzbank'
       path: '/commerzbank'
@@ -304,11 +840,151 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BankCommerzbankRouteImport
       parentRoute: typeof BankRoute
     }
+    '/bank/consorsbank': {
+      id: '/bank/consorsbank'
+      path: '/consorsbank'
+      fullPath: '/bank/consorsbank'
+      preLoaderRoute: typeof BankConsorsbankRouteImport
+      parentRoute: typeof BankRoute
+    }
     '/bank/deutsche-bank': {
       id: '/bank/deutsche-bank'
       path: '/deutsche-bank'
       fullPath: '/bank/deutsche-bank'
       preLoaderRoute: typeof BankDeutscheBankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/direkt1822': {
+      id: '/bank/direkt1822'
+      path: '/direkt1822'
+      fullPath: '/bank/direkt1822'
+      preLoaderRoute: typeof BankDirekt1822RouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/dkb': {
+      id: '/bank/dkb'
+      path: '/dkb'
+      fullPath: '/bank/dkb'
+      preLoaderRoute: typeof BankDkbRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/dkm': {
+      id: '/bank/dkm'
+      path: '/dkm'
+      fullPath: '/bank/dkm'
+      preLoaderRoute: typeof BankDkmRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/edekabank': {
+      id: '/bank/edekabank'
+      path: '/edekabank'
+      fullPath: '/bank/edekabank'
+      preLoaderRoute: typeof BankEdekabankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/ethikbank': {
+      id: '/bank/ethikbank'
+      path: '/ethikbank'
+      fullPath: '/bank/ethikbank'
+      preLoaderRoute: typeof BankEthikbankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/evangelische': {
+      id: '/bank/evangelische'
+      path: '/evangelische'
+      fullPath: '/bank/evangelische'
+      preLoaderRoute: typeof BankEvangelischeRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/flessa': {
+      id: '/bank/flessa'
+      path: '/flessa'
+      fullPath: '/bank/flessa'
+      preLoaderRoute: typeof BankFlessaRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/gls-bank': {
+      id: '/bank/gls-bank'
+      path: '/gls-bank'
+      fullPath: '/bank/gls-bank'
+      preLoaderRoute: typeof BankGlsBankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/hypovereinsbank': {
+      id: '/bank/hypovereinsbank'
+      path: '/hypovereinsbank'
+      fullPath: '/bank/hypovereinsbank'
+      preLoaderRoute: typeof BankHypovereinsbankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/ing': {
+      id: '/bank/ing'
+      path: '/ing'
+      fullPath: '/bank/ing'
+      preLoaderRoute: typeof BankIngRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/kd-bank': {
+      id: '/bank/kd-bank'
+      path: '/kd-bank'
+      fullPath: '/bank/kd-bank'
+      preLoaderRoute: typeof BankKdBankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/klarna-bank': {
+      id: '/bank/klarna-bank'
+      path: '/klarna-bank'
+      fullPath: '/bank/klarna-bank'
+      preLoaderRoute: typeof BankKlarnaBankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/liga-bank': {
+      id: '/bank/liga-bank'
+      path: '/liga-bank'
+      fullPath: '/bank/liga-bank'
+      preLoaderRoute: typeof BankLigaBankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/mlp': {
+      id: '/bank/mlp'
+      path: '/mlp'
+      fullPath: '/bank/mlp'
+      preLoaderRoute: typeof BankMlpRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/n26': {
+      id: '/bank/n26'
+      path: '/n26'
+      fullPath: '/bank/n26'
+      preLoaderRoute: typeof BankN26RouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/national-bank': {
+      id: '/bank/national-bank'
+      path: '/national-bank'
+      fullPath: '/bank/national-bank'
+      preLoaderRoute: typeof BankNationalBankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/norisbank': {
+      id: '/bank/norisbank'
+      path: '/norisbank'
+      fullPath: '/bank/norisbank'
+      preLoaderRoute: typeof BankNorisbankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/olb': {
+      id: '/bank/olb'
+      path: '/olb'
+      fullPath: '/bank/olb'
+      preLoaderRoute: typeof BankOlbRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/pax-bank': {
+      id: '/bank/pax-bank'
+      path: '/pax-bank'
+      fullPath: '/bank/pax-bank'
+      preLoaderRoute: typeof BankPaxBankRouteImport
       parentRoute: typeof BankRoute
     }
     '/bank/postbank': {
@@ -325,6 +1001,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BankPsdRouteImport
       parentRoute: typeof BankRoute
     }
+    '/bank/qonto': {
+      id: '/bank/qonto'
+      path: '/qonto'
+      fullPath: '/bank/qonto'
+      preLoaderRoute: typeof BankQontoRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/revolut': {
+      id: '/bank/revolut'
+      path: '/revolut'
+      fullPath: '/bank/revolut'
+      preLoaderRoute: typeof BankRevolutRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/santander': {
+      id: '/bank/santander'
+      path: '/santander'
+      fullPath: '/bank/santander'
+      preLoaderRoute: typeof BankSantanderRouteImport
+      parentRoute: typeof BankRoute
+    }
     '/bank/sparda-bank': {
       id: '/bank/sparda-bank'
       path: '/sparda-bank'
@@ -339,11 +1036,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BankSparkassenRouteImport
       parentRoute: typeof BankRoute
     }
+    '/bank/targobank': {
+      id: '/bank/targobank'
+      path: '/targobank'
+      fullPath: '/bank/targobank'
+      preLoaderRoute: typeof BankTargobankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/tomorrow': {
+      id: '/bank/tomorrow'
+      path: '/tomorrow'
+      fullPath: '/bank/tomorrow'
+      preLoaderRoute: typeof BankTomorrowRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/trade-republic': {
+      id: '/bank/trade-republic'
+      path: '/trade-republic'
+      fullPath: '/bank/trade-republic'
+      preLoaderRoute: typeof BankTradeRepublicRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/triodos': {
+      id: '/bank/triodos'
+      path: '/triodos'
+      fullPath: '/bank/triodos'
+      preLoaderRoute: typeof BankTriodosRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/vietinbank': {
+      id: '/bank/vietinbank'
+      path: '/vietinbank'
+      fullPath: '/bank/vietinbank'
+      preLoaderRoute: typeof BankVietinbankRouteImport
+      parentRoute: typeof BankRoute
+    }
     '/bank/volksbanken': {
       id: '/bank/volksbanken'
       path: '/volksbanken'
       fullPath: '/bank/volksbanken'
       preLoaderRoute: typeof BankVolksbankenRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/vw-bank': {
+      id: '/bank/vw-bank'
+      path: '/vw-bank'
+      fullPath: '/bank/vw-bank'
+      preLoaderRoute: typeof BankVwBankRouteImport
+      parentRoute: typeof BankRoute
+    }
+    '/bank/wise': {
+      id: '/bank/wise'
+      path: '/wise'
+      fullPath: '/bank/wise'
+      preLoaderRoute: typeof BankWiseRouteImport
       parentRoute: typeof BankRoute
     }
     '/bank/psd/': {
@@ -353,11 +1099,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BankPsdIndexRouteImport
       parentRoute: typeof BankPsdRoute
     }
+    '/bank/psd/$slug': {
+      id: '/bank/psd/$slug'
+      path: '/$slug'
+      fullPath: '/bank/psd/$slug'
+      preLoaderRoute: typeof BankPsdSlugRouteImport
+      parentRoute: typeof BankPsdRoute
+    }
     '/bank/sparda-bank/': {
       id: '/bank/sparda-bank/'
       path: '/'
       fullPath: '/bank/sparda-bank/'
       preLoaderRoute: typeof BankSpardaBankIndexRouteImport
+      parentRoute: typeof BankSpardaBankRoute
+    }
+    '/bank/sparda-bank/$slug': {
+      id: '/bank/sparda-bank/$slug'
+      path: '/$slug'
+      fullPath: '/bank/sparda-bank/$slug'
+      preLoaderRoute: typeof BankSpardaBankSlugRouteImport
       parentRoute: typeof BankSpardaBankRoute
     }
     '/bank/sparkassen/': {
@@ -392,10 +1152,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface BankPsdRouteChildren {
+  BankPsdSlugRoute: typeof BankPsdSlugRoute
   BankPsdIndexRoute: typeof BankPsdIndexRoute
 }
 
 const BankPsdRouteChildren: BankPsdRouteChildren = {
+  BankPsdSlugRoute: BankPsdSlugRoute,
   BankPsdIndexRoute: BankPsdIndexRoute,
 }
 
@@ -403,10 +1165,12 @@ const BankPsdRouteWithChildren =
   BankPsdRoute._addFileChildren(BankPsdRouteChildren)
 
 interface BankSpardaBankRouteChildren {
+  BankSpardaBankSlugRoute: typeof BankSpardaBankSlugRoute
   BankSpardaBankIndexRoute: typeof BankSpardaBankIndexRoute
 }
 
 const BankSpardaBankRouteChildren: BankSpardaBankRouteChildren = {
+  BankSpardaBankSlugRoute: BankSpardaBankSlugRoute,
   BankSpardaBankIndexRoute: BankSpardaBankIndexRoute,
 }
 
@@ -443,24 +1207,100 @@ const BankVolksbankenRouteWithChildren = BankVolksbankenRoute._addFileChildren(
 )
 
 interface BankRouteChildren {
+  BankApobankRoute: typeof BankApobankRoute
+  BankBank1saarRoute: typeof BankBank1saarRoute
+  BankBbbankRoute: typeof BankBbbankRoute
+  BankBensbergerRoute: typeof BankBensbergerRoute
+  BankBunqRoute: typeof BankBunqRoute
+  BankBwBankRoute: typeof BankBwBankRoute
+  BankC24BankRoute: typeof BankC24BankRoute
+  BankComdirectRoute: typeof BankComdirectRoute
   BankCommerzbankRoute: typeof BankCommerzbankRoute
+  BankConsorsbankRoute: typeof BankConsorsbankRoute
   BankDeutscheBankRoute: typeof BankDeutscheBankRoute
+  BankDirekt1822Route: typeof BankDirekt1822Route
+  BankDkbRoute: typeof BankDkbRoute
+  BankDkmRoute: typeof BankDkmRoute
+  BankEdekabankRoute: typeof BankEdekabankRoute
+  BankEthikbankRoute: typeof BankEthikbankRoute
+  BankEvangelischeRoute: typeof BankEvangelischeRoute
+  BankFlessaRoute: typeof BankFlessaRoute
+  BankGlsBankRoute: typeof BankGlsBankRoute
+  BankHypovereinsbankRoute: typeof BankHypovereinsbankRoute
+  BankIngRoute: typeof BankIngRoute
+  BankKdBankRoute: typeof BankKdBankRoute
+  BankKlarnaBankRoute: typeof BankKlarnaBankRoute
+  BankLigaBankRoute: typeof BankLigaBankRoute
+  BankMlpRoute: typeof BankMlpRoute
+  BankN26Route: typeof BankN26Route
+  BankNationalBankRoute: typeof BankNationalBankRoute
+  BankNorisbankRoute: typeof BankNorisbankRoute
+  BankOlbRoute: typeof BankOlbRoute
+  BankPaxBankRoute: typeof BankPaxBankRoute
   BankPostbankRoute: typeof BankPostbankRoute
   BankPsdRoute: typeof BankPsdRouteWithChildren
+  BankQontoRoute: typeof BankQontoRoute
+  BankRevolutRoute: typeof BankRevolutRoute
+  BankSantanderRoute: typeof BankSantanderRoute
   BankSpardaBankRoute: typeof BankSpardaBankRouteWithChildren
   BankSparkassenRoute: typeof BankSparkassenRouteWithChildren
+  BankTargobankRoute: typeof BankTargobankRoute
+  BankTomorrowRoute: typeof BankTomorrowRoute
+  BankTradeRepublicRoute: typeof BankTradeRepublicRoute
+  BankTriodosRoute: typeof BankTriodosRoute
+  BankVietinbankRoute: typeof BankVietinbankRoute
   BankVolksbankenRoute: typeof BankVolksbankenRouteWithChildren
+  BankVwBankRoute: typeof BankVwBankRoute
+  BankWiseRoute: typeof BankWiseRoute
   BankIndexRoute: typeof BankIndexRoute
 }
 
 const BankRouteChildren: BankRouteChildren = {
+  BankApobankRoute: BankApobankRoute,
+  BankBank1saarRoute: BankBank1saarRoute,
+  BankBbbankRoute: BankBbbankRoute,
+  BankBensbergerRoute: BankBensbergerRoute,
+  BankBunqRoute: BankBunqRoute,
+  BankBwBankRoute: BankBwBankRoute,
+  BankC24BankRoute: BankC24BankRoute,
+  BankComdirectRoute: BankComdirectRoute,
   BankCommerzbankRoute: BankCommerzbankRoute,
+  BankConsorsbankRoute: BankConsorsbankRoute,
   BankDeutscheBankRoute: BankDeutscheBankRoute,
+  BankDirekt1822Route: BankDirekt1822Route,
+  BankDkbRoute: BankDkbRoute,
+  BankDkmRoute: BankDkmRoute,
+  BankEdekabankRoute: BankEdekabankRoute,
+  BankEthikbankRoute: BankEthikbankRoute,
+  BankEvangelischeRoute: BankEvangelischeRoute,
+  BankFlessaRoute: BankFlessaRoute,
+  BankGlsBankRoute: BankGlsBankRoute,
+  BankHypovereinsbankRoute: BankHypovereinsbankRoute,
+  BankIngRoute: BankIngRoute,
+  BankKdBankRoute: BankKdBankRoute,
+  BankKlarnaBankRoute: BankKlarnaBankRoute,
+  BankLigaBankRoute: BankLigaBankRoute,
+  BankMlpRoute: BankMlpRoute,
+  BankN26Route: BankN26Route,
+  BankNationalBankRoute: BankNationalBankRoute,
+  BankNorisbankRoute: BankNorisbankRoute,
+  BankOlbRoute: BankOlbRoute,
+  BankPaxBankRoute: BankPaxBankRoute,
   BankPostbankRoute: BankPostbankRoute,
   BankPsdRoute: BankPsdRouteWithChildren,
+  BankQontoRoute: BankQontoRoute,
+  BankRevolutRoute: BankRevolutRoute,
+  BankSantanderRoute: BankSantanderRoute,
   BankSpardaBankRoute: BankSpardaBankRouteWithChildren,
   BankSparkassenRoute: BankSparkassenRouteWithChildren,
+  BankTargobankRoute: BankTargobankRoute,
+  BankTomorrowRoute: BankTomorrowRoute,
+  BankTradeRepublicRoute: BankTradeRepublicRoute,
+  BankTriodosRoute: BankTriodosRoute,
+  BankVietinbankRoute: BankVietinbankRoute,
   BankVolksbankenRoute: BankVolksbankenRouteWithChildren,
+  BankVwBankRoute: BankVwBankRoute,
+  BankWiseRoute: BankWiseRoute,
   BankIndexRoute: BankIndexRoute,
 }
 
