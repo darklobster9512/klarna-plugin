@@ -61,7 +61,7 @@ function Index() {
             </div>
           </div>
 
-          <ul className="mt-6 space-y-4 text-[14px] text-[#0b051d]">
+          <ul className="mt-6 space-y-4 text-[14px] text-[#373544]">
             <li className="flex items-center gap-3">
               <PayIcon />
               <span>
