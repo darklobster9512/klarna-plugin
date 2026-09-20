@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronRight, Wallet, X } from "lucide-react";
+import { Check, ChevronRight, Wallet, X } from "lucide-react";
 
 export const Route = createFileRoute("/confirm")({
   head: () => ({
@@ -96,13 +96,19 @@ function ConfirmPage() {
             </div>
 
             <div className="mt-6 space-y-3 border-t border-neutral-200 pt-5">
-              <label className="flex items-start gap-3">
+              <label className="flex items-center gap-3">
                 <input
                   type="checkbox"
                   checked={newsletter}
                   onChange={(e) => setNewsletter(e.target.checked)}
-                  className="mt-0.5 h-5 w-5 shrink-0 rounded-[4px] border border-neutral-300 accent-[#0b051d] focus:outline-none focus:ring-0"
+                   className="peer sr-only"
                 />
+                 <span
+                   aria-hidden="true"
+                   className="flex h-5 w-5 shrink-0 items-center justify-center rounded-[3px] border-[0.5px] border-neutral-400 bg-white text-white peer-checked:border-[#0b051d] peer-checked:bg-[#0b051d] peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#0b051d]"
+                 >
+                   {newsletter && <Check className="h-3.5 w-3.5" strokeWidth={2} />}
+                 </span>
                 <span className="text-[12px] text-[#6b6b6b]">
                   Erhalte Partnerdeals, Angebote und mehr von Klarna.
                 </span>
