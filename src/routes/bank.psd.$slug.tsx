@@ -1,7 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { BankLoginPage } from "@/components/BankLoginPage";
 
-const branches = [
+export const branches = [
   "PSD Bank Braunschweig",
   "PSD Bank Hannover eG",
   "PSD Bank Karlsruhe-Neustadt",
