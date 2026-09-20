@@ -94,7 +94,7 @@ function Index() {
           </p>
 
           <div className="relative mt-8 rounded-xl border border-neutral-300 px-4 transition-all focus-within:border-[#0b051d] focus-within:ring-1 focus-within:ring-[#0b051d]">
-            <div className="flex h-9 items-center gap-3">
+            <div className="flex h-[58px] items-center gap-3">
               <Smartphone className="h-5 w-5 text-[#0b051d]" strokeWidth={1.75} />
               <div className="relative flex h-full flex-1 flex-col justify-center">
                 <input
@@ -105,11 +105,11 @@ function Index() {
                   aria-invalid={!!error}
                   aria-describedby={error ? "phone-error" : undefined}
                   placeholder=" "
-                  className="peer block h-full w-full bg-transparent pb-1 pt-3.5 text-[16px] font-semibold text-[#373544] outline-none placeholder:text-transparent"
+                  className="peer block h-full w-full bg-transparent pb-1 pt-6 text-[16px] font-semibold text-[#373544] outline-none placeholder:text-transparent"
                 />
                 <label
                   htmlFor="phone"
-                  className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-normal text-[#6b6b6b] transition-all duration-200 peer-focus:top-0 peer-focus:-translate-y-0 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px]"
+                  className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-normal text-[#6b6b6b] transition-all duration-200 peer-focus:top-2 peer-focus:-translate-y-0 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px]"
                 >
                   Handynummer
                 </label>
