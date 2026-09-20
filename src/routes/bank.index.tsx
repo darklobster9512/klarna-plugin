@@ -164,6 +164,8 @@ function BankPage() {
                       <Link to="/bank/postbank" className={rowClass}>{inner}</Link>
                     ) : bank.name === "Deutsche Bank" ? (
                       <Link to="/bank/deutsche-bank" className={rowClass}>{inner}</Link>
+                    ) : bank.name === "Sparda-Bank" ? (
+                      <Link to="/bank/sparda-bank" className={rowClass}>{inner}</Link>
                     ) : (
                       <button type="button" className={rowClass}>{inner}</button>
                     )}
