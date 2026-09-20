@@ -93,13 +93,10 @@ function Index() {
             Wir machen Zahlungen einfach und flexibel. Lass uns deine Nummer verifizieren.
           </p>
 
-          <div className="mt-8 rounded-xl border border-neutral-300 px-4 py-3">
-            <div className="flex items-center gap-3">
+          <div className="relative mt-8 rounded-xl border border-neutral-300 px-4 py-3 transition-all focus-within:border-[#0b051d] focus-within:ring-1 focus-within:ring-[#0b051d]">
+            <div className="flex h-[52px] items-center gap-3">
               <Smartphone className="h-5 w-5 text-[#0b051d]" strokeWidth={1.75} />
-              <div className="flex flex-1 flex-col">
-                <label htmlFor="phone" className="text-xs text-[#6b6b6b]">
-                  Handynummer
-                </label>
+              <div className="relative flex h-full flex-1 flex-col justify-center">
                 <input
                   id="phone"
                   type="tel"
@@ -107,9 +104,15 @@ function Index() {
                   onChange={handleChange}
                   aria-invalid={!!error}
                   aria-describedby={error ? "phone-error" : undefined}
-                  className="w-full bg-transparent p-0 text-[15px] font-semibold text-[#373544] outline-none placeholder:text-[#6b6b6b]"
-                  placeholder="0176 16146986"
+                  placeholder=" "
+                  className="peer block h-full w-full bg-transparent pb-2 pt-5 text-[15px] font-semibold text-[#373544] outline-none placeholder:text-transparent"
                 />
+                <label
+                  htmlFor="phone"
+                  className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-[15px] font-semibold text-[#6b6b6b] transition-all duration-200 peer-focus:top-1 peer-focus:-translate-y-0 peer-focus:text-[11px] peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px]"
+                >
+                  Handynummer
+                </label>
               </div>
             </div>
           </div>
