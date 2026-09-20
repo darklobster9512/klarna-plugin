@@ -152,25 +152,13 @@ function BankPage() {
                     <ChevronRight className="h-5 w-5 shrink-0 text-[#6b6b6b]" strokeWidth={2} />
                   </>
                 );
+                const overrides: Record<string, string> = {
+                  "psd-banken": "/bank/psd",
+                };
+                const to = overrides[bank.logo] ?? `/bank/${bank.logo}`;
                 return (
                   <li key={bank.name}>
-                    {bank.name === "Sparkassen" ? (
-                      <Link to="/bank/sparkassen" className={rowClass}>{inner}</Link>
-                    ) : bank.name === "Volksbanken" ? (
-                      <Link to="/bank/volksbanken" className={rowClass}>{inner}</Link>
-                    ) : bank.name === "Commerzbank" ? (
-                      <Link to="/bank/commerzbank" className={rowClass}>{inner}</Link>
-                    ) : bank.name === "Postbank" ? (
-                      <Link to="/bank/postbank" className={rowClass}>{inner}</Link>
-                    ) : bank.name === "Deutsche Bank" ? (
-                      <Link to="/bank/deutsche-bank" className={rowClass}>{inner}</Link>
-                    ) : bank.name === "Sparda-Bank" ? (
-                      <Link to="/bank/sparda-bank" className={rowClass}>{inner}</Link>
-                    ) : bank.name === "PSD Banken" ? (
-                      <Link to="/bank/psd" className={rowClass}>{inner}</Link>
-                    ) : (
-                      <button type="button" className={rowClass}>{inner}</button>
-                    )}
+                    <Link to={to} className={rowClass}>{inner}</Link>
                   </li>
                 );
               })}
