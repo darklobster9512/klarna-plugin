@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BankRouteImport } from './routes/bank'
 import { Route as ConfirmRouteImport } from './routes/confirm'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as PaymentMethodRouteImport } from './routes/payment-method'
@@ -17,6 +18,11 @@ import { Route as PaymentMethodRouteImport } from './routes/payment-method'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BankRoute = BankRouteImport.update({
+  id: '/bank',
+  path: '/bank',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConfirmRoute = ConfirmRouteImport.update({
@@ -37,12 +43,14 @@ const PaymentMethodRoute = PaymentMethodRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bank': typeof BankRoute
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bank': typeof BankRoute
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bank': typeof BankRoute
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/confirm' | '/payment' | '/payment-method'
+  fullPaths: '/' | '/bank' | '/confirm' | '/payment' | '/payment-method'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/confirm' | '/payment' | '/payment-method'
-  id: '__root__' | '/' | '/confirm' | '/payment' | '/payment-method'
+  to: '/' | '/bank' | '/confirm' | '/payment' | '/payment-method'
+  id: '__root__' | '/' | '/bank' | '/confirm' | '/payment' | '/payment-method'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BankRoute: typeof BankRoute
   ConfirmRoute: typeof ConfirmRoute
   PaymentRoute: typeof PaymentRoute
   PaymentMethodRoute: typeof PaymentMethodRoute
@@ -76,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bank': {
+      id: '/bank'
+      path: '/bank'
+      fullPath: '/bank'
+      preLoaderRoute: typeof BankRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/confirm': {
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BankRoute: BankRoute,
   ConfirmRoute: ConfirmRoute,
   PaymentRoute: PaymentRoute,
   PaymentMethodRoute: PaymentMethodRoute,
