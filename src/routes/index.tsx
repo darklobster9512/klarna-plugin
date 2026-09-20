@@ -31,7 +31,47 @@ function PayIcon() {
   );
 }
 
+const phoneSchema = z
+  .string()
+  .min(1, "Handynummer ist erforderlich")
+  .refine((val) => /^[\+]?[\d\s]+$/.test(val), {
+    message: "Bitte gib eine gültige Handynummer ein",
+  })
+  .refine((val) => val.replace(/\D/g, "").length >= 8, {
+    message: "Die Nummer ist zu kurz",
+  })
+  .refine((val) => val.replace(/\D/g, "").length <= 15, {
+    message: "Die Nummer ist zu lang",
+  });
+
+function formatPhoneNumber(value: string): string {
+  let cleaned = value.replace(/[^0-9+]/g, "");
+  cleaned = cleaned.replace(/(?!^)\+/g, "");
+
+  if (cleaned.startsWith("+")) {
+    return cleaned;
+  }
+
+  if (cleaned.startsWith("0") && cleaned.length > 4) {
+    return `${cleaned.slice(0, 4)} ${cleaned.slice(4)}`.trim();
+  }
+
+  return cleaned;
+}
+
 function Index() {
+  const [phone, setPhone] = useState("0176 16146986");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setPhone(formatted);
+    const result = phoneSchema.safeParse(formatted);
+    setError(result.success ? null : result.error.errors[0].message);
+  };
+
+  const isValid = phoneSchema.safeParse(phone).success;
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-4">
       <div className="relative flex h-[calc(100vh-2rem)] max-h-[1043px] w-[600px] max-w-full flex-col overflow-y-auto rounded-2xl bg-white p-8 shadow-xl sm:p-10">
