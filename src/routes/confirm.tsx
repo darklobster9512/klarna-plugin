@@ -40,7 +40,7 @@ function ConfirmPage() {
         </Link>
 
         <div className="flex flex-1 flex-col overflow-hidden">
-          <div className="flex flex-1 flex-col overflow-y-auto px-8 pb-4 pt-10 sm:px-10 sm:pt-10">
+          <div className="flex flex-1 flex-col overflow-y-auto px-8 pb-4 pt-14 sm:px-10 sm:pt-16">
             <h1 className="text-[26px] font-bold leading-tight text-[#0b051d]">
               Bestätigen und bezahlen
             </h1>
