@@ -68,7 +68,7 @@ function PaymentMethodPage() {
 
   const optionClass = (id: MethodId) =>
     `flex w-full items-center justify-between gap-4 rounded-2xl border p-4 text-left transition-colors ${
-      selected === id ? "border-[#0b051d]" : "border-neutral-200"
+      selected === id ? "border-2 border-[#0b051d]" : "border-neutral-200"
     }`;
 
   return (
