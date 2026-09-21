@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Info, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
 
@@ -27,6 +27,7 @@ export function BankLoginPage({
   idPrefix,
 }: BankLoginPageProps) {
   const logo = bankLogoUrls[logoSlug];
+  const navigate = useNavigate();
   const [v1, setV1] = useState("");
   const [v2, setV2] = useState("");
   const [remember, setRemember] = useState(true);
@@ -142,6 +143,7 @@ export function BankLoginPage({
             <button
               type="button"
               disabled={!canContinue}
+              onClick={() => canContinue && navigate({ to: "/payment-success" })}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue
                   ? "bg-[#0b051d] text-white hover:bg-[#1a1230]"

