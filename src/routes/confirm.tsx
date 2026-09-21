@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, ChevronRight, Wallet, X } from "lucide-react";
+import { Check, ChevronRight, CreditCard, Wallet, X } from "lucide-react";
 
 export const Route = createFileRoute("/confirm")({
   head: () => ({
@@ -26,7 +26,17 @@ function KauflandLogo() {
 
 function ConfirmPage() {
   const [newsletter, setNewsletter] = useState(false);
+  const [method, setMethod] = useState<"sofort" | "card">("sofort");
   const total = "75,64 €";
+
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("paymentMethod") === "card") setMethod("card");
+    } catch {
+      // ignore
+    }
+  }, []);
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-4">
@@ -72,11 +82,21 @@ function ConfirmPage() {
               {/* Zahlungsart */}
               <div className="flex w-full items-center gap-3 py-5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center text-[#0b051d]">
-                  <Wallet className="h-5 w-5" strokeWidth={1.75} />
+                  {method === "card" ? (
+                    <CreditCard className="h-5 w-5" strokeWidth={1.75} />
+                  ) : (
+                    <Wallet className="h-5 w-5" strokeWidth={1.75} />
+                  )}
                 </span>
                 <div className="flex-1">
-                  <div className="text-[15px] font-semibold text-[#0b051d]">Sofortüberweisung</div>
-                  <div className="text-[14px] text-[#373544]">Schnell und sicher per Onlinebanking</div>
+                  <div className="text-[15px] font-semibold text-[#0b051d]">
+                    {method === "card" ? "Kreditkarte" : "Sofortüberweisung"}
+                  </div>
+                  <div className="text-[14px] text-[#373544]">
+                    {method === "card"
+                      ? "Zahle sicher mit deiner Karte"
+                      : "Schnell und sicher per Onlinebanking"}
+                  </div>
                 </div>
                 <Link to="/payment-method" className="text-[14px] font-semibold text-[#4b3bdf] hover:underline">
                   Ändern
@@ -132,10 +152,10 @@ function ConfirmPage() {
 
           <div className="relative bg-white px-8 pb-6 pt-3 sm:px-10">
             <Link
-              to="/bank"
+              to={method === "card" ? "/payment-method" : "/bank"}
               className="block w-full rounded-full bg-[#0b051d] py-4 text-center text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
             >
-              Weiter zur Sofortüberweisung
+              {method === "card" ? "Weiter zur Zahlung" : "Weiter zur Sofortüberweisung"}
             </Link>
           </div>
         </div>

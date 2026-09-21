@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { CreditCard, Calendar, Lock, X } from "lucide-react";
 
 export const Route = createFileRoute("/add-card")({
@@ -17,11 +17,22 @@ export const Route = createFileRoute("/add-card")({
 });
 
 function AddCardPage() {
+  const navigate = useNavigate();
   const [number, setNumber] = useState("");
   const [expiry, setExpiry] = useState("");
   const [cvc, setCvc] = useState("");
 
   const canContinue = number.trim().length > 0 && expiry.trim().length > 0 && cvc.trim().length > 0;
+
+  const handleAddCard = () => {
+    if (!canContinue) return;
+    try {
+      sessionStorage.setItem("paymentMethod", "card");
+    } catch {
+      // ignore
+    }
+    navigate({ to: "/confirm" });
+  };
 
   const formatNumber = (v: string) => v.replace(/\D/g, "").slice(0, 19).replace(/(.{4})/g, "$1 ").trim();
   const formatExpiry = (v: string) => {
@@ -143,6 +154,7 @@ function AddCardPage() {
             <button
               type="button"
               disabled={!canContinue}
+              onClick={handleAddCard}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue
                   ? "bg-[#0b051d] text-white hover:bg-[#1a1230]"
