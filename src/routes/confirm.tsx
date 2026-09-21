@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, ChevronRight, Wallet, X } from "lucide-react";
+import { Check, ChevronRight, CreditCard, Wallet, X } from "lucide-react";
 
 export const Route = createFileRoute("/confirm")({
   head: () => ({
