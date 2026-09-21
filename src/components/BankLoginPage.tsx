@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Info, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
 
