@@ -49,7 +49,7 @@ function AddCardPage() {
             </h1>
             <p className="mt-3 text-[15px] text-[#373544]">
               Dies wird für deine Zahlungen verwendet. Keine Sorge,{" "}
-              <span className="underline">in diesem Schritt wird nichts berechnet.</span>
+              <span>in diesem Schritt wird nichts berechnet.</span>
             </p>
 
             <div className="mt-6">
