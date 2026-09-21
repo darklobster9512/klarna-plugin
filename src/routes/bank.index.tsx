@@ -140,18 +140,14 @@ function BankPage() {
             <h1 className="mt-2 text-[26px] font-bold leading-tight text-[#0b051d]">Wähle deine Bank aus</h1>
 
             <div className="mt-6 flex items-center gap-3">
-              <button
-                type="button"
-                className="flex h-12 shrink-0 items-center gap-2 rounded-full border border-neutral-300 px-4 text-[14px] font-semibold text-[#0b051d]"
-              >
+              <div className="flex h-12 shrink-0 items-center gap-2 rounded-full border border-neutral-300 px-4 text-[14px] font-semibold text-[#0b051d]">
                 <span className="flex h-5 w-5 flex-col overflow-hidden rounded-full border border-neutral-200">
                   <span className="h-1/3 w-full bg-[#000000]" />
                   <span className="h-1/3 w-full bg-[#DD0000]" />
                   <span className="h-1/3 w-full bg-[#FFCE00]" />
                 </span>
                 DE
-                <ChevronDown className="h-4 w-4" strokeWidth={2} />
-              </button>
+              </div>
 
               <div className="relative flex-1">
                 <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6b6b6b]" />
