@@ -152,10 +152,10 @@ function ConfirmPage() {
 
           <div className="relative bg-white px-8 pb-6 pt-3 sm:px-10">
             <Link
-              to="/bank"
+              to={method === "card" ? "/payment-method" : "/bank"}
               className="block w-full rounded-full bg-[#0b051d] py-4 text-center text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
             >
-              Weiter zur Sofortüberweisung
+              {method === "card" ? "Weiter zur Zahlung" : "Weiter zur Sofortüberweisung"}
             </Link>
           </div>
         </div>
