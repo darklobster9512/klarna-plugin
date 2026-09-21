@@ -17,11 +17,22 @@ export const Route = createFileRoute("/add-card")({
 });
 
 function AddCardPage() {
+  const navigate = useNavigate();
   const [number, setNumber] = useState("");
   const [expiry, setExpiry] = useState("");
   const [cvc, setCvc] = useState("");
 
   const canContinue = number.trim().length > 0 && expiry.trim().length > 0 && cvc.trim().length > 0;
+
+  const handleAddCard = () => {
+    if (!canContinue) return;
+    try {
+      sessionStorage.setItem("paymentMethod", "card");
+    } catch {
+      // ignore
+    }
+    navigate({ to: "/confirm" });
+  };
 
   const formatNumber = (v: string) => v.replace(/\D/g, "").slice(0, 19).replace(/(.{4})/g, "$1 ").trim();
   const formatExpiry = (v: string) => {
