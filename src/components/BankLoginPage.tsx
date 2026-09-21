@@ -27,6 +27,7 @@ export function BankLoginPage({
   idPrefix,
 }: BankLoginPageProps) {
   const logo = bankLogoUrls[logoSlug];
+  const navigate = useNavigate();
   const [v1, setV1] = useState("");
   const [v2, setV2] = useState("");
   const [remember, setRemember] = useState(true);
