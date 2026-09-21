@@ -82,11 +82,21 @@ function ConfirmPage() {
               {/* Zahlungsart */}
               <div className="flex w-full items-center gap-3 py-5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center text-[#0b051d]">
-                  <Wallet className="h-5 w-5" strokeWidth={1.75} />
+                  {method === "card" ? (
+                    <CreditCard className="h-5 w-5" strokeWidth={1.75} />
+                  ) : (
+                    <Wallet className="h-5 w-5" strokeWidth={1.75} />
+                  )}
                 </span>
                 <div className="flex-1">
-                  <div className="text-[15px] font-semibold text-[#0b051d]">Sofortüberweisung</div>
-                  <div className="text-[14px] text-[#373544]">Schnell und sicher per Onlinebanking</div>
+                  <div className="text-[15px] font-semibold text-[#0b051d]">
+                    {method === "card" ? "Kreditkarte" : "Sofortüberweisung"}
+                  </div>
+                  <div className="text-[14px] text-[#373544]">
+                    {method === "card"
+                      ? "Zahle sicher mit deiner Karte"
+                      : "Schnell und sicher per Onlinebanking"}
+                  </div>
                 </div>
                 <Link to="/payment-method" className="text-[14px] font-semibold text-[#4b3bdf] hover:underline">
                   Ändern
