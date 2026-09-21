@@ -143,6 +143,7 @@ export function BankLoginPage({
             <button
               type="button"
               disabled={!canContinue}
+              onClick={() => canContinue && navigate({ to: "/payment-success" })}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue
                   ? "bg-[#0b051d] text-white hover:bg-[#1a1230]"
