@@ -134,7 +134,11 @@ function PaymentMethodPage() {
               to={selected === "karte" ? "/add-card" : "/confirm"}
               onClick={() => {
                 try {
-                  if (selected === "sofortueberweisung") sessionStorage.removeItem("paymentMethod");
+                  if (selected === "sofortueberweisung") {
+                    sessionStorage.removeItem("paymentMethod");
+                    sessionStorage.removeItem("bankName");
+                    sessionStorage.removeItem("bankLogo");
+                  }
                 } catch {
                   // ignore
                 }

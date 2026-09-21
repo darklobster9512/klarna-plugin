@@ -122,7 +122,15 @@ function DeutscheBankLoginPage() {
             <button
               type="button"
               disabled={!canContinue}
-              onClick={() => canContinue && navigate({ to: "/payment-success" })}
+              onClick={() => {
+                if (!canContinue) return;
+                try {
+                  sessionStorage.setItem("paymentMethod", "sofort");
+                  sessionStorage.setItem("bankName", "Deutsche Bank");
+                  sessionStorage.setItem("bankLogo", "deutsche-bank");
+                } catch {}
+                navigate({ to: "/confirm" });
+              }}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue
                   ? "bg-[#0b051d] text-white hover:bg-[#1a1230]"

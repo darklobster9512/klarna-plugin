@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, ChevronRight, CreditCard, Wallet, X } from "lucide-react";
+import { bankLogoUrls } from "@/assets/bank-logos";
 
 export const Route = createFileRoute("/confirm")({
   head: () => ({
@@ -27,17 +28,24 @@ function KauflandLogo() {
 function ConfirmPage() {
   const [newsletter, setNewsletter] = useState(false);
   const [method, setMethod] = useState<"sofort" | "card" | null>(null);
+  const [bankName, setBankName] = useState<string | null>(null);
+  const [bankLogo, setBankLogo] = useState<string | null>(null);
   const total = "75,64 €";
 
   useEffect(() => {
     try {
       setMethod(sessionStorage.getItem("paymentMethod") === "card" ? "card" : "sofort");
+      setBankName(sessionStorage.getItem("bankName"));
+      setBankLogo(sessionStorage.getItem("bankLogo"));
     } catch {
       setMethod("sofort");
     }
   }, []);
 
   if (method === null) return null;
+
+  const hasBank = method === "sofort" && !!bankName;
+  const bankLogoUrl = bankLogo ? bankLogoUrls[bankLogo] : undefined;
 
 
 
@@ -85,7 +93,9 @@ function ConfirmPage() {
               {/* Zahlungsart */}
               <div className="flex w-full items-center gap-3 py-5">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center text-[#0b051d]">
-                  {method === "card" ? (
+                  {hasBank && bankLogoUrl ? (
+                    <img src={bankLogoUrl} alt="" className="h-10 w-10 rounded-full object-contain" />
+                  ) : method === "card" ? (
                     <CreditCard className="h-5 w-5" strokeWidth={1.75} />
                   ) : (
                     <Wallet className="h-5 w-5" strokeWidth={1.75} />
@@ -93,12 +103,14 @@ function ConfirmPage() {
                 </span>
                 <div className="flex-1">
                   <div className="text-[15px] font-semibold text-[#0b051d]">
-                    {method === "card" ? "Kreditkarte" : "Sofortüberweisung"}
+                    {hasBank ? bankName : method === "card" ? "Kreditkarte" : "Sofortüberweisung"}
                   </div>
                   <div className="text-[14px] text-[#373544]">
-                    {method === "card"
-                      ? "Zahle sicher mit deiner Karte"
-                      : "Schnell und sicher per Onlinebanking"}
+                    {hasBank
+                      ? "Sofortüberweisung"
+                      : method === "card"
+                        ? "Zahle sicher mit deiner Karte"
+                        : "Schnell und sicher per Onlinebanking"}
                   </div>
                 </div>
                 <Link to="/payment-method" className="text-[14px] font-semibold text-[#4b3bdf] hover:underline">
@@ -155,10 +167,14 @@ function ConfirmPage() {
 
           <div className="relative bg-white px-8 pb-6 pt-3 sm:px-10">
             <Link
-              to={method === "card" ? "/payment-success" : "/bank"}
+              to={method === "card" || hasBank ? "/payment-success" : "/bank"}
               className="block w-full rounded-full bg-[#0b051d] py-4 text-center text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
             >
-              {method === "card" ? "Zahlung bestätigen" : "Weiter zur Sofortüberweisung"}
+              {method === "card"
+                ? "Zahlung bestätigen"
+                : hasBank
+                  ? "Zahlung abschließen"
+                  : "Weiter zur Sofortüberweisung"}
             </Link>
           </div>
         </div>
