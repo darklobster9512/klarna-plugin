@@ -26,16 +26,19 @@ function KauflandLogo() {
 
 function ConfirmPage() {
   const [newsletter, setNewsletter] = useState(false);
-  const [method, setMethod] = useState<"sofort" | "card">("sofort");
+  const [method, setMethod] = useState<"sofort" | "card" | null>(null);
   const total = "75,64 €";
 
   useEffect(() => {
     try {
-      if (sessionStorage.getItem("paymentMethod") === "card") setMethod("card");
+      setMethod(sessionStorage.getItem("paymentMethod") === "card" ? "card" : "sofort");
     } catch {
-      // ignore
+      setMethod("sofort");
     }
   }, []);
+
+  if (method === null) return null;
+
 
 
   return (
