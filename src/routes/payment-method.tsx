@@ -16,7 +16,7 @@ export const Route = createFileRoute("/payment-method")({
   component: PaymentMethodPage,
 });
 
-type MethodId = "sofortueberweisung" | "lastschrift" | "karte";
+type MethodId = "sofortueberweisung" | "karte";
 
 function SelectionDot({ selected }: { selected: boolean }) {
   if (selected) {
