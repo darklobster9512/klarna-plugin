@@ -143,7 +143,7 @@ function PaymentMethodPage() {
 
           <div className="relative bg-white px-8 pb-6 pt-3 shadow-[0_-8px_24px_-8px_rgba(0,0,0,0.08)] sm:px-10">
             <Link
-              to="/confirm"
+              to={selected === "karte" ? "/add-card" : "/confirm"}
               className="block w-full rounded-full bg-[#0b051d] py-4 text-center text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
             >
               Weiter

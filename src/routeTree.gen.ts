@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AddCardRouteImport } from './routes/add-card'
 import { Route as BankRouteImport } from './routes/bank'
 import { Route as ConfirmRouteImport } from './routes/confirm'
 import { Route as PaymentRouteImport } from './routes/payment'
@@ -72,6 +73,11 @@ import { Route as BankVolksbankenSlugRouteImport } from './routes/bank.volksbank
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AddCardRoute = AddCardRouteImport.update({
+  id: '/add-card',
+  path: '/add-card',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BankRoute = BankRouteImport.update({
@@ -367,6 +373,7 @@ const BankVolksbankenSlugRoute = BankVolksbankenSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/add-card': typeof AddCardRoute
   '/bank': typeof BankRouteWithChildren
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
@@ -428,6 +435,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/add-card': typeof AddCardRoute
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
@@ -485,6 +493,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/add-card': typeof AddCardRoute
   '/bank': typeof BankRouteWithChildren
   '/confirm': typeof ConfirmRoute
   '/payment': typeof PaymentRoute
@@ -548,6 +557,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/add-card'
     | '/bank'
     | '/confirm'
     | '/payment'
@@ -609,6 +619,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/add-card'
     | '/confirm'
     | '/payment'
     | '/payment-method'
@@ -665,6 +676,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/add-card'
     | '/bank'
     | '/confirm'
     | '/payment'
@@ -727,6 +739,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AddCardRoute: typeof AddCardRoute
   BankRoute: typeof BankRouteWithChildren
   ConfirmRoute: typeof ConfirmRoute
   PaymentRoute: typeof PaymentRoute
@@ -740,6 +753,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/add-card': {
+      id: '/add-card'
+      path: '/add-card'
+      fullPath: '/add-card'
+      preLoaderRoute: typeof AddCardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bank': {
@@ -1308,6 +1328,7 @@ const BankRouteWithChildren = BankRoute._addFileChildren(BankRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AddCardRoute: AddCardRoute,
   BankRoute: BankRouteWithChildren,
   ConfirmRoute: ConfirmRoute,
   PaymentRoute: PaymentRoute,
