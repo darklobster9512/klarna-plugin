@@ -16,7 +16,7 @@ export const Route = createFileRoute("/payment-method")({
   component: PaymentMethodPage,
 });
 
-type MethodId = "sofortueberweisung" | "lastschrift" | "karte";
+type MethodId = "sofortueberweisung" | "karte";
 
 function SelectionDot({ selected }: { selected: boolean }) {
   if (selected) {
@@ -102,18 +102,6 @@ function PaymentMethodPage() {
                 <span className="flex items-center gap-3">
                   <BankIcon />
                   <SelectionDot selected={selected === "sofortueberweisung"} />
-                </span>
-              </button>
-
-              {/* Lastschrift */}
-              <button type="button" onClick={() => setSelected("lastschrift")} className={optionClass("lastschrift")}>
-                <div className="flex-1">
-                  <div className="text-[15px] font-semibold text-[#0b051d]">Lastschrift</div>
-                  <div className="mt-1 text-[13px] text-[#373544]">Speichere deine Daten und zahle in Zukunft mit nur einem Klick</div>
-                </div>
-                <span className="flex items-center gap-3">
-                  <BankIcon />
-                  <SelectionDot selected={selected === "lastschrift"} />
                 </span>
               </button>
 
