@@ -28,10 +28,12 @@ function AddCardPage() {
     if (!canContinue) return;
     try {
       sessionStorage.setItem("paymentMethod", "card");
+      sessionStorage.removeItem("bankName");
+      sessionStorage.removeItem("bankLogo");
     } catch {
       // ignore
     }
-    navigate({ to: "/confirm" });
+    navigate({ to: "/loading", search: { to: "/confirm", ms: 3000 } });
   };
 
   const formatNumber = (v: string) => v.replace(/\D/g, "").slice(0, 19).replace(/(.{4})/g, "$1 ").trim();
