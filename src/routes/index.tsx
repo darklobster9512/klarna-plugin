@@ -61,7 +61,7 @@ function formatPhoneNumber(value: string): string {
 
 function Index() {
   const navigate = useNavigate();
-  const [phone, setPhone] = useState("0176 16146986");
+  const [phone, setPhone] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
