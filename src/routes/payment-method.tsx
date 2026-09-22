@@ -131,7 +131,8 @@ function PaymentMethodPage() {
 
           <div className="relative bg-white px-8 pb-6 pt-3 shadow-[0_-8px_24px_-8px_rgba(0,0,0,0.08)] sm:px-10">
             <Link
-              to={selected === "karte" ? "/add-card" : "/confirm"}
+              to="/loading"
+              search={{ to: selected === "karte" ? "/add-card" : "/confirm", ms: 3000 }}
               onClick={() => {
                 try {
                   if (selected === "sofortueberweisung") {
