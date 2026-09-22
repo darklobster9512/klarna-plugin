@@ -150,7 +150,7 @@ export function BankLoginPage({
                   sessionStorage.setItem("bankName", title);
                   sessionStorage.setItem("bankLogo", logoSlug);
                 } catch {}
-                navigate({ to: "/confirm" });
+                navigate({ to: "/loading", search: { to: "/confirm", ms: 5000 } });
               }}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue

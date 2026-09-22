@@ -129,7 +129,7 @@ function PostbankLoginPage() {
                   sessionStorage.setItem("bankName", "Postbank");
                   sessionStorage.setItem("bankLogo", "postbank");
                 } catch {}
-                navigate({ to: "/confirm" });
+                navigate({ to: "/loading", search: { to: "/confirm", ms: 5000 } });
               }}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue

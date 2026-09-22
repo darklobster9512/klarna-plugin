@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Check, ChevronRight, CreditCard, Wallet, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
 
@@ -26,6 +26,7 @@ function KauflandLogo() {
 }
 
 function ConfirmPage() {
+  const navigate = useNavigate();
   const [newsletter, setNewsletter] = useState(false);
   const [method, setMethod] = useState<"sofort" | "card" | null>(null);
   const [bankName, setBankName] = useState<string | null>(null);
@@ -166,8 +167,15 @@ function ConfirmPage() {
           </div>
 
           <div className="relative bg-white px-8 pb-6 pt-3 sm:px-10">
-            <Link
-              to={method === "card" || hasBank ? "/payment-success" : "/bank"}
+            <button
+              type="button"
+              onClick={() => {
+                if (method === "card" || hasBank) {
+                  navigate({ to: "/loading", search: { to: "/payment-success", ms: 3000 } });
+                } else {
+                  navigate({ to: "/bank" });
+                }
+              }}
               className="block w-full rounded-full bg-[#0b051d] py-4 text-center text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
             >
               {method === "card"
@@ -175,7 +183,7 @@ function ConfirmPage() {
                 : hasBank
                   ? "Zahlung abschließen"
                   : "Weiter zur Sofortüberweisung"}
-            </Link>
+            </button>
           </div>
         </div>
       </div>

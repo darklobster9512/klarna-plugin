@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AddCardRouteImport } from './routes/add-card'
 import { Route as BankRouteImport } from './routes/bank'
 import { Route as ConfirmRouteImport } from './routes/confirm'
+import { Route as LoadingRouteImport } from './routes/loading'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as PaymentMethodRouteImport } from './routes/payment-method'
 import { Route as PaymentSuccessRouteImport } from './routes/payment-success'
@@ -89,6 +90,11 @@ const BankRoute = BankRouteImport.update({
 const ConfirmRoute = ConfirmRouteImport.update({
   id: '/confirm',
   path: '/confirm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoadingRoute = LoadingRouteImport.update({
+  id: '/loading',
+  path: '/loading',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PaymentRoute = PaymentRouteImport.update({
@@ -382,6 +388,7 @@ export interface FileRoutesByFullPath {
   '/add-card': typeof AddCardRoute
   '/bank': typeof BankRouteWithChildren
   '/confirm': typeof ConfirmRoute
+  '/loading': typeof LoadingRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
   '/payment-success': typeof PaymentSuccessRoute
@@ -444,6 +451,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/add-card': typeof AddCardRoute
   '/confirm': typeof ConfirmRoute
+  '/loading': typeof LoadingRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
   '/payment-success': typeof PaymentSuccessRoute
@@ -504,6 +512,7 @@ export interface FileRoutesById {
   '/add-card': typeof AddCardRoute
   '/bank': typeof BankRouteWithChildren
   '/confirm': typeof ConfirmRoute
+  '/loading': typeof LoadingRoute
   '/payment': typeof PaymentRoute
   '/payment-method': typeof PaymentMethodRoute
   '/payment-success': typeof PaymentSuccessRoute
@@ -569,6 +578,7 @@ export interface FileRouteTypes {
     | '/add-card'
     | '/bank'
     | '/confirm'
+    | '/loading'
     | '/payment'
     | '/payment-method'
     | '/payment-success'
@@ -631,6 +641,7 @@ export interface FileRouteTypes {
     | '/'
     | '/add-card'
     | '/confirm'
+    | '/loading'
     | '/payment'
     | '/payment-method'
     | '/payment-success'
@@ -690,6 +701,7 @@ export interface FileRouteTypes {
     | '/add-card'
     | '/bank'
     | '/confirm'
+    | '/loading'
     | '/payment'
     | '/payment-method'
     | '/payment-success'
@@ -754,6 +766,7 @@ export interface RootRouteChildren {
   AddCardRoute: typeof AddCardRoute
   BankRoute: typeof BankRouteWithChildren
   ConfirmRoute: typeof ConfirmRoute
+  LoadingRoute: typeof LoadingRoute
   PaymentRoute: typeof PaymentRoute
   PaymentMethodRoute: typeof PaymentMethodRoute
   PaymentSuccessRoute: typeof PaymentSuccessRoute
@@ -787,6 +800,13 @@ declare module '@tanstack/react-router' {
       path: '/confirm'
       fullPath: '/confirm'
       preLoaderRoute: typeof ConfirmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loading': {
+      id: '/loading'
+      path: '/loading'
+      fullPath: '/loading'
+      preLoaderRoute: typeof LoadingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/payment': {
@@ -1351,6 +1371,7 @@ const rootRouteChildren: RootRouteChildren = {
   AddCardRoute: AddCardRoute,
   BankRoute: BankRouteWithChildren,
   ConfirmRoute: ConfirmRoute,
+  LoadingRoute: LoadingRoute,
   PaymentRoute: PaymentRoute,
   PaymentMethodRoute: PaymentMethodRoute,
   PaymentSuccessRoute: PaymentSuccessRoute,
