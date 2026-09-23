@@ -39,28 +39,6 @@ function BankIcon() {
   );
 }
 
-function ApplePayBadge() {
-  return (
-    <span className="inline-flex h-5 items-center rounded border border-neutral-200 bg-white px-1.5 text-[10px] font-semibold text-black">
-       Pay
-    </span>
-  );
-}
-function MastercardBadge() {
-  return (
-    <span className="inline-flex h-5 items-center gap-0.5 rounded border border-neutral-200 bg-white px-1">
-      <span className="h-3 w-3 rounded-full bg-[#EB001B]" />
-      <span className="-ml-1.5 h-3 w-3 rounded-full bg-[#F79E1B] opacity-90" />
-    </span>
-  );
-}
-function VisaBadge() {
-  return (
-    <span className="inline-flex h-5 items-center rounded border border-neutral-200 bg-white px-1.5 text-[10px] font-bold italic text-[#1A1F71]">
-      VISA
-    </span>
-  );
-}
 
 function PaymentMethodPage() {
   const [selected, setSelected] = useState<MethodId>("sofortueberweisung");
