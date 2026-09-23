@@ -191,7 +191,11 @@ function PaymentPage() {
             <button
               type="button"
               disabled={!selected}
-              onClick={() => navigate({ to: "/payment-method" })}
+              onClick={() => {
+                if (!selected) return;
+                try { sessionStorage.setItem("paymentPlan", selected); } catch {}
+                navigate({ to: "/payment-method" });
+              }}
               className="w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Weiter
