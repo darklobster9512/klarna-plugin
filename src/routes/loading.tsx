@@ -32,8 +32,8 @@ function LoadingPage() {
   }, [to, ms, navigate]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-4">
-      <div className="flex h-[calc(100vh-2rem)] max-h-[1043px] w-[600px] max-w-full items-center justify-center rounded-2xl bg-white shadow-xl">
+    <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-0 sm:p-4">
+      <div className="flex h-screen sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-[600px] max-w-full items-center justify-center bg-white sm:rounded-2xl sm:shadow-xl">
         <div className="flex items-center gap-2" aria-label="Wird geladen" role="status">
           <span className="klarna-dot h-3 w-3 rounded-full bg-[#0b051d]" style={{ animationDelay: "0s" }} />
           <span className="klarna-dot h-3 w-3 rounded-full bg-[#0b051d]" style={{ animationDelay: "0.15s" }} />
