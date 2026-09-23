@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, X } from "lucide-react";
+import { ApplePayBadge, MastercardBadge, VisaBadge } from "@/components/PaymentBadges";
 
 export const Route = createFileRoute("/payment-method")({
   head: () => ({
