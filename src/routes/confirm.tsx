@@ -25,19 +25,30 @@ function KauflandLogo() {
   );
 }
 
+type Plan = "sofort" | "spaeter" | "sechs" | "drei";
+
+const PLAN_INFO: Record<Plan, { today: string; total: string }> = {
+  sofort: { today: "75,64 €", total: "75,64 €" },
+  spaeter: { today: "0,00 €", total: "75,64 €" },
+  sechs: { today: "0,00 €", total: "78,81 €" },
+  drei: { today: "25,21 €", total: "75,64 €" },
+};
+
 function ConfirmPage() {
   const navigate = useNavigate();
   const [newsletter, setNewsletter] = useState(false);
   const [method, setMethod] = useState<"sofort" | "card" | null>(null);
   const [bankName, setBankName] = useState<string | null>(null);
   const [bankLogo, setBankLogo] = useState<string | null>(null);
-  const total = "75,64 €";
+  const [plan, setPlan] = useState<Plan>("sofort");
 
   useEffect(() => {
     try {
       setMethod(sessionStorage.getItem("paymentMethod") === "card" ? "card" : "sofort");
       setBankName(sessionStorage.getItem("bankName"));
       setBankLogo(sessionStorage.getItem("bankLogo"));
+      const p = sessionStorage.getItem("paymentPlan") as Plan | null;
+      if (p && p in PLAN_INFO) setPlan(p);
     } catch {
       setMethod("sofort");
     }
@@ -47,6 +58,7 @@ function ConfirmPage() {
 
   const hasBank = method === "sofort" && !!bankName;
   const bankLogoUrl = bankLogo ? bankLogoUrls[bankLogo] : undefined;
+  const { today, total } = PLAN_INFO[plan];
 
 
 
