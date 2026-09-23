@@ -36,7 +36,7 @@ function SpardaBankPage() {
   }, [query]);
 
   return (
-    <div className="min-h-screen bg-neutral-100 p-4">
+    <div className="min-h-screen bg-neutral-800/70 p-4">
       <div className="mx-auto flex w-[600px] max-w-full items-start justify-center">
         <div className="flex h-[calc(100vh-2rem)] max-h-[1043px] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-xl">
           <div className="flex flex-1 flex-col overflow-y-auto px-8 pb-6 pt-8 sm:px-10">
