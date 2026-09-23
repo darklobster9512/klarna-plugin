@@ -29,7 +29,6 @@ function RadioDot({ selected }: { selected: boolean }) {
   );
 }
 
-import { ApplePayBadge, MastercardBadge, VisaBadge } from "@/components/PaymentBadges";
 function BankBadge() {
   return (
     <span className="inline-flex h-5 w-6 items-center justify-center rounded border border-neutral-200 bg-white text-[#0b051d]">
