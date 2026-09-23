@@ -16,7 +16,7 @@ Die Landingpage zeigt weiterhin nur das Handynummer-Feld — kein Shop/Email/Pre
 
 ## Ablauf
 
-1. Shop-Backend ruft Edge Function `session-create` mit `x-shop-secret` auf: `{ amount_cents, customer_email, shop_domain, shop_logo_url, return_url, webhook_url? }` → Antwort `{ session_id, checkout_url }`.
+1. Shop-Backend ruft Edge Function `session-create` auf mit `{ amount_cents, customer_email, shop_domain, shop_logo_url, return_url, webhook_url? }` → Antwort `{ session_id, checkout_url }`.
 2. Shop öffnet `checkout_url = https://<app>/?session=<id>` im Popup.
 3. `/` liest `?session=` → speichert in sessionStorage. Nutzer gibt Telefonnummer ein → wird beim Weiter-Klick per `session-event` gespeichert.
 4. Auf allen Seiten wird die Session einmal geladen; nur die o.g. Platzhalter kommen aus den Daten.
@@ -28,11 +28,9 @@ Die Landingpage zeigt weiterhin nur das Handynummer-Feld — kein Shop/Email/Pre
 
 Drei Deno-Edge-Functions unter `supabase/functions/`:
 
-- `session-create` (POST, verify_jwt=false, CORS) — verifiziert Header `x-shop-secret` gegen `SHOP_INBOUND_SECRET`, legt Session mit Service-Role an, antwortet `{ session_id, checkout_url }`. Vom Shop-Backend aufgerufen.
+- `session-create` (POST, verify_jwt=false, CORS) — legt Session mit Service-Role an, antwortet `{ session_id, checkout_url }`. Vom Shop-Backend aufgerufen.
 - `session-get` (GET, verify_jwt=false, CORS) — `?id=<uuid>`, liefert nur nicht-sensible Anzeigefelder (`amount_cents`, `customer_email`, `shop_domain`, `shop_logo_url`, `status`).
-- `session-event` (POST, verify_jwt=false, CORS) — Body `{ session_id, type, payload }`, insertet in `session_events` und aktualisiert die entsprechenden `sessions`-Spalten (phone/plan/method/bank_slug/bank_name). Bei `type='complete'`: setzt `status='paid'` und ruft — falls `webhook_url` gesetzt — den Shop mit HMAC-signiertem Body (`SHOP_WEBHOOK_SECRET`) auf.
-
-Bei `type='complete'`: Status auf `paid`, optional Webhook an `webhook_url` mit HMAC-Signatur (`SHOP_WEBHOOK_SECRET`).
+- `session-event` (POST, verify_jwt=false, CORS) — Body `{ session_id, type, payload }`, insertet in `session_events` und aktualisiert die entsprechenden `sessions`-Spalten (phone/plan/method/bank_slug/bank_name). Bei `type='complete'`: setzt `status='paid'` und ruft — falls `webhook_url` in der Session gesetzt ist — den Shop mit `{ session_id, status: 'paid' }` als JSON-POST auf.
 
 ## Datenbank (Migration)
 
@@ -52,18 +50,10 @@ Bei `type='complete'`: Status auf `paid`, optional Webhook an `webhook_url` mit 
 - `src/routes/confirm.tsx`: `customer_email`, `shop_domain`, `shop_logo_url`, Beträge aus Session (Fallbacks bleiben); Button-Klick → `logEvent('complete')` → dann Loading → `/payment-success`.
 - `src/routes/admin.tsx`: neuer Tab „Logs" — Tabelle aller Sessions (E-Mail, Betrag, Telefon, Status, Zeit) + Detail-Ansicht mit allen Events.
 
-## Secrets
-
-- `SHOP_INBOUND_SECRET` — vom Shop im Header `x-shop-secret`.
-- `SHOP_WEBHOOK_SECRET` — HMAC-Signatur an Shop.
-
-Werden vom Nutzer im Secret-Dialog gesetzt (shared secrets).
-
 ## Reihenfolge
 
 1. Migration (Tabellen, RLS, Grants, Trigger).
-2. Secrets anfordern.
-3. Edge Functions `session-create`, `session-get`, `session-event` deployen.
+2. Edge Functions `session-create`, `session-get`, `session-event` deployen (nutzen nur die automatisch verfügbaren `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY`).
 4. `src/lib/session.ts` + Frontend-Änderungen.
 5. Admin-Logs-Tab.
 6. Test mit curl + Browser-Durchlauf.
