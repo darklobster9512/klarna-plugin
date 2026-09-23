@@ -98,8 +98,8 @@ function SparkassenLoginPage() {
   return (
     <div className="min-h-screen bg-[#8a8a8a] p-0 sm:bg-neutral-100 sm:p-4">
       <div className="mx-auto flex w-[600px] max-w-full items-start justify-center">
-        <div className="flex mt-6 h-[calc(100vh-1.5rem)] sm:mt-0 sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-full flex-col overflow-hidden bg-white rounded-t-3xl sm:rounded-2xl shadow-xl">
-          <div className="flex flex-1 flex-col overflow-y-auto px-8 pb-6 pt-8 sm:px-10">
+        <div className="flex mt-6 h-[calc(100vh-1.5rem)] sm:mt-0 sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-full flex-col overflow-hidden bg-white rounded-t-[32px] sm:rounded-2xl shadow-xl">
+          <div className="shrink-0 px-8 pt-8 sm:px-10">
             <div className="flex items-start justify-between">
               <Link
                 to="/bank/sparkassen"
@@ -116,6 +116,8 @@ function SparkassenLoginPage() {
                 <X className="h-6 w-6" strokeWidth={2} />
               </Link>
             </div>
+          </div>
+          <div className="flex flex-1 flex-col overflow-y-auto px-8 pb-6 sm:px-10">
 
             <img
               src={logo}

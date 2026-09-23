@@ -66,8 +66,8 @@ function PaymentPage() {
   const total = "75,64 €";
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-0 sm:p-4">
-      <div className="relative flex mt-6 h-[calc(100vh-1.5rem)] sm:mt-0 sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-[600px] max-w-full flex-col overflow-hidden bg-white rounded-t-2xl sm:rounded-2xl shadow-xl">
+    <div className="flex min-h-screen items-center justify-center bg-[#8a8a8a] p-0 sm:bg-neutral-100 sm:p-4">
+      <div className="relative flex mt-6 h-[calc(100vh-1.5rem)] sm:mt-0 sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-[600px] max-w-full flex-col overflow-hidden bg-white rounded-t-[32px] sm:rounded-2xl shadow-xl">
         <Link
           to="/"
           aria-label="Schließen"
@@ -77,7 +77,8 @@ function PaymentPage() {
         </Link>
 
         <div className="flex flex-1 flex-col overflow-hidden">
-          <div className="flex-1 overflow-y-auto px-8 pb-4 pt-10 sm:px-10 sm:pt-10">
+          <div className="h-14 shrink-0" />
+          <div className="flex-1 overflow-y-auto px-8 pb-4 pt-0 sm:px-10">
             <h1 className="mt-2 text-[26px] font-bold leading-tight text-[#0b051d]">
               Wie möchtest du {total} bezahlen?
             </h1>
