@@ -42,8 +42,23 @@ function BankBadge() {
 
 function PaymentPage() {
   const [selected, setSelected] = useState<OptionId | null>(null);
+  const [assetsReady, setAssetsReady] = useState(false);
   const navigate = useNavigate();
   const total = "75,64 €";
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setAssetsReady(true);
+    img.onerror = () => setAssetsReady(true);
+    img.src = applePayAsset.url;
+    if (img.complete) setAssetsReady(true);
+  }, []);
+
+  if (!assetsReady) {
+    return <div className="min-h-screen bg-[#8a8a8a] sm:bg-neutral-100" />;
+  }
+
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#8a8a8a] p-0 sm:bg-neutral-100 sm:p-4">
