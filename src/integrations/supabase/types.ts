@@ -14,7 +14,95 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      session_events: {
+        Row: {
+          created_at: string
+          id: string
+          payload: Json
+          session_id: string
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          payload?: Json
+          session_id: string
+          type: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          payload?: Json
+          session_id?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_events_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sessions: {
+        Row: {
+          amount_cents: number | null
+          bank_name: string | null
+          bank_slug: string | null
+          created_at: string
+          currency: string
+          customer_email: string | null
+          id: string
+          method: string | null
+          phone: string | null
+          plan: string | null
+          return_url: string | null
+          shop_domain: string | null
+          shop_logo_url: string | null
+          status: string
+          updated_at: string
+          webhook_url: string | null
+        }
+        Insert: {
+          amount_cents?: number | null
+          bank_name?: string | null
+          bank_slug?: string | null
+          created_at?: string
+          currency?: string
+          customer_email?: string | null
+          id?: string
+          method?: string | null
+          phone?: string | null
+          plan?: string | null
+          return_url?: string | null
+          shop_domain?: string | null
+          shop_logo_url?: string | null
+          status?: string
+          updated_at?: string
+          webhook_url?: string | null
+        }
+        Update: {
+          amount_cents?: number | null
+          bank_name?: string | null
+          bank_slug?: string | null
+          created_at?: string
+          currency?: string
+          customer_email?: string | null
+          id?: string
+          method?: string | null
+          phone?: string | null
+          plan?: string | null
+          return_url?: string | null
+          shop_domain?: string | null
+          shop_logo_url?: string | null
+          status?: string
+          updated_at?: string
+          webhook_url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
