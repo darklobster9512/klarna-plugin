@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AddCardRouteImport } from './routes/add-card'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BankRouteImport } from './routes/bank'
 import { Route as ConfirmRouteImport } from './routes/confirm'
 import { Route as LoadingRouteImport } from './routes/loading'
@@ -80,6 +82,16 @@ const IndexRoute = IndexRouteImport.update({
 const AddCardRoute = AddCardRouteImport.update({
   id: '/add-card',
   path: '/add-card',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BankRoute = BankRouteImport.update({
@@ -386,6 +398,8 @@ const BankVolksbankenSlugRoute = BankVolksbankenSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/add-card': typeof AddCardRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/bank': typeof BankRouteWithChildren
   '/confirm': typeof ConfirmRoute
   '/loading': typeof LoadingRoute
@@ -450,6 +464,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/add-card': typeof AddCardRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/confirm': typeof ConfirmRoute
   '/loading': typeof LoadingRoute
   '/payment': typeof PaymentRoute
@@ -510,6 +526,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/add-card': typeof AddCardRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/bank': typeof BankRouteWithChildren
   '/confirm': typeof ConfirmRoute
   '/loading': typeof LoadingRoute
@@ -576,6 +594,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/add-card'
+    | '/admin'
+    | '/auth'
     | '/bank'
     | '/confirm'
     | '/loading'
@@ -640,6 +660,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/add-card'
+    | '/admin'
+    | '/auth'
     | '/confirm'
     | '/loading'
     | '/payment'
@@ -699,6 +721,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/add-card'
+    | '/admin'
+    | '/auth'
     | '/bank'
     | '/confirm'
     | '/loading'
@@ -764,6 +788,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AddCardRoute: typeof AddCardRoute
+  AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
   BankRoute: typeof BankRouteWithChildren
   ConfirmRoute: typeof ConfirmRoute
   LoadingRoute: typeof LoadingRoute
@@ -786,6 +812,20 @@ declare module '@tanstack/react-router' {
       path: '/add-card'
       fullPath: '/add-card'
       preLoaderRoute: typeof AddCardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bank': {
@@ -1369,6 +1409,8 @@ const BankRouteWithChildren = BankRoute._addFileChildren(BankRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AddCardRoute: AddCardRoute,
+  AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
   BankRoute: BankRouteWithChildren,
   ConfirmRoute: ConfirmRoute,
   LoadingRoute: LoadingRoute,
