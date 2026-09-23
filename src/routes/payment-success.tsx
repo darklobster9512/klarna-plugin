@@ -17,8 +17,8 @@ export const Route = createFileRoute("/payment-success")({
 
 function PaymentSuccessPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-4">
-      <div className="relative flex h-[calc(100vh-2rem)] max-h-[1043px] w-[600px] max-w-full flex-col overflow-hidden rounded-2xl bg-white shadow-xl">
+    <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-0 sm:p-4">
+      <div className="relative flex h-screen sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-[600px] max-w-full flex-col overflow-hidden bg-white sm:rounded-2xl sm:shadow-xl">
         <div className="flex flex-1 flex-col items-center justify-center px-8 text-center sm:px-10">
           <span className="flex h-20 w-20 items-center justify-center rounded-full bg-[#ffb3c7]">
             <Check className="h-10 w-10 text-[#0b051d]" strokeWidth={2.5} />

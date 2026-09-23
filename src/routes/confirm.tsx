@@ -51,8 +51,8 @@ function ConfirmPage() {
 
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-4">
-      <div className="relative flex h-[calc(100vh-2rem)] max-h-[1043px] w-[600px] max-w-full flex-col overflow-hidden rounded-2xl bg-white shadow-xl">
+    <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-0 sm:p-4">
+      <div className="relative flex h-screen sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-[600px] max-w-full flex-col overflow-hidden bg-white sm:rounded-2xl sm:shadow-xl">
         <Link
           to="/payment-method"
           aria-label="Schließen"
