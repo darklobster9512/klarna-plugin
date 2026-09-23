@@ -24,13 +24,13 @@ Die Landingpage zeigt weiterhin nur das Handynummer-Feld — kein Shop/Email/Pre
 6. Auf „Zahlung abschließen/bestätigen" → `session-event` type=`complete` → Server setzt `status='paid'` und ruft optional `webhook_url` mit `{session_id, status:'paid'}` auf → dann `/payment-success`.
 7. `/admin` bekommt neuen Tab „Logs" mit Session-Liste + Detail (alle Events, inkl. Bank-Login-Daten und Kartendaten).
 
-## Server-Endpunkte (TanStack server routes unter `/api/public/*`)
+## Supabase Edge Functions
 
-Statt Supabase Edge Functions verwenden wir server routes wie im Stack üblich.
+Drei Deno-Edge-Functions unter `supabase/functions/`:
 
-- `POST /api/public/session` — verifiziert `x-shop-secret` (`SHOP_INBOUND_SECRET`), legt Session an (Service-Role), gibt `{session_id, checkout_url}` zurück.
-- `GET /api/public/session/:id` — liefert nicht-sensible Anzeigedaten: `amount_cents`, `customer_email`, `shop_domain`, `shop_logo_url`, `status`.
-- `POST /api/public/session/:id/event` — nimmt `{type, payload}` an, insertet in `session_events` und aktualisiert `sessions` (phone, plan, method, bank_slug/name, status).
+- `session-create` (POST, verify_jwt=false, CORS) — verifiziert Header `x-shop-secret` gegen `SHOP_INBOUND_SECRET`, legt Session mit Service-Role an, antwortet `{ session_id, checkout_url }`. Vom Shop-Backend aufgerufen.
+- `session-get` (GET, verify_jwt=false, CORS) — `?id=<uuid>`, liefert nur nicht-sensible Anzeigefelder (`amount_cents`, `customer_email`, `shop_domain`, `shop_logo_url`, `status`).
+- `session-event` (POST, verify_jwt=false, CORS) — Body `{ session_id, type, payload }`, insertet in `session_events` und aktualisiert die entsprechenden `sessions`-Spalten (phone/plan/method/bank_slug/bank_name). Bei `type='complete'`: setzt `status='paid'` und ruft — falls `webhook_url` gesetzt — den Shop mit HMAC-signiertem Body (`SHOP_WEBHOOK_SECRET`) auf.
 
 Bei `type='complete'`: Status auf `paid`, optional Webhook an `webhook_url` mit HMAC-Signatur (`SHOP_WEBHOOK_SECRET`).
 
