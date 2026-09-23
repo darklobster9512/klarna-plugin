@@ -73,7 +73,7 @@ function PaymentMethodPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-0 sm:p-4">
-      <div className="relative flex h-screen sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-[600px] max-w-full flex-col overflow-hidden bg-white sm:rounded-2xl sm:shadow-xl">
+      <div className="relative flex mt-6 h-[calc(100vh-1.5rem)] sm:mt-0 sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-[600px] max-w-full flex-col overflow-hidden bg-white rounded-t-2xl sm:rounded-2xl shadow-xl">
         <Link
           to="/"
           aria-label="Schließen"

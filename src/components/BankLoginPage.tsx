@@ -35,9 +35,9 @@ export function BankLoginPage({
   const canContinue = v1.trim().length > 0 && v2.trim().length > 0;
 
   return (
-    <div className="min-h-screen bg-neutral-100 p-0 sm:p-4">
+    <div className="min-h-screen bg-black/50 p-0 sm:bg-neutral-100 sm:p-4">
       <div className="mx-auto flex w-[600px] max-w-full items-start justify-center">
-        <div className="flex h-screen sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-full flex-col overflow-hidden bg-white sm:rounded-2xl sm:shadow-xl">
+        <div className="flex mt-6 h-[calc(100vh-1.5rem)] sm:mt-0 sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-full flex-col overflow-hidden bg-white rounded-t-2xl sm:rounded-2xl shadow-xl">
           <div className="flex flex-1 flex-col overflow-y-auto px-8 pb-6 pt-8 sm:px-10">
             <div className="flex items-start justify-between">
               <Link
