@@ -83,7 +83,8 @@ function PaymentMethodPage() {
         </Link>
 
         <div className="flex flex-1 flex-col overflow-hidden">
-          <div className="flex-1 overflow-y-auto px-8 pb-4 pt-10 sm:px-10 sm:pt-10">
+          <div className="h-14 shrink-0" />
+          <div className="flex-1 overflow-y-auto px-8 pb-4 pt-0 sm:px-10">
             <h1 className="mt-2 text-[26px] font-bold leading-tight text-[#0b051d]">
               Wie möchtest du {total} bezahlen?
             </h1>
