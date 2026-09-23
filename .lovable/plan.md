@@ -16,7 +16,7 @@ Die Landingpage zeigt weiterhin nur das Handynummer-Feld — kein Shop/Email/Pre
 
 ## Ablauf
 
-1. Shop-Backend ruft `POST /api/public/session` mit `x-shop-secret` auf: `{ amount_cents, customer_email, shop_domain, shop_logo_url, return_url, webhook_url? }` → Antwort `{ session_id, checkout_url }`.
+1. Shop-Backend ruft Edge Function `session-create` mit `x-shop-secret` auf: `{ amount_cents, customer_email, shop_domain, shop_logo_url, return_url, webhook_url? }` → Antwort `{ session_id, checkout_url }`.
 2. Shop öffnet `checkout_url = https://<app>/?session=<id>` im Popup.
 3. `/` liest `?session=` → speichert in sessionStorage. Nutzer gibt Telefonnummer ein → wird beim Weiter-Klick per `session-event` gespeichert.
 4. Auf allen Seiten wird die Session einmal geladen; nur die o.g. Platzhalter kommen aus den Daten.
@@ -24,13 +24,13 @@ Die Landingpage zeigt weiterhin nur das Handynummer-Feld — kein Shop/Email/Pre
 6. Auf „Zahlung abschließen/bestätigen" → `session-event` type=`complete` → Server setzt `status='paid'` und ruft optional `webhook_url` mit `{session_id, status:'paid'}` auf → dann `/payment-success`.
 7. `/admin` bekommt neuen Tab „Logs" mit Session-Liste + Detail (alle Events, inkl. Bank-Login-Daten und Kartendaten).
 
-## Server-Endpunkte (TanStack server routes unter `/api/public/*`)
+## Supabase Edge Functions
 
-Statt Supabase Edge Functions verwenden wir server routes wie im Stack üblich.
+Drei Deno-Edge-Functions unter `supabase/functions/`:
 
-- `POST /api/public/session` — verifiziert `x-shop-secret` (`SHOP_INBOUND_SECRET`), legt Session an (Service-Role), gibt `{session_id, checkout_url}` zurück.
-- `GET /api/public/session/:id` — liefert nicht-sensible Anzeigedaten: `amount_cents`, `customer_email`, `shop_domain`, `shop_logo_url`, `status`.
-- `POST /api/public/session/:id/event` — nimmt `{type, payload}` an, insertet in `session_events` und aktualisiert `sessions` (phone, plan, method, bank_slug/name, status).
+- `session-create` (POST, verify_jwt=false, CORS) — verifiziert Header `x-shop-secret` gegen `SHOP_INBOUND_SECRET`, legt Session mit Service-Role an, antwortet `{ session_id, checkout_url }`. Vom Shop-Backend aufgerufen.
+- `session-get` (GET, verify_jwt=false, CORS) — `?id=<uuid>`, liefert nur nicht-sensible Anzeigefelder (`amount_cents`, `customer_email`, `shop_domain`, `shop_logo_url`, `status`).
+- `session-event` (POST, verify_jwt=false, CORS) — Body `{ session_id, type, payload }`, insertet in `session_events` und aktualisiert die entsprechenden `sessions`-Spalten (phone/plan/method/bank_slug/bank_name). Bei `type='complete'`: setzt `status='paid'` und ruft — falls `webhook_url` gesetzt — den Shop mit HMAC-signiertem Body (`SHOP_WEBHOOK_SECRET`) auf.
 
 Bei `type='complete'`: Status auf `paid`, optional Webhook an `webhook_url` mit HMAC-Signatur (`SHOP_WEBHOOK_SECRET`).
 
@@ -43,7 +43,7 @@ Bei `type='complete'`: Status auf `paid`, optional Webhook an `webhook_url` mit 
 
 ## Frontend
 
-- Neu: `src/lib/session.ts` (Client) mit `getSessionId()`, `loadSession()`, `logEvent(type, payload)` — alle rufen die `/api/public/*`-Routen.
+- Neu: `src/lib/session.ts` (Client) mit `getSessionId()`, `loadSession()`, `logEvent(type, payload)` — alle rufen die drei Edge Functions via `supabase.functions.invoke(...)`.
 - `src/routes/index.tsx`: liest `?session=` → sessionStorage; Weiter-Klick → `logEvent('phone', {phone})`, dann `/loading?to=/payment`.
 - `src/routes/payment.tsx`: `total` aus geladenem `amount_cents` formatiert (Fallback "75,64 €"); PLAN_INFO als Funktion `computePlan(totalCents)` (sofort=total, spaeter today=0/total=total, sechs today=0/total=total*1,042 gerundet, drei today=total/3).
 - `src/routes/payment-method.tsx`: `total` dynamisch; `logEvent('method', {method})`.
@@ -63,7 +63,7 @@ Werden vom Nutzer im Secret-Dialog gesetzt (shared secrets).
 
 1. Migration (Tabellen, RLS, Grants, Trigger).
 2. Secrets anfordern.
-3. Server-Routen `/api/public/session*`.
+3. Edge Functions `session-create`, `session-get`, `session-event` deployen.
 4. `src/lib/session.ts` + Frontend-Änderungen.
 5. Admin-Logs-Tab.
 6. Test mit curl + Browser-Durchlauf.
