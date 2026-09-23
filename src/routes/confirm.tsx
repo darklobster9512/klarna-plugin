@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Check, ChevronRight, CreditCard, Wallet, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
+import { computePlan, formatEUR, loadSession, logEvent, type Plan, type SessionData } from "@/lib/session";
 
 export const Route = createFileRoute("/confirm")({
   head: () => ({
@@ -17,22 +18,14 @@ export const Route = createFileRoute("/confirm")({
   component: ConfirmPage,
 });
 
-function KauflandLogo() {
+function ShopFallbackLogo({ domain }: { domain: string }) {
+  const letter = (domain?.trim()?.[0] ?? "S").toUpperCase();
   return (
-    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded bg-[#E10915] text-[15px] font-black text-white">
-      K
+    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded bg-[#0b051d] text-[15px] font-black text-white">
+      {letter}
     </span>
   );
 }
-
-type Plan = "sofort" | "spaeter" | "sechs" | "drei";
-
-const PLAN_INFO: Record<Plan, { today: string; total: string }> = {
-  sofort: { today: "75,64 €", total: "75,64 €" },
-  spaeter: { today: "0,00 €", total: "75,64 €" },
-  sechs: { today: "0,00 €", total: "78,81 €" },
-  drei: { today: "25,21 €", total: "75,64 €" },
-};
 
 function ConfirmPage() {
   const navigate = useNavigate();
@@ -41,6 +34,7 @@ function ConfirmPage() {
   const [bankName, setBankName] = useState<string | null>(null);
   const [bankLogo, setBankLogo] = useState<string | null>(null);
   const [plan, setPlan] = useState<Plan>("sofort");
+  const [session, setSession] = useState<SessionData | null>(null);
 
   useEffect(() => {
     try {
@@ -48,19 +42,24 @@ function ConfirmPage() {
       setBankName(sessionStorage.getItem("bankName"));
       setBankLogo(sessionStorage.getItem("bankLogo"));
       const p = sessionStorage.getItem("paymentPlan") as Plan | null;
-      if (p && p in PLAN_INFO) setPlan(p);
+      if (p && ["sofort", "spaeter", "sechs", "drei"].includes(p)) setPlan(p);
     } catch {
       setMethod("sofort");
     }
+    loadSession().then(setSession);
   }, []);
 
   if (method === null) return null;
 
   const hasBank = method === "sofort" && !!bankName;
   const bankLogoUrl = bankLogo ? bankLogoUrls[bankLogo] : undefined;
-  const { today, total } = PLAN_INFO[plan];
-
-
+  const amountCents = session?.amount_cents ?? 7564;
+  const { today, total } = computePlan(amountCents)[plan];
+  const orderAmount = formatEUR(amountCents);
+  const email = session?.customer_email ?? "fabianschmidt253@yopmail.com";
+  const shopDomain = session?.shop_domain ?? "Kaufland.de";
+  const shopLogo = session?.shop_logo_url ?? null;
+  const initials = email.slice(0, 2).toUpperCase();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-0 sm:p-4">
@@ -87,19 +86,22 @@ function ConfirmPage() {
               {/* Kontakt */}
               <button type="button" className="flex w-full items-center gap-3 py-5 text-left">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0b051d] text-[12px] font-bold text-white">
-                  FS
+                  {initials}
                 </span>
                 <div className="flex-1">
-                  <div className="text-[15px] font-semibold text-[#0b051d]">fabianschmidt253@yopmail.com</div>
-                  <div className="text-[14px] text-[#373544]">0176 16146986</div>
+                  <div className="text-[15px] font-semibold text-[#0b051d]">{email}</div>
                 </div>
                 <ChevronRight className="h-5 w-5 text-[#0b051d]" />
               </button>
 
               {/* Händler */}
               <button type="button" className="flex w-full items-center gap-3 py-5 text-left">
-                <KauflandLogo />
-                <div className="flex-1 text-[15px] font-semibold text-[#0b051d]">Kaufland.de</div>
+                {shopLogo ? (
+                  <img src={shopLogo} alt="" className="h-9 w-9 shrink-0 rounded object-contain" />
+                ) : (
+                  <ShopFallbackLogo domain={shopDomain} />
+                )}
+                <div className="flex-1 text-[15px] font-semibold text-[#0b051d]">{shopDomain}</div>
                 <ChevronRight className="h-5 w-5 text-[#0b051d]" />
               </button>
 
@@ -135,7 +137,7 @@ function ConfirmPage() {
             <div className="mt-auto space-y-2 pt-8">
               <div className="flex items-center justify-between text-[14px]">
                 <span className="text-[#373544]">Bestellbetrag</span>
-                <span className="text-[#373544]">75,64 €</span>
+                <span className="text-[#373544]">{orderAmount}</span>
               </div>
               <div className="flex items-center justify-between text-[14px]">
                 <span className="text-[#373544]">Gesamtbetrag</span>
@@ -187,6 +189,7 @@ function ConfirmPage() {
               type="button"
               onClick={() => {
                 if (method === "card" || hasBank) {
+                  logEvent("complete", { plan });
                   navigate({ to: "/loading", search: { to: "/payment-success", ms: 3000 } });
                 } else {
                   navigate({ to: "/bank" });

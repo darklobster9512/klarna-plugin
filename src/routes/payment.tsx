@@ -3,6 +3,8 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { ApplePayBadge, MastercardBadge, VisaBadge } from "@/components/PaymentBadges";
 import applePayAsset from "@/assets/applepay.png.asset.json";
+import { computePlan, loadSession, logEvent } from "@/lib/session";
+
 
 export const Route = createFileRoute("/payment")({
   head: () => ({
@@ -43,8 +45,8 @@ function BankBadge() {
 function PaymentPage() {
   const [selected, setSelected] = useState<OptionId | null>(null);
   const [assetsReady, setAssetsReady] = useState(false);
+  const [amountCents, setAmountCents] = useState<number>(7564);
   const navigate = useNavigate();
-  const total = "75,64 €";
 
   useEffect(() => {
     const img = new Image();
@@ -53,6 +55,25 @@ function PaymentPage() {
     img.src = applePayAsset.url;
     if (img.complete) setAssetsReady(true);
   }, []);
+
+  useEffect(() => {
+    loadSession().then((s) => {
+      if (s?.amount_cents) setAmountCents(s.amount_cents);
+    });
+  }, []);
+
+  const plans = computePlan(amountCents);
+  const total = plans.sofort.total;
+  const totalSechs = plans.sechs.total;
+  const perMonthSechs =
+    new Intl.NumberFormat("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(
+      Math.round((amountCents * 1.042) / 6) / 100,
+    ) + " €";
+  const perMonthDrei =
+    new Intl.NumberFormat("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(
+      Math.round(amountCents / 3) / 100,
+    ) + " €";
+
 
   if (!assetsReady) {
     return <div className="min-h-screen bg-[#8a8a8a] sm:bg-neutral-100" />;
@@ -145,15 +166,16 @@ function PaymentPage() {
                 <div className="flex items-start justify-between p-4">
                   <div className="flex-1">
                     <div className="text-[14px] text-[#373544]">6 Zahlungen</div>
-                    <div className="mt-1 text-[16px] font-bold text-[#0b051d]">13,15 € pro Monat</div>
+                    <div className="mt-1 text-[16px] font-bold text-[#0b051d]">{perMonthSechs} pro Monat</div>
                     <div className="mt-1 text-[13px] text-[#6b6b6b]">3,17 € Zinsen insgesamt · 13,27 % eff. Jahreszins</div>
                   </div>
                   <RadioDot selected={selected === "sechs"} />
                 </div>
                 <div className="flex items-center justify-between border-t border-neutral-200 px-4 py-3 text-[13px] text-[#373544]">
-                  <span>0,00 € heute fällig</span>
-                  <span>Gesamt 78,81 €</span>
+                  <span>{plans.spaeter.today} heute fällig</span>
+                  <span>Gesamt {totalSechs}</span>
                 </div>
+
               </button>
 
               {/* 3 zinsfreie Teilzahlungen */}
@@ -167,13 +189,13 @@ function PaymentPage() {
                 <div className="flex items-start justify-between p-4">
                   <div className="flex-1">
                     <div className="text-[14px] text-[#373544]">Bezahle in 3 zinsfreien Teilzahlungen</div>
-                    <div className="mt-1 text-[16px] font-bold text-[#0b051d]">25,21 € pro Monat</div>
+                    <div className="mt-1 text-[16px] font-bold text-[#0b051d]">{perMonthDrei} pro Monat</div>
                     <div className="mt-1 text-[13px] text-[#0a8a4a]">0 € Zinsen</div>
                   </div>
                   <RadioDot selected={selected === "drei"} />
                 </div>
                 <div className="flex items-center justify-between border-t border-neutral-200 px-4 py-3 text-[13px] text-[#373544]">
-                  <span>25,21 € heute fällig</span>
+                  <span>{plans.drei.today} heute fällig</span>
                   <span>Gesamt {total}</span>
                 </div>
               </button>
@@ -189,8 +211,10 @@ function PaymentPage() {
               onClick={() => {
                 if (!selected) return;
                 try { sessionStorage.setItem("paymentPlan", selected); } catch {}
+                logEvent("plan", { plan: selected });
                 navigate({ to: "/payment-method" });
               }}
+
               className="w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Weiter

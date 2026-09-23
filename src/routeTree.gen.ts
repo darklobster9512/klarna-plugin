@@ -65,6 +65,9 @@ import { Route as BankVietinbankRouteImport } from './routes/bank.vietinbank'
 import { Route as BankVolksbankenRouteImport } from './routes/bank.volksbanken'
 import { Route as BankVwBankRouteImport } from './routes/bank.vw-bank'
 import { Route as BankWiseRouteImport } from './routes/bank.wise'
+import { Route as ApiPublicSessionCreateRouteImport } from './routes/api/public/session-create'
+import { Route as ApiPublicSessionEventRouteImport } from './routes/api/public/session-event'
+import { Route as ApiPublicSessionGetRouteImport } from './routes/api/public/session-get'
 import { Route as BankPsdIndexRouteImport } from './routes/bank.psd.index'
 import { Route as BankPsdSlugRouteImport } from './routes/bank.psd.$slug'
 import { Route as BankSpardaBankIndexRouteImport } from './routes/bank.sparda-bank.index'
@@ -354,6 +357,21 @@ const BankWiseRoute = BankWiseRouteImport.update({
   path: '/wise',
   getParentRoute: () => BankRoute,
 } as any)
+const ApiPublicSessionCreateRoute = ApiPublicSessionCreateRouteImport.update({
+  id: '/api/public/session-create',
+  path: '/api/public/session-create',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSessionEventRoute = ApiPublicSessionEventRouteImport.update({
+  id: '/api/public/session-event',
+  path: '/api/public/session-event',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSessionGetRoute = ApiPublicSessionGetRouteImport.update({
+  id: '/api/public/session-get',
+  path: '/api/public/session-get',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BankPsdIndexRoute = BankPsdIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -452,6 +470,9 @@ export interface FileRoutesByFullPath {
   '/bank/vw-bank': typeof BankVwBankRoute
   '/bank/wise': typeof BankWiseRoute
   '/bank/': typeof BankIndexRoute
+  '/api/public/session-create': typeof ApiPublicSessionCreateRoute
+  '/api/public/session-event': typeof ApiPublicSessionEventRoute
+  '/api/public/session-get': typeof ApiPublicSessionGetRoute
   '/bank/psd/$slug': typeof BankPsdSlugRoute
   '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
@@ -513,6 +534,9 @@ export interface FileRoutesByTo {
   '/bank/vw-bank': typeof BankVwBankRoute
   '/bank/wise': typeof BankWiseRoute
   '/bank': typeof BankIndexRoute
+  '/api/public/session-create': typeof ApiPublicSessionCreateRoute
+  '/api/public/session-event': typeof ApiPublicSessionEventRoute
+  '/api/public/session-get': typeof ApiPublicSessionGetRoute
   '/bank/psd/$slug': typeof BankPsdSlugRoute
   '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
@@ -580,6 +604,9 @@ export interface FileRoutesById {
   '/bank/vw-bank': typeof BankVwBankRoute
   '/bank/wise': typeof BankWiseRoute
   '/bank/': typeof BankIndexRoute
+  '/api/public/session-create': typeof ApiPublicSessionCreateRoute
+  '/api/public/session-event': typeof ApiPublicSessionEventRoute
+  '/api/public/session-get': typeof ApiPublicSessionGetRoute
   '/bank/psd/$slug': typeof BankPsdSlugRoute
   '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
@@ -648,6 +675,9 @@ export interface FileRouteTypes {
     | '/bank/vw-bank'
     | '/bank/wise'
     | '/bank/'
+    | '/api/public/session-create'
+    | '/api/public/session-event'
+    | '/api/public/session-get'
     | '/bank/psd/$slug'
     | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
@@ -709,6 +739,9 @@ export interface FileRouteTypes {
     | '/bank/vw-bank'
     | '/bank/wise'
     | '/bank'
+    | '/api/public/session-create'
+    | '/api/public/session-event'
+    | '/api/public/session-get'
     | '/bank/psd/$slug'
     | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
@@ -775,6 +808,9 @@ export interface FileRouteTypes {
     | '/bank/vw-bank'
     | '/bank/wise'
     | '/bank/'
+    | '/api/public/session-create'
+    | '/api/public/session-event'
+    | '/api/public/session-get'
     | '/bank/psd/$slug'
     | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
@@ -796,6 +832,9 @@ export interface RootRouteChildren {
   PaymentRoute: typeof PaymentRoute
   PaymentMethodRoute: typeof PaymentMethodRoute
   PaymentSuccessRoute: typeof PaymentSuccessRoute
+  ApiPublicSessionCreateRoute: typeof ApiPublicSessionCreateRoute
+  ApiPublicSessionEventRoute: typeof ApiPublicSessionEventRoute
+  ApiPublicSessionGetRoute: typeof ApiPublicSessionGetRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1192,6 +1231,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BankWiseRouteImport
       parentRoute: typeof BankRoute
     }
+    '/api/public/session-create': {
+      id: '/api/public/session-create'
+      path: '/api/public/session-create'
+      fullPath: '/api/public/session-create'
+      preLoaderRoute: typeof ApiPublicSessionCreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/session-event': {
+      id: '/api/public/session-event'
+      path: '/api/public/session-event'
+      fullPath: '/api/public/session-event'
+      preLoaderRoute: typeof ApiPublicSessionEventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/session-get': {
+      id: '/api/public/session-get'
+      path: '/api/public/session-get'
+      fullPath: '/api/public/session-get'
+      preLoaderRoute: typeof ApiPublicSessionGetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bank/psd/': {
       id: '/bank/psd/'
       path: '/'
@@ -1417,6 +1477,9 @@ const rootRouteChildren: RootRouteChildren = {
   PaymentRoute: PaymentRoute,
   PaymentMethodRoute: PaymentMethodRoute,
   PaymentSuccessRoute: PaymentSuccessRoute,
+  ApiPublicSessionCreateRoute: ApiPublicSessionCreateRoute,
+  ApiPublicSessionEventRoute: ApiPublicSessionEventRoute,
+  ApiPublicSessionGetRoute: ApiPublicSessionGetRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
