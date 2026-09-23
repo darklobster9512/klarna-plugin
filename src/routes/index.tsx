@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { Smartphone, ShieldCheck, X } from "lucide-react";
+import { getSessionId, loadSession, logEvent } from "@/lib/session";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,6 +65,12 @@ function Index() {
   const navigate = useNavigate();
   const [phone, setPhone] = useState("");
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    getSessionId();
+    loadSession();
+  }, []);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneNumber(e.target.value);
@@ -147,11 +155,15 @@ function Index() {
           <button
             type="button"
             disabled={!isValid}
-            onClick={() => navigate({ to: "/loading", search: { to: "/payment", ms: 3000 } })}
+            onClick={() => {
+              logEvent("phone", { phone });
+              navigate({ to: "/loading", search: { to: "/payment", ms: 3000 } });
+            }}
             className="mt-auto w-full rounded-full bg-[#0b051d] py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Weiter
           </button>
+
         </div>
 
         <p className="mt-4 text-center text-[13px] text-[#373544]">
