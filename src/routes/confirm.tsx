@@ -135,11 +135,15 @@ function ConfirmPage() {
             <div className="mt-auto space-y-2 pt-8">
               <div className="flex items-center justify-between text-[14px]">
                 <span className="text-[#373544]">Bestellbetrag</span>
+                <span className="text-[#373544]">75,64 €</span>
+              </div>
+              <div className="flex items-center justify-between text-[14px]">
+                <span className="text-[#373544]">Gesamtbetrag</span>
                 <span className="text-[#373544]">{total}</span>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-[15px] font-normal text-[#0b051d]">Gesamtbetrag</span>
-                <span className="text-[22px] font-bold text-[#0b051d]">{total}</span>
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-[15px] font-normal text-[#0b051d]">Heute fällig</span>
+                <span className="text-[22px] font-bold text-[#0b051d]">{today}</span>
               </div>
             </div>
 
