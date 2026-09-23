@@ -1,1 +1,10 @@
 project_id = "lchwcpxftprwbpwcoohk"
+
+[functions.session-create]
+verify_jwt = false
+
+[functions.session-get]
+verify_jwt = false
+
+[functions.session-event]
+verify_jwt = false
