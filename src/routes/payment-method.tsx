@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, X } from "lucide-react";
 import { ApplePayBadge, MastercardBadge, VisaBadge } from "@/components/PaymentBadges";
+import { loadSession, logEvent, formatEUR } from "@/lib/session";
+
 
 export const Route = createFileRoute("/payment-method")({
   head: () => ({
@@ -43,7 +45,12 @@ function BankIcon() {
 
 function PaymentMethodPage() {
   const [selected, setSelected] = useState<MethodId>("sofortueberweisung");
-  const total = "75,64 €";
+  const [amountCents, setAmountCents] = useState<number>(7564);
+  useEffect(() => {
+    loadSession().then((s) => { if (s?.amount_cents) setAmountCents(s.amount_cents); });
+  }, []);
+  const total = formatEUR(amountCents);
+
 
   const optionClass = (id: MethodId) =>
     `flex w-full items-center justify-between gap-4 rounded-2xl border p-4 text-left transition-colors ${
@@ -114,6 +121,7 @@ function PaymentMethodPage() {
               to="/loading"
               search={{ to: selected === "karte" ? "/add-card" : "/confirm", ms: 3000 }}
               onClick={() => {
+                logEvent("method", { method: selected });
                 try {
                   if (selected === "sofortueberweisung") {
                     sessionStorage.removeItem("paymentMethod");
@@ -124,6 +132,7 @@ function PaymentMethodPage() {
                   // ignore
                 }
               }}
+
               className="block w-full rounded-full bg-[#0b051d] py-4 text-center text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
             >
               Weiter
