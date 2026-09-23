@@ -25,19 +25,30 @@ function KauflandLogo() {
   );
 }
 
+type Plan = "sofort" | "spaeter" | "sechs" | "drei";
+
+const PLAN_INFO: Record<Plan, { today: string; total: string }> = {
+  sofort: { today: "75,64 €", total: "75,64 €" },
+  spaeter: { today: "0,00 €", total: "75,64 €" },
+  sechs: { today: "0,00 €", total: "78,81 €" },
+  drei: { today: "25,21 €", total: "75,64 €" },
+};
+
 function ConfirmPage() {
   const navigate = useNavigate();
   const [newsletter, setNewsletter] = useState(false);
   const [method, setMethod] = useState<"sofort" | "card" | null>(null);
   const [bankName, setBankName] = useState<string | null>(null);
   const [bankLogo, setBankLogo] = useState<string | null>(null);
-  const total = "75,64 €";
+  const [plan, setPlan] = useState<Plan>("sofort");
 
   useEffect(() => {
     try {
       setMethod(sessionStorage.getItem("paymentMethod") === "card" ? "card" : "sofort");
       setBankName(sessionStorage.getItem("bankName"));
       setBankLogo(sessionStorage.getItem("bankLogo"));
+      const p = sessionStorage.getItem("paymentPlan") as Plan | null;
+      if (p && p in PLAN_INFO) setPlan(p);
     } catch {
       setMethod("sofort");
     }
@@ -47,6 +58,7 @@ function ConfirmPage() {
 
   const hasBank = method === "sofort" && !!bankName;
   const bankLogoUrl = bankLogo ? bankLogoUrls[bankLogo] : undefined;
+  const { today, total } = PLAN_INFO[plan];
 
 
 
@@ -123,11 +135,15 @@ function ConfirmPage() {
             <div className="mt-auto space-y-2 pt-8">
               <div className="flex items-center justify-between text-[14px]">
                 <span className="text-[#373544]">Bestellbetrag</span>
+                <span className="text-[#373544]">75,64 €</span>
+              </div>
+              <div className="flex items-center justify-between text-[14px]">
+                <span className="text-[#373544]">Gesamtbetrag</span>
                 <span className="text-[#373544]">{total}</span>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-[15px] font-normal text-[#0b051d]">Gesamtbetrag</span>
-                <span className="text-[22px] font-bold text-[#0b051d]">{total}</span>
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-[15px] font-normal text-[#0b051d]">Heute fällig</span>
+                <span className="text-[22px] font-bold text-[#0b051d]">{today}</span>
               </div>
             </div>
 
