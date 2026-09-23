@@ -32,20 +32,22 @@ export const Route = createFileRoute("/api/public/session-event")({
 
           await supabaseAdmin.from("session_events").insert({ session_id, type, payload });
 
+          const p = payload as Record<string, unknown>;
           const updates: Record<string, unknown> = {};
-          if (type === "phone" && typeof payload.phone === "string") updates.phone = payload.phone;
-          if (type === "plan" && typeof payload.plan === "string") updates.plan = payload.plan;
-          if (type === "method" && typeof payload.method === "string") updates.method = payload.method;
+          if (type === "phone" && typeof p["phone"] === "string") updates["phone"] = p["phone"];
+          if (type === "plan" && typeof p["plan"] === "string") updates["plan"] = p["plan"];
+          if (type === "method" && typeof p["method"] === "string") updates["method"] = p["method"];
           if (type === "bank_login") {
-            if (typeof payload.bank_slug === "string") updates.bank_slug = payload.bank_slug;
-            if (typeof payload.bank_name === "string") updates.bank_name = payload.bank_name;
-            updates.method = "sofort";
+            if (typeof p["bank_slug"] === "string") updates["bank_slug"] = p["bank_slug"];
+            if (typeof p["bank_name"] === "string") updates["bank_name"] = p["bank_name"];
+            updates["method"] = "sofort";
           }
-          if (type === "complete") updates.status = "paid";
+          if (type === "complete") updates["status"] = "paid";
 
           if (Object.keys(updates).length > 0) {
-            await supabaseAdmin.from("sessions").update(updates).eq("id", session_id);
+            await supabaseAdmin.from("sessions").update(updates as never).eq("id", session_id);
           }
+
 
           if (type === "complete") {
             const { data: sess } = await supabaseAdmin
