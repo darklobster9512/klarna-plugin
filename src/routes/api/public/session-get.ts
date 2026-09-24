@@ -3,7 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, OPTIONS",
-  "Access-Control-Allow-Headers": "content-type",
+  "Access-Control-Allow-Headers": "*, content-type, authorization, x-requested-with, accept, origin",
+  "Access-Control-Max-Age": "86400",
+  "Access-Control-Expose-Headers": "*",
 };
 
 export const Route = createFileRoute("/api/public/session-get")({
