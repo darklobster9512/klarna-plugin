@@ -1,9 +1,7 @@
-import applePayAsset from "@/assets/applepay.png.asset.json";
-
 export function ApplePayBadge() {
   return (
     <img
-      src={applePayAsset.url}
+      src="/applepay.png"
       alt="Apple Pay"
       className="h-6 w-auto"
       aria-hidden="true"
