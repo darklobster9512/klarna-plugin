@@ -33,10 +33,10 @@ export const Route = createFileRoute("/api/public/session-create")({
             });
           }
           const b = parsed.data;
-          const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-          const { data, error } = await supabaseAdmin
-            .from("sessions")
-            .insert({
+          const { sbRest } = await import("@/integrations/supabase/rest.server");
+          const rows = await sbRest.insert<{ id: string }>(
+            "sessions",
+            {
               amount_cents: b.amount_cents,
               customer_email: b.customer_email,
               shop_domain: b.shop_domain,
@@ -44,18 +44,19 @@ export const Route = createFileRoute("/api/public/session-create")({
               return_url: b.return_url ?? null,
               webhook_url: b.webhook_url ?? null,
               status: "pending",
-            })
-            .select("id")
-            .single();
-          if (error || !data) {
-            return new Response(JSON.stringify({ error: error?.message ?? "insert failed" }), {
+            },
+            "id",
+          );
+          const id = rows?.[0]?.id;
+          if (!id) {
+            return new Response(JSON.stringify({ error: "insert failed" }), {
               status: 500,
               headers: { "content-type": "application/json", ...CORS },
             });
           }
           const origin = new URL(request.url).origin;
           return new Response(
-            JSON.stringify({ session_id: data.id, checkout_url: `${origin}/?session=${data.id}` }),
+            JSON.stringify({ session_id: id, checkout_url: `${origin}/?session=${id}` }),
             { status: 200, headers: { "content-type": "application/json", ...CORS } },
           );
         } catch (e) {
