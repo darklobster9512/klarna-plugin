@@ -30,9 +30,9 @@ export const Route = createFileRoute("/api/public/session-event")({
             });
           }
           const { session_id, type, payload } = parsed.data;
-          const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+          const { sbRest } = await import("@/integrations/supabase/rest.server");
 
-          await supabaseAdmin.from("session_events").insert({ session_id, type, payload });
+          await sbRest.insert("session_events", { session_id, type, payload });
 
           const p = payload as Record<string, unknown>;
           const updates: Record<string, unknown> = {};
@@ -47,19 +47,18 @@ export const Route = createFileRoute("/api/public/session-event")({
           if (type === "complete") updates["status"] = "paid";
 
           if (Object.keys(updates).length > 0) {
-            await supabaseAdmin.from("sessions").update(updates as never).eq("id", session_id);
+            await sbRest.update("sessions", updates, { id: session_id });
           }
 
-
           if (type === "complete") {
-            const { data: sess } = await supabaseAdmin
-              .from("sessions")
-              .select("webhook_url")
-              .eq("id", session_id)
-              .maybeSingle();
-            if (sess?.webhook_url) {
-              // fire-and-forget
-              fetch(sess.webhook_url, {
+            const rows = await sbRest.select<{ webhook_url: string | null }>("sessions", {
+              select: "webhook_url",
+              eq: { id: session_id },
+              limit: 1,
+            });
+            const webhook = rows?.[0]?.webhook_url;
+            if (webhook) {
+              fetch(webhook, {
                 method: "POST",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify({ session_id, status: "paid" }),

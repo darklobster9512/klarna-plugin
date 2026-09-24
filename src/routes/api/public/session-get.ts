@@ -20,22 +20,30 @@ export const Route = createFileRoute("/api/public/session-get")({
             headers: { "content-type": "application/json", ...CORS },
           });
         }
-        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-        const { data, error } = await supabaseAdmin
-          .from("sessions")
-          .select("amount_cents, customer_email, shop_domain, shop_logo_url, status")
-          .eq("id", id)
-          .maybeSingle();
-        if (error || !data) {
-          return new Response(JSON.stringify({ error: error?.message ?? "not found" }), {
-            status: 404,
+        try {
+          const { sbRest } = await import("@/integrations/supabase/rest.server");
+          const rows = await sbRest.select<Record<string, unknown>>("sessions", {
+            select: "amount_cents,customer_email,shop_domain,shop_logo_url,status",
+            eq: { id },
+            limit: 1,
+          });
+          const data = rows?.[0];
+          if (!data) {
+            return new Response(JSON.stringify({ error: "not found" }), {
+              status: 404,
+              headers: { "content-type": "application/json", ...CORS },
+            });
+          }
+          return new Response(JSON.stringify(data), {
+            status: 200,
+            headers: { "content-type": "application/json", ...CORS },
+          });
+        } catch (e) {
+          return new Response(JSON.stringify({ error: (e as Error).message }), {
+            status: 500,
             headers: { "content-type": "application/json", ...CORS },
           });
         }
-        return new Response(JSON.stringify(data), {
-          status: 200,
-          headers: { "content-type": "application/json", ...CORS },
-        });
       },
     },
   },
