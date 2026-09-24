@@ -4,7 +4,9 @@ import { z } from "zod";
 const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "content-type",
+  "Access-Control-Allow-Headers": "*, content-type, authorization, x-requested-with, accept, origin",
+  "Access-Control-Max-Age": "86400",
+  "Access-Control-Expose-Headers": "*",
 };
 
 const bodySchema = z.object({
