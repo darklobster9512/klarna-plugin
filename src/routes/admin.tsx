@@ -462,19 +462,7 @@ function TelegramView() {
         {rows && rows.length > 0 && (
           <ul className="mt-4 divide-y divide-neutral-100">
             {rows.map((r) => (
-              <li key={r.id} className="flex items-center justify-between py-3">
-                <div>
-                  <div className="font-mono text-sm text-[#0B051D]">{r.chat_id}</div>
-                  {r.label && <div className="text-xs text-[#6b6b6b]">{r.label}</div>}
-                </div>
-                <button
-                  onClick={() => remove(r.id)}
-                  className="rounded-lg border border-neutral-200 p-2 text-[#6b6b6b] hover:bg-neutral-50"
-                  aria-label="Entfernen"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
-              </li>
+              <TelegramRow key={r.id} row={r} onRemove={() => remove(r.id)} />
             ))}
           </ul>
         )}
