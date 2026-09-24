@@ -462,23 +462,62 @@ function TelegramView() {
         {rows && rows.length > 0 && (
           <ul className="mt-4 divide-y divide-neutral-100">
             {rows.map((r) => (
-              <li key={r.id} className="flex items-center justify-between py-3">
-                <div>
-                  <div className="font-mono text-sm text-[#0B051D]">{r.chat_id}</div>
-                  {r.label && <div className="text-xs text-[#6b6b6b]">{r.label}</div>}
-                </div>
-                <button
-                  onClick={() => remove(r.id)}
-                  className="rounded-lg border border-neutral-200 p-2 text-[#6b6b6b] hover:bg-neutral-50"
-                  aria-label="Entfernen"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
-              </li>
+              <TelegramRow key={r.id} row={r} onRemove={() => remove(r.id)} />
             ))}
           </ul>
         )}
       </div>
     </section>
+  );
+}
+
+function TelegramRow({ row, onRemove }: { row: TelegramChat; onRemove: () => void }) {
+  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState<{ ok: boolean; msg: string } | null>(null);
+  const send = async () => {
+    setSending(true);
+    setStatus(null);
+    try {
+      const r = await fetch("/api/public/telegram-test", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ chat_id: row.chat_id }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (r.ok) setStatus({ ok: true, msg: "Gesendet" });
+      else setStatus({ ok: false, msg: data.error ?? `Fehler ${r.status}` });
+    } catch (e) {
+      setStatus({ ok: false, msg: (e as Error).message });
+    } finally {
+      setSending(false);
+      setTimeout(() => setStatus(null), 4000);
+    }
+  };
+  return (
+    <li className="flex items-center justify-between gap-3 py-3">
+      <div className="min-w-0">
+        <div className="font-mono text-sm text-[#0B051D]">{row.chat_id}</div>
+        {row.label && <div className="text-xs text-[#6b6b6b]">{row.label}</div>}
+        {status && (
+          <div className={`text-xs ${status.ok ? "text-green-600" : "text-red-600"}`}>{status.msg}</div>
+        )}
+      </div>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={send}
+          disabled={sending}
+          className="rounded-lg bg-[#0b051d] px-3 py-2 text-xs font-medium text-white disabled:opacity-50"
+        >
+          {sending ? "Sendet…" : "Test senden"}
+        </button>
+        <button
+          onClick={onRemove}
+          className="rounded-lg border border-neutral-200 p-2 text-[#6b6b6b] hover:bg-neutral-50"
+          aria-label="Entfernen"
+        >
+          <Trash2 className="h-4 w-4" />
+        </button>
+      </div>
+    </li>
   );
 }
