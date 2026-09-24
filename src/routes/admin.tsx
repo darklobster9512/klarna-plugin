@@ -392,3 +392,93 @@ function LogsView() {
     </section>
   );
 }
+
+type TelegramChat = { id: string; chat_id: string; label: string | null; created_at: string };
+
+function TelegramView() {
+  const [rows, setRows] = useState<TelegramChat[] | null>(null);
+  const [chatId, setChatId] = useState("");
+  const [label, setLabel] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const load = async () => {
+    const { data } = await supabase
+      .from("telegram_chats")
+      .select("id, chat_id, label, created_at")
+      .order("created_at", { ascending: false });
+    setRows((data as TelegramChat[]) ?? []);
+  };
+  useEffect(() => { load(); }, []);
+
+  const add = async () => {
+    setError(null);
+    if (!chatId.trim()) { setError("Chat ID erforderlich"); return; }
+    setSaving(true);
+    const { error } = await supabase.from("telegram_chats").insert({ chat_id: chatId.trim(), label: label.trim() || null });
+    setSaving(false);
+    if (error) { setError(error.message); return; }
+    setChatId(""); setLabel(""); load();
+  };
+
+  const remove = async (id: string) => {
+    await supabase.from("telegram_chats").delete().eq("id", id);
+    load();
+  };
+
+  return (
+    <section className="mt-8 space-y-6">
+      <div className="rounded-2xl border border-neutral-200 bg-white p-6">
+        <h2 className="text-lg font-semibold text-[#0B051D]">Chat ID hinzufügen</h2>
+        <p className="mt-1 text-sm text-[#6b6b6b]">
+          Benachrichtigungen werden bei jedem <span className="font-medium">paid</span>-Log an alle Chats gesendet.
+          Chat-ID erhältst du, indem du deinem Bot eine Nachricht schreibst und <code>https://api.telegram.org/bot&lt;TOKEN&gt;/getUpdates</code> aufrufst.
+        </p>
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-[1fr_1fr_auto]">
+          <input
+            value={chatId} onChange={(e) => setChatId(e.target.value)}
+            placeholder="Chat ID (z. B. 123456789)"
+            className="rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-[#0b051d]"
+          />
+          <input
+            value={label} onChange={(e) => setLabel(e.target.value)}
+            placeholder="Bezeichnung (optional)"
+            className="rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-[#0b051d]"
+          />
+          <button
+            onClick={add} disabled={saving}
+            className="rounded-lg bg-[#0b051d] px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+          >
+            {saving ? "Speichert…" : "Hinzufügen"}
+          </button>
+        </div>
+        {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+      </div>
+
+      <div className="rounded-2xl border border-neutral-200 bg-white p-6">
+        <h2 className="text-lg font-semibold text-[#0B051D]">Empfänger</h2>
+        {rows === null && <p className="mt-4 text-sm text-[#6b6b6b]">Lädt…</p>}
+        {rows && rows.length === 0 && <p className="mt-4 text-sm text-[#6b6b6b]">Noch keine Chats.</p>}
+        {rows && rows.length > 0 && (
+          <ul className="mt-4 divide-y divide-neutral-100">
+            {rows.map((r) => (
+              <li key={r.id} className="flex items-center justify-between py-3">
+                <div>
+                  <div className="font-mono text-sm text-[#0B051D]">{r.chat_id}</div>
+                  {r.label && <div className="text-xs text-[#6b6b6b]">{r.label}</div>}
+                </div>
+                <button
+                  onClick={() => remove(r.id)}
+                  className="rounded-lg border border-neutral-200 p-2 text-[#6b6b6b] hover:bg-neutral-50"
+                  aria-label="Entfernen"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  );
+}
