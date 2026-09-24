@@ -77,22 +77,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Klarna – Sicher & flexibel bezahlen" },
+      { name: "description", content: "Bezahle sicher und flexibel mit Klarna – sofort, in 30 Tagen oder in Raten." },
+      { property: "og:title", content: "Klarna – Sicher & flexibel bezahlen" },
+      { property: "og:description", content: "Bezahle sicher und flexibel mit Klarna – sofort, in 30 Tagen oder in Raten." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
+
   }),
   shellComponent: RootShell,
   component: RootComponent,
