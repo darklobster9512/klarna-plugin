@@ -61,10 +61,24 @@ function Index() {
   const navigate = useNavigate();
   const [phone, setPhone] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [sessionLoading, setSessionLoading] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      return new URL(window.location.href).searchParams.has("session");
+    } catch {
+      return false;
+    }
+  });
 
   useEffect(() => {
     getSessionId();
-    loadSession();
+    let cancelled = false;
+    loadSession().finally(() => {
+      if (!cancelled) setSessionLoading(false);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
 
@@ -77,6 +91,30 @@ function Index() {
 
   const isValid = phoneSchema.safeParse(phone).success;
 
+  if (sessionLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-0 sm:p-4">
+        <div className="flex h-screen sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-[600px] max-w-full items-center justify-center bg-white sm:rounded-2xl sm:shadow-xl">
+          <div className="flex items-center gap-2" aria-label="Wird geladen" role="status">
+            <span className="klarna-dot h-3 w-3 rounded-full bg-[#0b051d]" style={{ animationDelay: "0s" }} />
+            <span className="klarna-dot h-3 w-3 rounded-full bg-[#0b051d]" style={{ animationDelay: "0.15s" }} />
+            <span className="klarna-dot h-3 w-3 rounded-full bg-[#0b051d]" style={{ animationDelay: "0.3s" }} />
+          </div>
+        </div>
+        <style>{`
+          @keyframes klarna-bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-12px); }
+          }
+          .klarna-dot {
+            display: inline-block;
+            animation: klarna-bounce 1s infinite ease-in-out;
+          }
+        `}</style>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-0 sm:p-4">
       <div className="relative flex h-screen sm:h-[calc(100vh-2rem)] max-h-none sm:max-h-[1043px] w-[600px] max-w-full flex-col overflow-y-auto rounded-2xl bg-white p-8 shadow-xl sm:p-10">
@@ -87,6 +125,7 @@ function Index() {
         >
           <X className="h-6 w-6" />
         </button>
+
 
         <div className="flex flex-1 flex-col">
           <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
