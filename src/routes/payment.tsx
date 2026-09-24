@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { ApplePayBadge, MastercardBadge, VisaBadge } from "@/components/PaymentBadges";
-import applePayAsset from "@/assets/applepay.png.asset.json";
+const applePayAsset = { url: "/applepay.png" };
 import { computePlan, loadSession, logEvent } from "@/lib/session";
 
 
