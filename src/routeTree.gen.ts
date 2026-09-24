@@ -68,6 +68,7 @@ import { Route as BankWiseRouteImport } from './routes/bank.wise'
 import { Route as ApiPublicSessionCreateRouteImport } from './routes/api/public/session-create'
 import { Route as ApiPublicSessionEventRouteImport } from './routes/api/public/session-event'
 import { Route as ApiPublicSessionGetRouteImport } from './routes/api/public/session-get'
+import { Route as ApiPublicTelegramTestRouteImport } from './routes/api/public/telegram-test'
 import { Route as BankPsdIndexRouteImport } from './routes/bank.psd.index'
 import { Route as BankPsdSlugRouteImport } from './routes/bank.psd.$slug'
 import { Route as BankSpardaBankIndexRouteImport } from './routes/bank.sparda-bank.index'
@@ -372,6 +373,11 @@ const ApiPublicSessionGetRoute = ApiPublicSessionGetRouteImport.update({
   path: '/api/public/session-get',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicTelegramTestRoute = ApiPublicTelegramTestRouteImport.update({
+  id: '/api/public/telegram-test',
+  path: '/api/public/telegram-test',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BankPsdIndexRoute = BankPsdIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -473,6 +479,7 @@ export interface FileRoutesByFullPath {
   '/api/public/session-create': typeof ApiPublicSessionCreateRoute
   '/api/public/session-event': typeof ApiPublicSessionEventRoute
   '/api/public/session-get': typeof ApiPublicSessionGetRoute
+  '/api/public/telegram-test': typeof ApiPublicTelegramTestRoute
   '/bank/psd/$slug': typeof BankPsdSlugRoute
   '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
@@ -537,6 +544,7 @@ export interface FileRoutesByTo {
   '/api/public/session-create': typeof ApiPublicSessionCreateRoute
   '/api/public/session-event': typeof ApiPublicSessionEventRoute
   '/api/public/session-get': typeof ApiPublicSessionGetRoute
+  '/api/public/telegram-test': typeof ApiPublicTelegramTestRoute
   '/bank/psd/$slug': typeof BankPsdSlugRoute
   '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
@@ -607,6 +615,7 @@ export interface FileRoutesById {
   '/api/public/session-create': typeof ApiPublicSessionCreateRoute
   '/api/public/session-event': typeof ApiPublicSessionEventRoute
   '/api/public/session-get': typeof ApiPublicSessionGetRoute
+  '/api/public/telegram-test': typeof ApiPublicTelegramTestRoute
   '/bank/psd/$slug': typeof BankPsdSlugRoute
   '/bank/sparda-bank/$slug': typeof BankSpardaBankSlugRoute
   '/bank/sparkassen/$slug': typeof BankSparkassenSlugRoute
@@ -678,6 +687,7 @@ export interface FileRouteTypes {
     | '/api/public/session-create'
     | '/api/public/session-event'
     | '/api/public/session-get'
+    | '/api/public/telegram-test'
     | '/bank/psd/$slug'
     | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
@@ -742,6 +752,7 @@ export interface FileRouteTypes {
     | '/api/public/session-create'
     | '/api/public/session-event'
     | '/api/public/session-get'
+    | '/api/public/telegram-test'
     | '/bank/psd/$slug'
     | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
@@ -811,6 +822,7 @@ export interface FileRouteTypes {
     | '/api/public/session-create'
     | '/api/public/session-event'
     | '/api/public/session-get'
+    | '/api/public/telegram-test'
     | '/bank/psd/$slug'
     | '/bank/sparda-bank/$slug'
     | '/bank/sparkassen/$slug'
@@ -835,6 +847,7 @@ export interface RootRouteChildren {
   ApiPublicSessionCreateRoute: typeof ApiPublicSessionCreateRoute
   ApiPublicSessionEventRoute: typeof ApiPublicSessionEventRoute
   ApiPublicSessionGetRoute: typeof ApiPublicSessionGetRoute
+  ApiPublicTelegramTestRoute: typeof ApiPublicTelegramTestRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1252,6 +1265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicSessionGetRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/telegram-test': {
+      id: '/api/public/telegram-test'
+      path: '/api/public/telegram-test'
+      fullPath: '/api/public/telegram-test'
+      preLoaderRoute: typeof ApiPublicTelegramTestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bank/psd/': {
       id: '/bank/psd/'
       path: '/'
@@ -1480,6 +1500,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicSessionCreateRoute: ApiPublicSessionCreateRoute,
   ApiPublicSessionEventRoute: ApiPublicSessionEventRoute,
   ApiPublicSessionGetRoute: ApiPublicSessionGetRoute,
+  ApiPublicTelegramTestRoute: ApiPublicTelegramTestRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
