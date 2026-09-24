@@ -35,14 +35,10 @@ function PayIcon() {
 
 const phoneSchema = z
   .string()
-  .min(1, "Handynummer ist erforderlich")
-  .refine((val) => /^[\+]?[\d\s]+$/.test(val), {
-    message: "Bitte gib eine gültige Handynummer ein",
-  })
-  .refine((val) => val.replace(/\D/g, "").length >= 8, {
+  .refine((val) => val.replace(/\D/g, "").length >= 6, {
     message: "Die Nummer ist zu kurz",
   })
-  .refine((val) => val.replace(/\D/g, "").length <= 15, {
+  .refine((val) => val.replace(/\D/g, "").length <= 18, {
     message: "Die Nummer ist zu lang",
   });
 
