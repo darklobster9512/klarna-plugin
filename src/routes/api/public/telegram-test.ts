@@ -23,7 +23,7 @@ export const Route = createFileRoute("/api/public/telegram-test")({
           }
           const token = process.env["TELEGRAM_BOT_TOKEN"];
           if (!token) {
-            return new Response(JSON.stringify({ error: "TELEGRAM_BOT_TOKEN not configured" }), { status: 500, headers: { "content-type": "application/json", ...CORS } });
+            return new Response(JSON.stringify({ error: "TELEGRAM_BOT_TOKEN not configured" }), { status: 200, headers: { "content-type": "application/json", ...CORS } });
           }
           const text = [
             "<b>✅ Test-Nachricht</b>",
