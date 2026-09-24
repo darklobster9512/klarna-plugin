@@ -14,6 +14,8 @@ import {
   MoreHorizontal,
   FileText,
   ChevronLeft,
+  Send,
+  Trash2,
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
@@ -53,7 +55,7 @@ function Admin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
-  const [view, setView] = useState<"dashboard" | "logs">("dashboard");
+  const [view, setView] = useState<"dashboard" | "logs" | "telegram">("dashboard");
 
   useEffect(() => {
     let mounted = true;
@@ -120,15 +122,12 @@ function Admin() {
             >
               <FileText className="h-4 w-4" /> Logs
             </button>
-            <a className="flex items-center gap-3 rounded-lg px-3 py-2 text-[#373544] hover:bg-neutral-100">
-              <Users className="h-4 w-4" /> Nutzer
-            </a>
-            <a className="flex items-center gap-3 rounded-lg px-3 py-2 text-[#373544] hover:bg-neutral-100">
-              <CreditCard className="h-4 w-4" /> Transaktionen
-            </a>
-            <a className="flex items-center gap-3 rounded-lg px-3 py-2 text-[#373544] hover:bg-neutral-100">
-              <TrendingUp className="h-4 w-4" /> Berichte
-            </a>
+            <button
+              onClick={() => setView("telegram")}
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-left ${view === "telegram" ? "bg-[#0b051d] text-white" : "text-[#373544] hover:bg-neutral-100"}`}
+            >
+              <Send className="h-4 w-4" /> Telegram
+            </button>
           </nav>
 
           <button
@@ -143,7 +142,7 @@ function Admin() {
         <main className="flex-1 p-6 md:p-10">
           <header className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-semibold text-[#0B051D]">{view === "logs" ? "Logs" : "Dashboard"}</h1>
+              <h1 className="text-2xl font-semibold text-[#0B051D]">{view === "logs" ? "Logs" : view === "telegram" ? "Telegram" : "Dashboard"}</h1>
               <p className="text-sm text-[#6b6b6b]">Willkommen zurück{email ? `, ${email}` : ""}.</p>
             </div>
             <div className="flex items-center gap-3">
@@ -162,6 +161,8 @@ function Admin() {
 
           {view === "logs" ? (
             <LogsView />
+          ) : view === "telegram" ? (
+            <TelegramView />
           ) : (
             <>
               {/* Stats */}
